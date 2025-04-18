@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import CardList from "@/components/server/cardList/CardList";
-import { getPosts } from "@/api/post";
+// import { getPosts } from "@/api/post";
 // import { useAppDispatch, useAppSelector } from "@/store/hooks";
 // import { set } from "@/store/slices/userSlice";
 
