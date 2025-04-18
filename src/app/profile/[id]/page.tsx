@@ -1,9 +1,9 @@
 import CardList from "@/components/server/profilePostList/CardList";
 import styles from "./page.module.css";
 interface Props {
-  params: { id: string }; // 이게 핵심
+  params: Promise<{ id: string }>;
 }
-export default function ProfilePage({ params }: Props) {
+export default async function ProfilePage({ params }: Props) {
   const posts = [
     { id: 1, title: "제목1", content: "내용1" },
     { id: 2, title: "제목2", content: "내용2" },
@@ -24,11 +24,13 @@ export default function ProfilePage({ params }: Props) {
     { id: 17, title: "제목3", content: "내용3" },
     { id: 18, title: "제목3", content: "내용3" },
   ];
+  const { id } = await params;
+  console.log(id);
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.menu}>
-          <div className={styles.profile}>{params.id}님의 프로필입니다.</div>
+          <div className={styles.profile}>님의 프로필입니다.</div>
           <div className={styles.tag}>태그들</div>
         </div>
         <CardList posts={posts}></CardList>

@@ -1,6 +1,9 @@
 import CardList from "@/components/server/cardList/CardList";
 import styles from "./page.module.css";
-export default function postPage() {
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+export default async function postPage({ params }: PageProps) {
   const posts = [
     { id: 1, title: "제목1", content: "내용1" },
     { id: 2, title: "제목2", content: "내용2" },
@@ -21,9 +24,10 @@ export default function postPage() {
     { id: 17, title: "제목3", content: "내용3" },
     { id: 18, title: "제목3", content: "내용3" },
   ];
+  const { id } = await params;
   return (
     <div className={styles.container}>
-      <div className={styles.title}>제목</div>
+      <div className={styles.title}>제목 {id} </div>
       <img className={styles.img} src="example.jpg" alt="썸네일 미완성" />
 
       <div className={styles.content}>
@@ -55,7 +59,16 @@ export default function postPage() {
         <button>발사</button>
       </div>
       <div className={styles.advertise}>
-        <div>추천 post</div>
+        <div
+          style={{
+            fontSize: "18px",
+            color: "#999999",
+            textAlign: "center",
+            padding: "10px 0",
+          }}
+        >
+          이런 게시글은 어때요?
+        </div>
         <CardList posts={posts}></CardList>
       </div>
     </div>
