@@ -5,12 +5,14 @@ import remarkGfm from "remark-gfm";
 
 function App() {
   const [markdown, setMarkdown] = useState("");
-  const textareaRef = useRef();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const insertMarkdownSyntax = (syntaxType) => {
+  const insertMarkdownSyntax = (syntaxType: string) => {
     const textarea = textareaRef.current;
+    if (!textarea) return;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
+    console.log(markdown, start, end);
     const selectedText = markdown.slice(start, end);
 
     let wrappedText = "";
@@ -19,13 +21,13 @@ function App() {
         wrappedText = `**${selectedText || ""}**`;
         break;
       case "italic":
-        wrappedText = `*${selectedText || "기울임"}*`;
+        wrappedText = `*${selectedText || ""}*`;
         break;
       case "strike":
-        wrappedText = `~~${selectedText || "취소선"}~~`;
+        wrappedText = `~~${selectedText || ""}~~`;
         break;
       case "code":
-        wrappedText = `\`${selectedText || "코드"}\``;
+        wrappedText = `\`${selectedText || ""}\``;
         break;
       default:
         break;
