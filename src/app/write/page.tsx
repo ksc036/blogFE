@@ -49,8 +49,8 @@ function App() {
       strike: "~~",
       code: "`",
     };
-
-    const wrapper = markMap[syntaxType];
+    if (!Object.hasOwn(markMap, syntaxType)) return;
+    const wrapper = markMap[syntaxType as keyof typeof markMap];
     const wrapperLength = wrapper.length;
 
     // 선택이 없는 경우 (커서만 있는 경우)
