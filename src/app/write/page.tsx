@@ -12,22 +12,28 @@ function App() {
     if (!textarea) return;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    console.log(markdown, start, end);
+    // console.log(markdown, start, end);
     const selectedText = markdown.slice(start, end);
 
     let wrappedText = "";
+    let cursorOffset = 0;
+
     switch (syntaxType) {
       case "bold":
         wrappedText = `**${selectedText || ""}**`;
+        cursorOffset = 2; // ** <- 여기 커서
         break;
       case "italic":
         wrappedText = `*${selectedText || ""}*`;
+        cursorOffset = 1;
         break;
       case "strike":
         wrappedText = `~~${selectedText || ""}~~`;
+        cursorOffset = 2;
         break;
       case "code":
         wrappedText = `\`${selectedText || ""}\``;
+        cursorOffset = 1;
         break;
       default:
         break;
@@ -36,6 +42,22 @@ function App() {
     const newText =
       markdown.slice(0, start) + wrappedText + markdown.slice(end);
     setMarkdown(newText);
+
+    // setMarkdown 이후 커서 위치 조정
+    setTimeout(() => {
+      if (textarea) {
+        if (start === end) {
+          // 텍스트 선택 없이 입력했을 경우: **|**
+          textarea.selectionStart = textarea.selectionEnd =
+            start + cursorOffset;
+        } else {
+          // 기존 선택 유지
+          textarea.selectionStart = start;
+          textarea.selectionEnd = start + wrappedText.length;
+        }
+        textarea.focus();
+      }
+    }, 0);
   };
 
   return (
