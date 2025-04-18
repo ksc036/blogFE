@@ -13,7 +13,7 @@ function App() {
 
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    let selectedText = markdown.slice(start, end);
+    const selectedText = markdown.slice(start, end);
     let newText = markdown;
     let newCursorPos = start;
 
@@ -68,7 +68,7 @@ function App() {
         // 기존 다른 마크업 제거 후 새 마크업으로 교체
         let cleanedMarkdown = markdown;
         let offset = 0;
-        for (const [key, val] of Object.entries(markMap)) {
+        for (const [_key, val] of Object.entries(markMap)) {
           if (val === wrapper) continue;
           const b = cleanedMarkdown.slice(start - val.length, start);
           const a = cleanedMarkdown.slice(end, end + val.length);
