@@ -46,6 +46,7 @@ jobs:
         with:
           context: .
           file: ./dockerfile.dev
+          push: true
           tags: |
             ksc036/blog-frontend:${{ env.TAG }}
 
@@ -55,6 +56,7 @@ jobs:
         with:
           context: .
           file: ./dockerfile.prod
+          push: true
           tags: |
             ksc036/blog-frontend:${{ env.TAG }}
 
