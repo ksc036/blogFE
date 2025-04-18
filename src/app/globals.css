@@ -40,3 +40,39 @@ a {
     color-scheme: dark;
   }
 }
+.container {
+  margin: 0 auto;
+  padding: 0 8px; /* 여백 = 15px (8 + 7)처럼 조절됨) */
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+@media (min-width: 769px) and (max-width: 1056px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+/* 1057~1440: 3개 */
+@media (min-width: 1057px) and (max-width: 1440px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+/* 1441~1919: 4개 */
+@media (min-width: 1441px) and (max-width: 1919px) {
+  .container {
+    max-width: 1037px;
+  }
+}
+
+/* ≥1920: 5개 */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1728px;
+  }
+}
