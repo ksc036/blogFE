@@ -190,7 +190,7 @@ function App() {
       // });
 
       const { url } = res.data; // presigned URL 반환
-
+      console.log(process.env.NEXT_PUBLIC_S3_URL + url);
       // presigned URL로 업로드
       await axios.put(process.env.NEXT_PUBLIC_S3_URL + url, file, {
         headers: {
@@ -200,7 +200,7 @@ function App() {
 
       // 이미지 삽입
       const imageUrl = url.split("?")[0]; // 쿼리스트링 제거
-      const insertText = `![](${imageUrl})`;
+      const insertText = `![](${process.env.NEXT_PUBLIC_S3_URL + imageUrl})`;
       const cursor = textareaRef.current!.selectionStart;
       const newText =
         markdown.slice(0, cursor) + insertText + markdown.slice(cursor);
