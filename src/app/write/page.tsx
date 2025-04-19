@@ -192,7 +192,7 @@ function App() {
       const { url } = res.data; // presigned URL 반환
 
       // presigned URL로 업로드
-      await axios.put(url, file, {
+      await axios.put(process.env.NEXT_PUBLIC_S3_URL + url, file, {
         headers: {
           "Content-Type": file.type,
         },
