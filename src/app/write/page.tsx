@@ -5,6 +5,12 @@ import remarkGfm from "remark-gfm";
 
 function App() {
   const [markdown, setMarkdown] = useState("");
+  const [showLinkInput, setShowLinkInput] = useState(false);
+  const [linkURL, setLinkURL] = useState("");
+  const [linkInsertInfo, setLinkInsertInfo] = useState<{
+    start: number;
+    end: number;
+  } | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const insertMarkdownSyntax = (syntaxType: string) => {
@@ -17,7 +23,6 @@ function App() {
     let newText = markdown;
     let newCursorPos = start;
 
-    // === heading 처리 ===
     if (syntaxType.startsWith("heading")) {
       const headingLevel = parseInt(syntaxType.replace("heading", ""), 10);
       const lines = markdown.split("\n");
@@ -42,7 +47,6 @@ function App() {
       return;
     }
 
-    // === 마크업 문법 ===
     const markMap = {
       bold: "**",
       italic: "*",
@@ -53,19 +57,16 @@ function App() {
     const wrapper = markMap[syntaxType as keyof typeof markMap];
     const wrapperLength = wrapper.length;
 
-    // 선택이 없는 경우 (커서만 있는 경우)
     if (start === end) {
       const before = markdown.slice(start - wrapperLength, start);
       const after = markdown.slice(end, end + wrapperLength);
 
-      // 동일한 마크업이 이미 있으면 제거 (토글)
       if (before === wrapper && after === wrapper) {
         newText =
           markdown.slice(0, start - wrapperLength) +
           markdown.slice(end + wrapperLength);
         newCursorPos = start - wrapperLength;
       } else {
-        // 기존 다른 마크업 제거 후 새 마크업으로 교체
         let cleanedMarkdown = markdown;
         let offset = 0;
         for (const [_key, val] of Object.entries(markMap)) {
@@ -97,7 +98,6 @@ function App() {
       return;
     }
 
-    // 선택된 텍스트가 있는 경우: 기존 로직 유지
     const wrappedText = wrapper + selectedText + wrapper;
     newText = markdown.slice(0, start) + wrappedText + markdown.slice(end);
 
@@ -107,6 +107,57 @@ function App() {
       textarea.selectionEnd = start + wrappedText.length;
       textarea.focus();
     }, 0);
+  };
+
+  const handleLinkInsert = () => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    setLinkInsertInfo({ start, end });
+    setShowLinkInput(true);
+    setLinkURL("");
+  };
+
+  const confirmLinkInsert = () => {
+    const { start, end } = linkInsertInfo!;
+    const selectedText = markdown.slice(start, end);
+
+    let newText = markdown;
+
+    if (start === end) {
+      // 아무것도 선택 안한 경우: "링크텍스트"를 선택 상태로 삽입
+      const linkText = "[링크텍스트]";
+      const insertText = `${linkText}(${linkURL})`;
+      newText = markdown + `\n${insertText}`;
+
+      const selectionStart = newText.length - insertText.length + 1; // "[" 다음
+      const selectionEnd = selectionStart + linkText.length - 2; // "]" 전까지
+
+      setMarkdown(newText);
+      setShowLinkInput(false);
+      setTimeout(() => {
+        textareaRef.current!.selectionStart = selectionStart;
+        textareaRef.current!.selectionEnd = selectionEnd;
+        textareaRef.current!.focus();
+      }, 0);
+    } else {
+      // 선택된 텍스트가 있는 경우
+      newText =
+        markdown.slice(0, start) +
+        `[${selectedText}](${linkURL})` +
+        markdown.slice(end);
+      const newCursorPos = start + 1;
+
+      setMarkdown(newText);
+      setShowLinkInput(false);
+      setTimeout(() => {
+        textareaRef.current!.selectionStart =
+          textareaRef.current!.selectionEnd = newCursorPos;
+        textareaRef.current!.focus();
+      }, 0);
+    }
   };
 
   return (
@@ -120,7 +171,21 @@ function App() {
         <button onClick={() => insertMarkdownSyntax("italic")}>기울임</button>
         <button onClick={() => insertMarkdownSyntax("strike")}>취소선</button>
         <button onClick={() => insertMarkdownSyntax("code")}>코드</button>
+        <button onClick={handleLinkInsert}>링크</button>
       </div>
+
+      {showLinkInput && (
+        <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
+          <input
+            type="text"
+            placeholder="URL을 입력하세요"
+            value={linkURL}
+            onChange={(e) => setLinkURL(e.target.value)}
+            style={{ flex: 1 }}
+          />
+          <button onClick={confirmLinkInsert}>확인</button>
+        </div>
+      )}
 
       <div style={{ display: "flex", height: "90vh" }}>
         <textarea
