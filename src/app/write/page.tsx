@@ -1,7 +1,9 @@
 "use client";
+import axiosInstance from "@/lib/axiosInstance";
 import React, { useState, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import axios from "axios";
 
 function App() {
   const [markdown, setMarkdown] = useState("");
@@ -11,6 +13,7 @@ function App() {
     start: number;
     end: number;
   } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const insertMarkdownSyntax = (syntaxType: string) => {
@@ -160,6 +163,60 @@ function App() {
     }
   };
 
+  const handleImageInsert = () => {
+    console.log("handleImageInsert");
+    fileInputRef.current?.click();
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("handleImageUpload");
+    const file = e.target.files?.[0];
+    console.log(file);
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+    if (!file) return;
+
+    try {
+      // 서버에 presigned URL 요청
+      const res = await axiosInstance.post("/presign", {
+        filename: file.name,
+      });
+      e.target.value = "";
+      // const res = await fetch("/api/presign", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ filename: file.name }),
+      // });
+
+      const { url } = res.data; // presigned URL 반환
+
+      // presigned URL로 업로드
+      await axios.put(url, file, {
+        headers: {
+          "Content-Type": file.type,
+        },
+      });
+
+      // 이미지 삽입
+      const imageUrl = url.split("?")[0]; // 쿼리스트링 제거
+      const insertText = `![](${imageUrl})`;
+      const cursor = textareaRef.current!.selectionStart;
+      const newText =
+        markdown.slice(0, cursor) + insertText + markdown.slice(cursor);
+      setMarkdown(newText);
+
+      setTimeout(() => {
+        textareaRef.current!.selectionStart =
+          textareaRef.current!.selectionEnd = cursor + insertText.length;
+        textareaRef.current!.focus();
+      }, 0);
+    } catch (err) {
+      alert("이미지 업로드 실패");
+      console.error(err);
+    }
+  };
+
   return (
     <div>
       <div style={{ marginBottom: "0.5rem" }}>
@@ -171,6 +228,14 @@ function App() {
         <button onClick={() => insertMarkdownSyntax("italic")}>기울임</button>
         <button onClick={() => insertMarkdownSyntax("strike")}>취소선</button>
         <button onClick={() => insertMarkdownSyntax("code")}>코드</button>
+        <button onClick={handleImageInsert}>이미지</button>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleImageUpload}
+          style={{ display: "none" }}
+        />
         <button onClick={handleLinkInsert}>링크</button>
       </div>
 
