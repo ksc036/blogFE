@@ -4,15 +4,23 @@ import React, { useState, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
+import PostUpload from "@/components/client/postUpload/PostUpload";
 
-function App() {
-  const [markdown, setMarkdown] = useState("");
+export default function write() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [linkURL, setLinkURL] = useState("");
   const [linkInsertInfo, setLinkInsertInfo] = useState<{
     start: number;
     end: number;
   } | null>(null);
+
+  const [showPublishScreen, setShowPublishScreen] = useState(false);
+  const handleCompleteWrite = () => {
+    setShowPublishScreen(true); // 슬라이드 화면 열기
+  };
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -22,27 +30,27 @@ function App() {
 
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    const selectedText = markdown.slice(start, end);
-    let newText = markdown;
+    const selectedText = content.slice(start, end);
+    let newText = content;
     let newCursorPos = start;
 
     if (syntaxType.startsWith("heading")) {
       const headingLevel = parseInt(syntaxType.replace("heading", ""), 10);
-      const lines = markdown.split("\n");
-      const startLineIndex = markdown.slice(0, start).split("\n").length - 1;
+      const lines = content.split("\n");
+      const startLineIndex = content.slice(0, start).split("\n").length - 1;
       const originalLine = lines[startLineIndex];
       const strippedLine = originalLine.replace(/^#{1,6}\s*/, "");
       const newHeadingPrefix = "#".repeat(headingLevel) + " ";
       lines[startLineIndex] = newHeadingPrefix + strippedLine;
       newText = lines.join("\n");
 
-      newCursorPos = markdown
+      newCursorPos = content
         .split("\n")
         .slice(0, startLineIndex)
         .reduce((acc, line) => acc + line.length + 1, 0);
       newCursorPos += newHeadingPrefix.length;
 
-      setMarkdown(newText);
+      setContent(newText);
       setTimeout(() => {
         textarea.selectionStart = textarea.selectionEnd = newCursorPos;
         textarea.focus();
@@ -61,16 +69,16 @@ function App() {
     const wrapperLength = wrapper.length;
 
     if (start === end) {
-      const before = markdown.slice(start - wrapperLength, start);
-      const after = markdown.slice(end, end + wrapperLength);
+      const before = content.slice(start - wrapperLength, start);
+      const after = content.slice(end, end + wrapperLength);
 
       if (before === wrapper && after === wrapper) {
         newText =
-          markdown.slice(0, start - wrapperLength) +
-          markdown.slice(end + wrapperLength);
+          content.slice(0, start - wrapperLength) +
+          content.slice(end + wrapperLength);
         newCursorPos = start - wrapperLength;
       } else {
-        let cleanedMarkdown = markdown;
+        let cleanedMarkdown = content;
         let offset = 0;
         for (const [_key, val] of Object.entries(markMap)) {
           if (val === wrapper) continue;
@@ -93,7 +101,7 @@ function App() {
         newCursorPos = start - offset + wrapperLength;
       }
 
-      setMarkdown(newText);
+      setContent(newText);
       setTimeout(() => {
         textarea.selectionStart = textarea.selectionEnd = newCursorPos;
         textarea.focus();
@@ -102,9 +110,9 @@ function App() {
     }
 
     const wrappedText = wrapper + selectedText + wrapper;
-    newText = markdown.slice(0, start) + wrappedText + markdown.slice(end);
+    newText = content.slice(0, start) + wrappedText + content.slice(end);
 
-    setMarkdown(newText);
+    setContent(newText);
     setTimeout(() => {
       textarea.selectionStart = start;
       textarea.selectionEnd = start + wrappedText.length;
@@ -125,20 +133,20 @@ function App() {
 
   const confirmLinkInsert = () => {
     const { start, end } = linkInsertInfo!;
-    const selectedText = markdown.slice(start, end);
+    const selectedText = content.slice(start, end);
 
-    let newText = markdown;
+    let newText = content;
 
     if (start === end) {
       // 아무것도 선택 안한 경우: "링크텍스트"를 선택 상태로 삽입
       const linkText = "[링크텍스트]";
       const insertText = `${linkText}(${linkURL})`;
-      newText = markdown + `\n${insertText}`;
+      newText = content + `\n${insertText}`;
 
       const selectionStart = newText.length - insertText.length + 1; // "[" 다음
       const selectionEnd = selectionStart + linkText.length - 2; // "]" 전까지
 
-      setMarkdown(newText);
+      setContent(newText);
       setShowLinkInput(false);
       setTimeout(() => {
         textareaRef.current!.selectionStart = selectionStart;
@@ -148,12 +156,12 @@ function App() {
     } else {
       // 선택된 텍스트가 있는 경우
       newText =
-        markdown.slice(0, start) +
+        content.slice(0, start) +
         `[${selectedText}](${linkURL})` +
-        markdown.slice(end);
+        content.slice(end);
       const newCursorPos = start + 1;
 
-      setMarkdown(newText);
+      setContent(newText);
       setShowLinkInput(false);
       setTimeout(() => {
         textareaRef.current!.selectionStart =
@@ -203,8 +211,8 @@ function App() {
       const insertText = `![](${process.env.NEXT_PUBLIC_S3_URL + imageUrl})`;
       const cursor = textareaRef.current!.selectionStart;
       const newText =
-        markdown.slice(0, cursor) + insertText + markdown.slice(cursor);
-      setMarkdown(newText);
+        content.slice(0, cursor) + insertText + content.slice(cursor);
+      setContent(newText);
 
       setTimeout(() => {
         textareaRef.current!.selectionStart =
@@ -216,9 +224,19 @@ function App() {
       console.error(err);
     }
   };
-
+  // const handleCompleteWrite = async () => {};
   return (
     <div>
+      <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
+        <input
+          type="text"
+          placeholder="제목을 입력하세요"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ flex: 1 }}
+        />
+        <button onClick={handleCompleteWrite}>작성완료</button>
+      </div>
       <div style={{ marginBottom: "0.5rem" }}>
         <button onClick={() => insertMarkdownSyntax("heading1")}>H1</button>
         <button onClick={() => insertMarkdownSyntax("heading2")}>H2</button>
@@ -256,8 +274,8 @@ function App() {
         <textarea
           ref={textareaRef}
           style={{ width: "50%", padding: "1rem", fontSize: "16px" }}
-          value={markdown}
-          onChange={(e) => setMarkdown(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           placeholder="Markdown을 입력하세요..."
         />
         <div
@@ -268,11 +286,18 @@ function App() {
             overflowY: "auto",
           }}
         >
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
         </div>
       </div>
+
+      {showPublishScreen && (
+        <PostUpload
+          showPublishScreen={showPublishScreen}
+          setShowPublishScreen={setShowPublishScreen}
+          title={title}
+          content={content}
+        ></PostUpload>
+      )}
     </div>
   );
 }
-
-export default App;
