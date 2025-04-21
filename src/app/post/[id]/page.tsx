@@ -1,4 +1,5 @@
 import CardList from "@/components/server/cardList/CardList";
+import Comments from "@/components/server/comments/Comments";
 import styles from "./page.module.css";
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -54,10 +55,16 @@ export default async function postPage({ params }: PageProps) {
         <div className={styles.button}>좋아요 | 스크랩</div>
       </div>
 
-      <div className={styles.comments}>
-        <textarea name="" id=""></textarea>
-        <button>발사</button>
-      </div>
+      {/* <div className={styles.commentSection}>
+        <div className={styles.commentBox}>
+          <textarea
+            className={styles.commentInput}
+            placeholder="댓글을 작성해주세요"
+          />
+          <button className={styles.commentButton}>댓글 작성</button>
+        </div>
+      </div> */}
+      <Comments></Comments>
       <div className={styles.advertise}>
         <div
           style={{

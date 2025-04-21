@@ -1,0 +1,108 @@
+.commentsSection {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.commentCount {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.inputBox {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 32px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.submitButton {
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  /* gap: 24px; 👈 제거하거나 줄이기 */
+}
+
+.comment {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.nickname {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.date {
+  font-size: 13px;
+  color: #999;
+}
+
+.content {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.replyBox {
+  margin-top: 12px;
+  padding-left: 24px;
+  border-left: 2px solid #eee;
+}
+
+.reply {
+  margin-top: 12px;
+}
+
+.replyToggle {
+  font-size: 14px;
+  color: #999999;
+  cursor: pointer;
+}
+
+.replyWrite {
+  font-size: 13px;
+  color: #999999;
+  margin-top: 8px;
+  cursor: pointer;
+}
