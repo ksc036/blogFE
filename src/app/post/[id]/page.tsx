@@ -29,7 +29,6 @@ export default async function postPage({ params }: PageProps) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>제목 {id} </div>
-      <img className={styles.img} src="example.jpg" alt="썸네일 미완성" />
 
       <div className={styles.content}>
         한 공중파 방송 프로그램 작가님으로부터 취재 요청이 오시기도 했는데요,
