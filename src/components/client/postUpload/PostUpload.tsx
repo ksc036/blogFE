@@ -34,7 +34,10 @@ export default function PostUpload({
   const [visibility, setVisibility] = useState(initialVisibility ?? true);
   const [postUrl, setpostUrl] = useState(initialPostUrl || "");
   const router = useRouter();
-
+  useEffect(() => {
+    console.log("postId ==", postId);
+    console.log("isUpdate ==", isUpdate);
+  });
   const onPublish = async () => {
     // console.log(
     //   " content : " + content + "\n${title} : " + title,
