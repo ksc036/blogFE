@@ -31,6 +31,7 @@ export default function write() {
       try {
         const res = await axiosInstance.get(`/posts/${postId}`);
         const post = res.data;
+        console.log(post);
         setInfo(post);
         setTitle(post.title);
         setContent(post.content);
@@ -325,7 +326,7 @@ export default function write() {
           visibility={info?.visibility}
           postUrl={info?.postUrl}
           isUpdate={true}
-          postId={info?.postId}
+          postId={info?.id}
         ></PostUpload>
       )}
     </div>
