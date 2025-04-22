@@ -26,6 +26,7 @@ export default async function Home() {
   //   { id: 17, title: "제목3", content: "내용3" },
   //   { id: 18, title: "제목3", content: "내용3" },
   // ];
+  console.log("환경변수 체크 : " + process.env.NEXT_PUBLIC_API_URL);
   const res = await axiosInstance(`/posts`);
   // const res = await axios.get(
   //   "http://blog-backend-service.dev.svc.cluster.local:2999/posts"
