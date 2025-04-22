@@ -4,6 +4,7 @@ type Post = {
   id: number;
   title: string;
   content: string;
+  desc: string;
 };
 
 export default function CardList({ posts }: { posts: Post[] }) {

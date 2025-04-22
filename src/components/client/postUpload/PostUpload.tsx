@@ -1,6 +1,7 @@
 import axiosInstance from "@/lib/axiosInstance";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 type ModalProps = {
   showPublishScreen: boolean;
@@ -19,6 +20,7 @@ export default function PostUpload({
   const [desc, setDesc] = useState("");
   const [visibility, setVisibility] = useState<boolean>(true);
   const [postUrl, setpostUrl] = useState("");
+  const router = useRouter();
 
   const onPublish = async () => {
     // console.log(
@@ -29,7 +31,7 @@ export default function PostUpload({
     //   "postUrl : " + postUrl
     // );
     try {
-      const res = await axiosInstance.post("/post", {
+      const res = await axiosInstance.post("/posts", {
         title,
         content,
         thumbnailUrl,
@@ -38,8 +40,10 @@ export default function PostUpload({
         postUrl,
       });
       //redir
-      setShowPublishScreen(false);
-      alert("포스트가 성공적으로 업로드되었습니다.");
+      // const url = res.data.postUrl; // 서버에서 반환해주는 고유 URL
+      // setShowPublishScreen(false);
+      router.push("post/123"); // Next.js의 클라이언트 라우팅
+      // alert("포스트가 성공적으로 업로드되었습니다.");
     } catch (err) {
       console.error("포스트 업로드 실패", err);
       alert("포스트 업로드에 실패했습니다.");
@@ -79,6 +83,13 @@ export default function PostUpload({
       alert("썸네일 업로드에 실패했습니다.");
     }
   };
+  useEffect(() => {
+    // content 내 첫 번째 이미지 URL 추출
+    const match = content.match(/!\[.*?\]\((.*?)\)/);
+    if (match && !thumbnailUrl) {
+      setThumbnailUrl(match[1]);
+    }
+  }, [content, thumbnailUrl]);
   return (
     <div
       style={{
@@ -186,6 +197,21 @@ export default function PostUpload({
           <label style={{ fontWeight: "bold", display: "block" }}>
             URL 설정
           </label>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span style={{ marginRight: 4 }}>ksc036/</span>
+            <input
+              type="text"
+              onChange={(e) => setpostUrl(e.target.value)}
+              placeholder="default"
+              style={{
+                marginTop: "0.5rem",
+                width: "100%",
+                padding: "0.5rem",
+                border: "1px solid #ccc",
+              }}
+            />
+          </div>
+          {/* <span>ksc036dd/</span>
           <input
             type="text"
             onChange={(e) => setpostUrl(e.target.value)}
@@ -196,7 +222,7 @@ export default function PostUpload({
               padding: "0.5rem",
               border: "1px solid #ccc",
             }}
-          />
+          /> */}
         </div>
 
         <div style={{ display: "flex", gap: "1rem", marginTop: "2rem" }}>
