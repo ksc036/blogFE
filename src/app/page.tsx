@@ -1,6 +1,7 @@
 import axiosInstance from "@/lib/axiosInstance";
 import styles from "./page.module.css";
 import CardList from "@/components/server/cardList/CardList";
+import axios from "axios";
 
 export default async function Home() {
   // const posts = [
@@ -23,7 +24,10 @@ export default async function Home() {
   //   { id: 17, title: "제목3", content: "내용3" },
   //   { id: 18, title: "제목3", content: "내용3" },
   // ];
-  const res = await axiosInstance(`/posts`);
+  // const res = await axiosInstance(`/posts`);
+  const res = await axios.get(
+    "http://blog-backend-service.dev.svc.cluster.local:2999/posts"
+  );
   const posts = res.data;
   return (
     <div className={styles.page}>
