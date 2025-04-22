@@ -1,6 +1,10 @@
 import CardList from "@/components/server/cardList/CardList";
 import Comments from "@/components/server/comments/Comments";
 import styles from "./page.module.css";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+import axiosInstance from "@/lib/axiosInstance";
 interface PageProps {
   params: Promise<{ id: string }>;
 }
@@ -26,12 +30,21 @@ export default async function postPage({ params }: PageProps) {
     { id: 18, title: "제목3", content: "내용3" },
   ];
   const { id } = await params;
+  const res = await axiosInstance(`/posts/${id}`);
+  const post = res.data;
   return (
     <div className={styles.container}>
-      <div className={styles.title}>제목 {id} </div>
+      <div className={styles.title}>{post.title} </div>
 
       <div className={styles.content}>
-        한 공중파 방송 프로그램 작가님으로부터 취재 요청이 오시기도 했는데요,
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {post.content}
+        </ReactMarkdown>
+        {/* {post.content} */}
+        {/* <img
+          src="https://cdn.pixabay.com/photo/2023/10/02/17/30/food-8292791_1280.jpg"
+          alt="food"
+        {/* 한 공중파 방송 프로그램 작가님으로부터 취재 요청이 오시기도 했는데요,
         지난 주에 즐겁게 촬영을 마쳤어요. 개발자라는 직업으로 방송 인터뷰를 할
         날이 올지는 정말 몰랐습니다. 🫢 인터뷰가 끝나고, 낮동안 직접 해당
         가게들을 취재하고 오신 PD님들로부터 마음이 따뜻해지는 이야기를
@@ -46,7 +59,7 @@ export default async function postPage({ params }: PageProps) {
         서비스는 저에게 아직은 낯설기 때문에, 이 도메인에 대한 이해도를 높이기
         위해 우선 노력해볼 생각이예요. 도메인에 대한 이해도가 높아지면 점점 더
         좋은 기능을 만들어낼 수 있겠죠? (지도 API... 커뮤니티... 정말 해보고
-        싶다...🌟)
+        싶다...🌟) */}
       </div>
 
       <div className={styles.contentend}>
@@ -75,7 +88,7 @@ export default async function postPage({ params }: PageProps) {
         >
           이런 게시글은 어때요?
         </div>
-        <CardList posts={posts}></CardList>
+        {/* <CardList posts={posts}></CardList> */}
       </div>
     </div>
   );

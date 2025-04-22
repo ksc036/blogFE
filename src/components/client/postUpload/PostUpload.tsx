@@ -40,9 +40,9 @@ export default function PostUpload({
         postUrl,
       });
       //redir
-      // const url = res.data.postUrl; // 서버에서 반환해주는 고유 URL
+      const id = res.data.postId; // 서버에서 반환해주는 고유 URL
       // setShowPublishScreen(false);
-      router.push("post/123"); // Next.js의 클라이언트 라우팅
+      router.push(`post/${id}`); // Next.js의 클라이언트 라우팅
       // alert("포스트가 성공적으로 업로드되었습니다.");
     } catch (err) {
       console.error("포스트 업로드 실패", err);
