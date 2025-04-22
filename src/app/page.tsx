@@ -1,9 +1,6 @@
 import axiosInstance from "@/lib/axiosInstance";
 import styles from "./page.module.css";
 import CardList from "@/components/server/cardList/CardList";
-import axios from "axios";
-import dns from "dns";
-dns.setDefaultResultOrder("ipv4first");
 
 export default async function Home() {
   // const posts = [

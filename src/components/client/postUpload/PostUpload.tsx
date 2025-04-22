@@ -42,6 +42,7 @@ export default function PostUpload({
       //redir
       const id = res.data.postId; // 서버에서 반환해주는 고유 URL
       // setShowPublishScreen(false);
+      console.log(id);
       router.push(`post/${id}`); // Next.js의 클라이언트 라우팅
       // alert("포스트가 성공적으로 업로드되었습니다.");
     } catch (err) {
