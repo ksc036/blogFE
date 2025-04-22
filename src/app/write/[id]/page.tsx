@@ -8,9 +8,10 @@ import PostUpload from "@/components/client/postUpload/PostUpload";
 import { useParams } from "next/navigation";
 
 export default function write() {
-  // const params = useParams();
-  // const postId = params?.id; // /write/2 라면 id는 "2"
+  const params = useParams();
+  const postId = params?.id; // /write/2 라면 id는 "2"
 
+  const [info, setInfo] = useState<null | any>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -22,23 +23,24 @@ export default function write() {
   } | null>(null);
 
   const [showPublishScreen, setShowPublishScreen] = useState(false);
-  // useEffect(() => {
-  //   const fetchPost = async () => {
-  //     if (!postId) {
-  //       return;
-  //     }
-  //     try {
-  //       const res = await axiosInstance.get(`/posts/${postId}`);
-  //       const post = res.data;
-  //       setTitle(post.title);
-  //       setContent(post.content);
-  //     } catch (err) {
-  //       alert("게시글 정보를 불러오지 못했습니다.");
-  //     } finally {
-  //     }
-  //   };
-  //   fetchPost();
-  // }, [postId]);
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (!postId) {
+        return;
+      }
+      try {
+        const res = await axiosInstance.get(`/posts/${postId}`);
+        const post = res.data;
+        setInfo(post);
+        setTitle(post.title);
+        setContent(post.content);
+      } catch (err) {
+        alert("게시글 정보를 불러오지 못했습니다.");
+      } finally {
+      }
+    };
+    fetchPost();
+  }, [postId]);
 
   const handleCompleteWrite = () => {
     setShowPublishScreen(true); // 슬라이드 화면 열기
@@ -318,7 +320,12 @@ export default function write() {
           setShowPublishScreen={setShowPublishScreen}
           title={title}
           content={content}
-          isUpdate={false}
+          thumbnailUrl={info?.thumbnailUrl}
+          desc={info?.desc}
+          visibility={info?.visibility}
+          postUrl={info?.postUrl}
+          isUpdate={true}
+          postId={info?.postId}
         ></PostUpload>
       )}
     </div>

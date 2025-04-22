@@ -8,18 +8,31 @@ type ModalProps = {
   setShowPublishScreen: (value: boolean) => void;
   title: string;
   content: string;
+  isUpdate: boolean;
+  thumbnailUrl?: string;
+  desc?: string;
+  visibility?: boolean;
+  postUrl?: string;
+  postId?: number;
 };
 export default function PostUpload({
   content,
   title,
   showPublishScreen,
+  isUpdate,
   setShowPublishScreen,
+  thumbnailUrl: initialThumbnailUrl,
+  desc: initialDesc,
+  visibility: initialVisibility,
+  postUrl: initialPostUrl,
+  postId: postId,
 }: ModalProps) {
   const thumbnailInputRef = useRef<HTMLInputElement | null>(null);
-  const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
-  const [desc, setDesc] = useState("");
-  const [visibility, setVisibility] = useState<boolean>(true);
-  const [postUrl, setpostUrl] = useState("");
+  // ✅ props로 받은 값을 초기값으로 세팅하되 없으면 기본값
+  const [thumbnailUrl, setThumbnailUrl] = useState(initialThumbnailUrl || "");
+  const [desc, setDesc] = useState(initialDesc || "");
+  const [visibility, setVisibility] = useState(initialVisibility ?? true);
+  const [postUrl, setpostUrl] = useState(initialPostUrl || "");
   const router = useRouter();
 
   const onPublish = async () => {
@@ -31,20 +44,31 @@ export default function PostUpload({
     //   "postUrl : " + postUrl
     // );
     try {
-      const res = await axiosInstance.post("/posts", {
-        title,
-        content,
-        thumbnailUrl,
-        desc,
-        visibility,
-        postUrl,
-      });
-      //redir
-      const id = res.data.postId; // 서버에서 반환해주는 고유 URL
-      // setShowPublishScreen(false);
-      console.log(id);
-      router.push(`posts/${id}`); // Next.js의 클라이언트 라우팅
-      // alert("포스트가 성공적으로 업로드되었습니다.");
+      if (isUpdate) {
+        const res = await axiosInstance.put(`/posts/${postId}`, {
+          title,
+          content,
+          thumbnailUrl,
+          desc,
+          visibility,
+          postUrl,
+        });
+        router.push(`posts/${postId}`); // Next.js의 클라이언트 라우팅
+      } else {
+        const res = await axiosInstance.post("/posts", {
+          title,
+          content,
+          thumbnailUrl,
+          desc,
+          visibility,
+          postUrl,
+        });
+        //redir
+        const id = res.data.postId; // 서버에서 반환해주는 고유 URL
+        // setShowPublishScreen(false);
+        console.log(id);
+        router.push(`posts/${id}`); // Next.js의 클라이언트 라우팅
+      }
     } catch (err) {
       console.error("포스트 업로드 실패", err);
       alert("포스트 업로드에 실패했습니다.");
