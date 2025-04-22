@@ -1,7 +1,8 @@
 // lib/axiosInstance.js
 import axios from "axios";
+import https from "https"; //
 const agent = new https.Agent({
-  rejectUnauthorized: false, // 인증서 CN 불일치 또는 self-signed 대응 (로컬 테스트만)
+  rejectUnauthorized: false,
 });
 
 const axiosInstance = axios.create({
