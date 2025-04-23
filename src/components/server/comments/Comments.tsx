@@ -1,27 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./comments.module.css";
 import Comment from "@/components/client/comment/Comment";
 import SubComment from "@/components/client/subComment/SubComment";
-
-// const comments = [
-//   {
-//     id: 1,
-//     nickname: "윤성현",
-//     date: "2025년 4월 11일",
-//     content: "이전글 번역본도 있을까요?",
-//     replies: [
-//       {
-//         id: 11,
-//         nickname: "Nguyễn Bá Chemical",
-//         date: "5일 전",
-//         content: "Hello! Nice to meet you!",
-//       },
-//     ],
-//   },
-// ];
-
+import { set } from "@/store/slices/commentSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store"; // store의 타입 정의
 export default function Comments({
   comments,
   postId,
@@ -29,15 +14,21 @@ export default function Comments({
   comments: any[];
   postId: number;
 }) {
+  const dispatch = useDispatch();
   const [activeReplyId, setActiveReplyId] = useState<number | null>(null);
-
+  useEffect(() => {
+    dispatch(set({ comments }));
+  }, [comments, dispatch]);
+  const reduxComments = useSelector(
+    (state: RootState) => state.comment.comments
+  );
   return (
     <div className={styles.commentsSection}>
       <h3 className={styles.commentCount}>{comments.length}개의 댓글</h3>
       <Comment postId={postId} />
 
       <div className={styles.commentList}>
-        {comments.map((comment) => (
+        {reduxComments.map((comment) => (
           <div key={comment.id} className={styles.comment}>
             <div className={styles.commentHeader}>
               <img

@@ -3,7 +3,9 @@
 import { useState } from "react";
 import styles from "./SubComment.module.css";
 import axiosInstance from "@/lib/axiosInstance";
-
+import { useSelector, useDispatch } from "react-redux";
+import { addReplieComment } from "@/store/slices/commentSlice";
+// import { RootState } from "@/store"; // store의 타입 정의
 export default function SubComment({
   commentId,
   postId,
@@ -12,7 +14,10 @@ export default function SubComment({
   onSubmit: (text: string) => void;
 }) {
   const [text, setText] = useState("");
-
+  const dispatch = useDispatch();
+  // const reduxComments = useSelector(
+  //   (state: RootState) => state.comment.comments
+  // );
   return (
     <div className={styles.subCommentBox}>
       <textarea
@@ -23,12 +28,17 @@ export default function SubComment({
       />
       <button
         className={styles.button}
-        onClick={() => {
-          axiosInstance.post("/comments", {
+        onClick={async () => {
+          const comment = await axiosInstance.post("/comments", {
             postId: postId,
             content: text,
             parentId: commentId,
           });
+          console.log(comment);
+          dispatch(
+            addReplieComment({ parentId: commentId, comment: comment.data })
+          );
+          onSubmit(text); // 부모 컴포넌트에 답글 전송
           setText("");
         }}
       >
