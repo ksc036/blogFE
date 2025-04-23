@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import styles from "./SubComment.module.css";
+import axiosInstance from "@/lib/axiosInstance";
 
 export default function SubComment({
+  commentId,
+  postId,
   onSubmit,
 }: {
   onSubmit: (text: string) => void;
@@ -21,7 +24,11 @@ export default function SubComment({
       <button
         className={styles.button}
         onClick={() => {
-          onSubmit(text);
+          axiosInstance.post("/comments", {
+            postId: postId,
+            content: text,
+            parentId: commentId,
+          });
           setText("");
         }}
       >

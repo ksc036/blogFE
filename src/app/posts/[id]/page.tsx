@@ -34,6 +34,7 @@ export default async function postPage({ params }: PageProps) {
   const { id } = await params;
   const res = await axiosInstance(`/posts/${id}`);
   const post = res.data;
+  console.log(post);
   return (
     <div className={styles.container}>
       <div className={styles.title}>{post.title} </div>
@@ -53,7 +54,7 @@ export default async function postPage({ params }: PageProps) {
         <div className={styles.profile}>프로필</div>
         <div className={styles.button}>좋아요 | 스크랩</div>
       </div>
-      <Comments></Comments>
+      <Comments postId={post.id} comments={post.comments}></Comments>
       <div className={styles.advertise}>
         <div
           style={{
