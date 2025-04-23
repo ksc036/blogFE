@@ -77,7 +77,7 @@ export default function CommentProfile({ comment }: { comment: any }) {
               수정
             </div>
             <div onClick={handleDelete}>삭제</div>
-            <div>{comment.id}</div>
+            {/* <div>{comment.id}</div> */}
           </div>
         </div>
 
