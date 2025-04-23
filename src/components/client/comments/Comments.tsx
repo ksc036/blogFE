@@ -26,7 +26,7 @@ export default function Comments({
   return (
     <div className={styles.commentsSection}>
       <h3 className={styles.commentCount}>{comments.length}개의 댓글</h3>
-      <Comment postId={postId} />
+      {/* <Comment postId={postId} /> */}
 
       <div className={styles.commentList}>
         {reduxComments.map((comment) => (
@@ -70,6 +70,7 @@ export default function Comments({
             )}
           </div>
         ))}
+        <Comment postId={postId} />
       </div>
     </div>
   );
