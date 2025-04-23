@@ -1,0 +1,20 @@
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ccc;
+}
+.nickname {
+  font-weight: 600;
+  font-size: 15px;
+}
+.date {
+  font-size: 13px;
+  color: #999;
+}

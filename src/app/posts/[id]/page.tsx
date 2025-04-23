@@ -1,5 +1,5 @@
 import CardList from "@/components/server/cardList/CardList";
-import Comments from "@/components/server/comments/Comments";
+import Comments from "@/components/client/comments/Comments";
 import PostEdit from "@/components/client/postEdit/PostEdit";
 import PostDelete from "@/components/client/postDelete/PostDelete";
 import styles from "./page.module.css";

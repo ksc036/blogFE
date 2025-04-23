@@ -7,6 +7,7 @@ import SubComment from "@/components/client/subComment/SubComment";
 import { set } from "@/store/slices/commentSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store"; // store의 타입 정의
+import CommentProfile from "@/components/client/commensProfile/CommentProfile";
 export default function Comments({
   comments,
   postId,
@@ -30,7 +31,8 @@ export default function Comments({
       <div className={styles.commentList}>
         {reduxComments.map((comment) => (
           <div key={comment.id} className={styles.comment}>
-            <div className={styles.commentHeader}>
+            <CommentProfile comment={comment}></CommentProfile>
+            {/* <div className={styles.commentHeader}>
               <img
                 className={styles.avatar}
                 src="/default-profile.png"
@@ -40,7 +42,7 @@ export default function Comments({
                 <div className={styles.nickname}>{comment.nickname}</div>
                 <div className={styles.date}>{comment.date}</div>
               </div>
-            </div>
+            </div> */}
             <div className={styles.content}>{comment.content}</div>
 
             {comment.replies?.length > 0 && (
@@ -50,17 +52,20 @@ export default function Comments({
                 </div>
                 {comment.replies.map((reply) => (
                   <div key={reply.id} className={styles.reply}>
-                    <div className={styles.commentHeader}>
+                    <CommentProfile comment={reply}></CommentProfile>
+                    {/* <div className={styles.commentHeader}>
                       <img
                         className={styles.avatar}
                         src="/default-profile.png"
                         alt="프로필"
                       />
                       <div>
-                        <div className={styles.nickname}>{reply.nickname}</div>
-                        <div className={styles.date}>{reply.date}</div>
+                        <div className={styles.nickname}>
+                          asdasd{reply.nickname}
+                        </div>
+                        <div className={styles.date}>asdas{reply.date}</div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className={styles.content}>{reply.content}</div>
                   </div>
                 ))}
@@ -75,7 +80,7 @@ export default function Comments({
                 )
               }
             >
-              답글 달기
+              답글달기
             </div>
 
             {activeReplyId === comment.id && (
