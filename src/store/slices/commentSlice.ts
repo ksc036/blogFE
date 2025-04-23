@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { cp } from "fs";
+import { CONFIG_FILES } from "next/dist/shared/lib/constants";
 // id: 1,
 // nickname: "닉네임",
 // date: "2023-10-01",
@@ -69,10 +71,11 @@ export const commentSlice = createSlice({
       action: PayloadAction<{ id: number; content: string }>
     ) => {
       const { id, content } = action.payload;
-
+      console.log("editComment 호출!", id, content);
       // 1. 최상위 댓글에서 찾기
       const topLevelComment = state.comments.find((c) => c.id === id);
       if (topLevelComment) {
+        console.log("topLevelComment 변경!", action.content);
         topLevelComment.content = content;
         return;
       }
@@ -81,10 +84,12 @@ export const commentSlice = createSlice({
       for (const comment of state.comments) {
         const reply = comment.replies?.find((r) => r.id === id);
         if (reply) {
+          console.log("reply 변경!", action.content);
           reply.content = content;
           return;
         }
       }
+      console.log("editComment end!");
     },
   },
 });

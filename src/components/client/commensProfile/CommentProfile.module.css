@@ -18,3 +18,14 @@
   font-size: 13px;
   color: #999;
 }
+.textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+}

@@ -32,18 +32,6 @@ export default function Comments({
         {reduxComments.map((comment) => (
           <div key={comment.id} className={styles.comment}>
             <CommentProfile comment={comment}></CommentProfile>
-            {/* <div className={styles.commentHeader}>
-              <img
-                className={styles.avatar}
-                src="/default-profile.png"
-                alt="프로필"
-              />
-              <div>
-                <div className={styles.nickname}>{comment.nickname}</div>
-                <div className={styles.date}>{comment.date}</div>
-              </div>
-            </div> */}
-            <div className={styles.content}>{comment.content}</div>
 
             {comment.replies?.length > 0 && (
               <div className={styles.replyBox}>
@@ -53,20 +41,6 @@ export default function Comments({
                 {comment.replies.map((reply) => (
                   <div key={reply.id} className={styles.reply}>
                     <CommentProfile comment={reply}></CommentProfile>
-                    {/* <div className={styles.commentHeader}>
-                      <img
-                        className={styles.avatar}
-                        src="/default-profile.png"
-                        alt="프로필"
-                      />
-                      <div>
-                        <div className={styles.nickname}>
-                          asdasd{reply.nickname}
-                        </div>
-                        <div className={styles.date}>asdas{reply.date}</div>
-                      </div>
-                    </div> */}
-                    <div className={styles.content}>{reply.content}</div>
                   </div>
                 ))}
               </div>
