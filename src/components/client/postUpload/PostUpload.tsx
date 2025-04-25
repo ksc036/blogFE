@@ -1,4 +1,4 @@
-import axiosInstance from "@/lib/axiosInstance";
+import axiosInstance from "@/shared/lib/axiosInstance";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";

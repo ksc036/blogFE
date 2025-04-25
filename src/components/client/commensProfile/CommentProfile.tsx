@@ -1,20 +1,19 @@
 "user client";
-import axiosInstance from "@/lib/axiosInstance";
+import axiosInstance from "@/shared/lib/axiosInstance";
 import styles from "./CommentProfile.module.css";
 import { useDispatch } from "react-redux";
-import { deleteComment, editComment } from "@/store/slices/commentSlice";
+import {
+  deleteComment,
+  editComment,
+} from "@/entities/comment/model/commentSlice";
 import { useState } from "react";
+import { Comment } from "@/entities/comment/model/types";
 
-export default function CommentProfile({ comment }: { comment: any }) {
+export default function CommentProfile({ comment }: { comment: Comment }) {
   const dispatch = useDispatch();
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [editContent, setEditContent] = useState<string>("");
   const handleEdit = (id: number) => {
-    console.log("Edit comment:", {
-      id: id,
-      postId: comment.postId,
-      content: editContent,
-    });
     axiosInstance
       .put(`/comments`, {
         id: comment.id,
@@ -104,7 +103,6 @@ export default function CommentProfile({ comment }: { comment: any }) {
       ) : (
         <div className={styles.content}>{comment.content}</div>
       )}
-      {/* <div className={styles.content}>{comment.content}</div> */}
     </div>
   );
 }
