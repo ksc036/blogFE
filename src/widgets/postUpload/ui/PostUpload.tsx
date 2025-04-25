@@ -2,6 +2,7 @@ import axiosInstance from "@/shared/lib/axiosInstance";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { usePostUpload } from "../model/usePostUpload";
 
 type ModalProps = {
   showPublishScreen: boolean;
@@ -27,93 +28,30 @@ export default function PostUpload({
   postUrl: initialPostUrl,
   postId: postId,
 }: ModalProps) {
-  const thumbnailInputRef = useRef<HTMLInputElement | null>(null);
-  // ✅ props로 받은 값을 초기값으로 세팅하되 없으면 기본값
-  const [thumbnailUrl, setThumbnailUrl] = useState(initialThumbnailUrl || "");
-  const [desc, setDesc] = useState(initialDesc || "");
-  const [visibility, setVisibility] = useState(initialVisibility ?? true);
-  const [postUrl, setpostUrl] = useState(initialPostUrl || "");
-  const router = useRouter();
-  const onPublish = async () => {
-    // console.log(
-    //   " content : " + content + "\n${title} : " + title,
-    //   " thumbnailUrl : " + thumbnailUrl,
-    //   "desc : " + desc,
-    //   "visibility : " + visibility,
-    //   "postUrl : " + postUrl
-    // );
-    try {
-      if (isUpdate) {
-        const res = await axiosInstance.put(`/posts/${postId}`, {
-          title,
-          content,
-          thumbnailUrl,
-          desc,
-          visibility,
-          postUrl,
-        });
-        router.push(`/posts/${postId}`); // Next.js의 클라이언트 라우팅
-      } else {
-        const res = await axiosInstance.post("/posts", {
-          title,
-          content,
-          thumbnailUrl,
-          desc,
-          visibility,
-          postUrl,
-        });
-        //redir
-        const id = res.data.postId; // 서버에서 반환해주는 고유 URL
-        // setShowPublishScreen(false);
-        console.log(id);
-        router.push(`/posts/${id}`); // Next.js의 클라이언트 라우팅
-      }
-    } catch (err) {
-      console.error("포스트 업로드 실패", err);
-      alert("포스트 업로드에 실패했습니다.");
-    }
-  };
+  const {
+    thumbnailInputRef,
+    thumbnailUrl,
+    onPublish,
+    handleThumbnailClick,
+    handleThumbnailUpload,
+    desc,
+    visibility,
+    setDesc,
+    setVisibility,
+    setPostUrl,
+  } = usePostUpload({
+    content,
+    title,
+    showPublishScreen,
+    isUpdate,
+    setShowPublishScreen,
+    initialThumbnailUrl,
+    initialDesc,
+    initialVisibility,
+    initialPostUrl,
+    postId,
+  });
 
-  const handleThumbnailClick = () => {
-    thumbnailInputRef.current?.click();
-  };
-  const handleThumbnailUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      // Presigned URL 요청
-      const res = await axiosInstance.post("/presign", {
-        filename: file.name,
-      });
-      e.target.value = "";
-
-      const { url } = res.data;
-
-      // S3에 업로드
-      await axios.put(process.env.NEXT_PUBLIC_S3_URL + url, file, {
-        headers: {
-          "Content-Type": file.type,
-        },
-      });
-
-      // 미리보기 URL 추출
-      const imageUrl = process.env.NEXT_PUBLIC_S3_URL + url.split("?")[0];
-      setThumbnailUrl(imageUrl);
-    } catch (err) {
-      console.error("썸네일 업로드 실패", err);
-      alert("썸네일 업로드에 실패했습니다.");
-    }
-  };
-  useEffect(() => {
-    // content 내 첫 번째 이미지 URL 추출
-    const match = content.match(/!\[.*?\]\((.*?)\)/);
-    if (match && !thumbnailUrl) {
-      setThumbnailUrl(match[1]);
-    }
-  }, [content, thumbnailUrl]);
   return (
     <div
       style={{
@@ -225,7 +163,7 @@ export default function PostUpload({
             <span style={{ marginRight: 4 }}>ksc036/</span>
             <input
               type="text"
-              onChange={(e) => setpostUrl(e.target.value)}
+              onChange={(e) => setPostUrl(e.target.value)}
               placeholder="default"
               style={{
                 marginTop: "0.5rem",
@@ -235,18 +173,6 @@ export default function PostUpload({
               }}
             />
           </div>
-          {/* <span>ksc036dd/</span>
-          <input
-            type="text"
-            onChange={(e) => setpostUrl(e.target.value)}
-            placeholder="ksc036/default"
-            style={{
-              marginTop: "0.5rem",
-              width: "100%",
-              padding: "0.5rem",
-              border: "1px solid #ccc",
-            }}
-          /> */}
         </div>
 
         <div style={{ display: "flex", gap: "1rem", marginTop: "2rem" }}>
