@@ -4,16 +4,24 @@ export default function Card({
   title,
   content,
   desc,
+  thumbnailUrl,
 }: {
   id: number;
   title: string;
   content: string;
   desc: string;
+  thumbnailUrl: string;
 }) {
   return (
     <a href={`/posts/${id}`}>
       <div className={styles.card}>
-        <img className={styles.img} src="" alt="" />
+        <div
+          style={{ width: "100%", aspectRatio: "16/9", overflow: "hidden" }}
+          className={styles.thumbnail}
+        >
+          <img className={styles.img} src={thumbnailUrl} alt="" />
+        </div>
+
         <div className={styles.main}>
           <div className={styles.title}>{title}</div>
           <div className={styles.content}>{desc}</div>
