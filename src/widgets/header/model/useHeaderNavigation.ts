@@ -8,8 +8,10 @@ export function useHeaderNavigation() {
   const goToWrite = () => {
     router.push("/write");
   };
-
   const goToHome = () => {
+    window.location.href = "https://ksc036.store/";
+  };
+  const goToUserPage = () => {
     router.push("/");
   };
 
@@ -17,5 +19,5 @@ export function useHeaderNavigation() {
     router.push("/profile/ksc036");
   };
 
-  return { goToWrite, goToHome, goToProfile };
+  return { goToWrite, goToHome, goToUserPage, goToProfile };
 }
