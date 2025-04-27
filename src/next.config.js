@@ -3,8 +3,8 @@ module.exports = {
     return [
       {
         source: "/:path*", // 요청 경로는 뭐든
-        has: [{ type: "host", value: "(?<user>[^.]+)\\.ksc036\\.store" }],
-        destination: "/profile/:user", // 항상 /profile/서브도메인 으로
+        has: [{ type: "host", value: "(?<id>[^.]+)\\.ksc036\\.store" }],
+        destination: "/profile/:id", // 항상 /profile/서브도메인 으로
       },
     ];
   },
