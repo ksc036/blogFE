@@ -4,7 +4,7 @@ import styles from "./Header.module.css";
 import { useHeaderNavigation } from "../model/useHeaderNavigation";
 
 export default function Header() {
-  const { goToUserPage, goToHome, goToWrite, goToProfile } =
+  const { goToLoginGoogle, goToUserPage, goToHome, goToWrite, goToProfile } =
     useHeaderNavigation();
 
   return (
@@ -12,8 +12,9 @@ export default function Header() {
       <div className={styles.mainHeader}>
         <div onClick={goToHome} style={{ cursor: "pointer" }}>
           Delog logo
+          <span onClick={goToUserPage}> 사용자 페이지</span>
         </div>
-        <span onClick={goToUserPage}>사용자 페이지</span>
+
         <div style={{ display: "flex", gap: "20px" }}>
           <div onClick={goToWrite} style={{ cursor: "pointer" }}>
             새글 작성
@@ -21,12 +22,13 @@ export default function Header() {
           <div onClick={goToProfile} style={{ cursor: "pointer" }}>
             profile
           </div>
+          <div onClick={goToLoginGoogle}>로그인</div>
         </div>
       </div>
-      <div className={styles.mainHeader}>
+      {/* <div className={styles.mainHeader}>
         <div>트랜딩 | 최신 | 피드 </div>
         <div>이번주</div>
-      </div>
+      </div> */}
     </header>
   );
 }

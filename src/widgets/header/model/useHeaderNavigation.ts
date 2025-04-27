@@ -1,5 +1,6 @@
 "use client";
 
+import axiosInstance from "@/shared/lib/axiosInstance";
 import { useRouter } from "next/navigation";
 
 export function useHeaderNavigation() {
@@ -18,6 +19,8 @@ export function useHeaderNavigation() {
   const goToProfile = () => {
     router.push("/profile/ksc036");
   };
-
-  return { goToWrite, goToHome, goToUserPage, goToProfile };
+  const goToLoginGoogle = () => {
+    axiosInstance.get("/users/social/google").then((res) => {});
+  };
+  return { goToWrite, goToHome, goToUserPage, goToProfile, goToLoginGoogle };
 }
