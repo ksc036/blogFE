@@ -8,7 +8,7 @@ export function useSubCommentInput(
   postId: number,
   setActiveReplyId: (id: number | null) => void
 ) {
-  //   console.log("type checkin function", typeof setActiveReplyId);
+  //   //console.log("type checkin function", typeof setActiveReplyId);
   const [text, setText] = useState("");
   const dispatch = useAppDispatch();
   const handleSubmit = async () => {

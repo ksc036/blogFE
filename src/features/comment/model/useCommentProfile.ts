@@ -19,7 +19,7 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
   const [editContent, setEditContent] = useState<string>("");
 
   const handleEdit = async () => {
-    console.log("editCommentId", comment);
+    //console.log("editCommentId", comment);
     const res = await putCommentApi(comment.id, comment.postId, editContent);
     dispatch(editComment({ id: res.id, content: res.content }));
     setEditCommentId(null);

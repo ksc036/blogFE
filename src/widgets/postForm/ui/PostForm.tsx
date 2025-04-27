@@ -25,7 +25,7 @@ export default function PostForm({ postId }: PostFormProps) {
   const [showPublishScreen, setShowPublishScreen] = useState(false);
   useEffect(() => {
     const fetchPost = async () => {
-      console.log("postId", postId);
+      //console.log("postId", postId);
       if (!postId) {
         return;
       }
@@ -198,15 +198,15 @@ export default function PostForm({ postId }: PostFormProps) {
   };
 
   const handleImageInsert = () => {
-    console.log("handleImageInsert");
+    //console.log("handleImageInsert");
     fileInputRef.current?.click();
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("handleImageUpload");
+    //console.log("handleImageUpload");
     const file = e.target.files?.[0];
-    console.log(file);
-    console.log(process.env.NEXT_PUBLIC_API_URL);
+    //console.log(file);
+    //console.log(process.env.NEXT_PUBLIC_API_URL);
     if (!file) return;
 
     try {
@@ -227,7 +227,7 @@ export default function PostForm({ postId }: PostFormProps) {
       }, 0);
     } catch (err) {
       alert("이미지 업로드 실패");
-      console.error(err);
+      //console.error(err);
     }
   };
 

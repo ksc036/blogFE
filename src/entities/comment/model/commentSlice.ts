@@ -74,7 +74,7 @@ export const commentSlice = createSlice({
       // 1. 최상위 댓글에서 찾기
       const topLevelComment = state.comments.find((c) => c.id === id);
       if (topLevelComment) {
-        console.log("topLevelComment 변경!", action.content);
+        //console.log("topLevelComment 변경!", action.content);
         topLevelComment.content = content;
         return;
       }

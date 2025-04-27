@@ -58,11 +58,11 @@ export function usePostUpload({
           postUrl
         );
         const id = res.postId; // 서버에서 반환해주는 고유 URL
-        console.log(id);
+        //console.log(id);
         router.push(`/posts/${id}`); // Next.js의 클라이언트 라우팅
       }
     } catch (err) {
-      console.error("포스트 업로드 실패", err);
+      //console.error("포스트 업로드 실패", err);
       alert("포스트 업로드에 실패했습니다.");
     }
   };
@@ -82,7 +82,7 @@ export function usePostUpload({
       const imageUrl = process.env.NEXT_PUBLIC_S3_URL + url.split("?")[0];
       setThumbnailUrl(imageUrl);
     } catch (err) {
-      console.error("썸네일 업로드 실패", err);
+      //console.error("썸네일 업로드 실패", err);
       alert("썸네일 업로드에 실패했습니다.");
     }
   };

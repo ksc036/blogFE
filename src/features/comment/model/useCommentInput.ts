@@ -16,7 +16,7 @@ export function useCommentInput(postId: number) {
       dispatch(addComment({ comment: newComment }));
       setComment("");
     } catch (e) {
-      console.error("댓글 작성 실패:", e);
+      //console.error("댓글 작성 실패:", e);
       alert("댓글 작성 중 오류가 발생했습니다.");
     }
   };

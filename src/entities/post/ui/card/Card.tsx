@@ -1,7 +1,7 @@
 import styles from "./Card.module.css";
 import { CardType, Post } from "@/entities/post/model/types";
 export default function Card({ post }: { post: Post }) {
-  console.log("Card", post);
+  //console.log("Card", post);
   return (
     <a href={`/posts/${post.id}`}>
       <div className={styles.card}>
