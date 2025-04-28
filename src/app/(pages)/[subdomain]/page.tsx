@@ -6,8 +6,9 @@ import { getPostsBySubdomain } from "@/entities/post/api/postApi";
 
 export default async function ProfilePage({ params }: urlParams) {
   const { id, subdomain } = await params;
-  console.log("params", params);
-  const posts: Post[] = await getPostsBySubdomain(id); //params.id로 바꿔야함
+  console.log("ProfilePage", subdomain);
+  console.log("hostname", window.location.hostname);
+  const posts: Post[] = await getPostsBySubdomain(subdomain); //params.id로 바꿔야함
 
   return (
     <div className={styles.container}>
