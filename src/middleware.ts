@@ -12,8 +12,9 @@ export function middleware(request: NextRequest) {
   // "ksc036.store"로 끝나는 요청만 처리
   if (hostname.endsWith(domainOnly)) {
     if (hostname === domainOnly || hostname === `www.${domainOnly}`) {
-      // 👉 기본 도메인(kcs036.store 또는 www.ksc036.store) 요청이면 아무것도 안 한다
-      return NextResponse.next();
+      // 👉 기본 도메인(kcs036.store 또는 www.ksc036.store) 요청이면 쓰기,읽기에 대해서 예외처리리
+      url.pathname = `/home/${request.nextUrl.pathname}`;
+      return NextResponse.rewrite(url);
     }
 
     // 여기까지 왔으면 무조건 서브도메인이다.

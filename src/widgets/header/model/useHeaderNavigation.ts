@@ -16,9 +16,13 @@ export function useHeaderNavigation() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const me = useAppSelector((state: RootState) => state.user.me);
+  const isLogined = useAppSelector((state: RootState) => state.user.isLogined);
   // const subdomain = getSubdomainFromCookie();
 
   const goToWrite = () => {
+    if (isLogined) {
+      router.push("/write");
+    }
     router.push("/write");
   };
   const goToHome = () => {
@@ -39,8 +43,6 @@ export function useHeaderNavigation() {
   const goToLogOut = async () => {
     dispatch(logout());
   };
-
-  const isLogined = useAppSelector((state: RootState) => state.user.isLogined);
 
   return {
     goToWrite,

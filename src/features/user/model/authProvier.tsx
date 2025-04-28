@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       fetchUser();
     }
     console.log("auth provider", me);
-  }, [me, isLogined]);
+  }, []);
 
   return <div>{children}</div>;
 }

@@ -9,7 +9,7 @@ export default async function ProfilePage({ params }: urlParams) {
   console.log("ProfilePage", subdomain);
   // console.log("hostname", window.location.hostname);
   const posts: Post[] = await getPostsBySubdomain(subdomain); //params.id로 바꿔야함
-
+  console.log("posts", posts);
   return (
     <div className={styles.container}>
       <div className={styles.content}>
