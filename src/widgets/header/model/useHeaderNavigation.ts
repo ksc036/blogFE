@@ -5,18 +5,18 @@ import axiosInstance from "@/shared/lib/axiosInstance";
 import { RootState } from "@/shared/store";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useRouter } from "next/navigation";
-function getSubdomainFromCookie() {
-  const cookies = document.cookie.split("; ");
-  const subdomainCookie = cookies.find((cookie) =>
-    cookie.startsWith("subdomain=")
-  );
-  return subdomainCookie?.split("=")[1] || "";
-}
+// function getSubdomainFromCookie() {
+//   const cookies = document.cookie.split("; ");
+//   const subdomainCookie = cookies.find((cookie) =>
+//     cookie.startsWith("subdomain=")
+//   );
+//   return subdomainCookie?.split("=")[1] || "";
+// }
 export function useHeaderNavigation() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const me = useAppSelector((state: RootState) => state.user.me);
-  const subdomain = getSubdomainFromCookie();
+  // const subdomain = getSubdomainFromCookie();
 
   const goToWrite = () => {
     router.push("/write");
