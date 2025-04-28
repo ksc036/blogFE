@@ -32,7 +32,7 @@ export default function Header() {
           {isLogined ? (
             <div onClick={goToLogOut}>프로필</div>
           ) : (
-            <div onClick={goToLoginGoogle}>로그인</div>
+            <div onClick={goToLoginGoogle}>로그인dd</div>
           )}
         </div>
       </div>
