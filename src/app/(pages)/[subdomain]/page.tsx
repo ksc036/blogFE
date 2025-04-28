@@ -5,14 +5,15 @@ import { urlParams } from "@/shared/types/types";
 import { getPostsBySubdomain } from "@/entities/post/api/postApi";
 
 export default async function ProfilePage({ params }: urlParams) {
-  const { id } = await params;
+  const { id, subdomain } = await params;
+  console.log("params", params);
   const posts: Post[] = await getPostsBySubdomain(id); //params.id로 바꿔야함
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.menu}>
-          <div className={styles.profile}>${id}님의 프로필입니다.</div>
+          <div className={styles.profile}>${subdomain}님의 프로필입니다.</div>
           <div className={styles.tag}>태그들</div>
         </div>
         <CardList posts={posts}></CardList>
