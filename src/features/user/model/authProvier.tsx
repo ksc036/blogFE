@@ -8,11 +8,11 @@ import { setMe } from "@/entities/user/model/userSlice";
 export function AuthProvider({ children }: { children: ReactNode }) {
   const me = useAppSelector((state) => state.user.me); // redux에 저장된 유저 정보
   const isLogined = useAppSelector((state) => state.user.isLogined); // redux에 저장된 유저 정보
+  const dispatch = useAppDispatch(); // redux dispatch 함수
   useEffect(() => {
     console.log("auth provider", me);
     console.log("isLogined", isLogined);
     const fetchUser = async () => {
-      const dispatch = useAppDispatch(); // redux dispatch 함수
       try {
         const data = await getMe();
         dispatch(setMe({ me: data })); // redux store 업데이트
@@ -24,7 +24,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!isLogined) {
       fetchUser();
     }
-  }, [me]);
+    console.log("auth provider", me);
+  }, [me, isLogined]);
 
   return <div>{children}</div>;
 }
