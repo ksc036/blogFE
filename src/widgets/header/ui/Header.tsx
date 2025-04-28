@@ -4,8 +4,15 @@ import styles from "./Header.module.css";
 import { useHeaderNavigation } from "../model/useHeaderNavigation";
 
 export default function Header() {
-  const { goToLoginGoogle, goToUserPage, goToHome, goToWrite, goToProfile } =
-    useHeaderNavigation();
+  const {
+    goToLoginGoogle,
+    goToUserPage,
+    goToHome,
+    goToWrite,
+    goToProfile,
+    isLogined,
+    goToLogOut,
+  } = useHeaderNavigation();
 
   return (
     <header className={styles.header}>
@@ -22,7 +29,11 @@ export default function Header() {
           <div onClick={goToProfile} style={{ cursor: "pointer" }}>
             profile
           </div>
-          <div onClick={goToLoginGoogle}>로그인</div>
+          {isLogined ? (
+            <div onClick={goToLogOut}>프로필</div>
+          ) : (
+            <div onClick={goToLoginGoogle}>로그인</div>
+          )}
         </div>
       </div>
       {/* <div className={styles.mainHeader}>

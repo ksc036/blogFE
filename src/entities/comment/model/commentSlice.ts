@@ -1,18 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { cp } from "fs";
-import { CONFIG_FILES } from "next/dist/shared/lib/constants";
-// id: 1,
-// nickname: "닉네임",
-// date: "2023-10-01",
-// content: "댓글 내용",
-// replies: [
-//   {
-//     id: 2,
-//     nickname: "답글 작성자",
-//     date: "2023-10-02",
-//     content: "답글 내용",
-//   },
-// ],
+
 const initialState = { comments: [] };
 
 export const commentSlice = createSlice({
