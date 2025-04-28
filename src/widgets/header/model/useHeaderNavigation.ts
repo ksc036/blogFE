@@ -19,8 +19,10 @@ export function useHeaderNavigation() {
   const goToProfile = () => {
     router.push("/profile/ksc036");
   };
-  const goToLoginGoogle = () => {
-    axiosInstance.get("/users/social/google").then((res) => {});
+  const goToLoginGoogle = async () => {
+    const { data } = await axiosInstance.get("/users/social/google");
+    const { url } = data;
+    window.location.href = url;
   };
   return { goToWrite, goToHome, goToUserPage, goToProfile, goToLoginGoogle };
 }
