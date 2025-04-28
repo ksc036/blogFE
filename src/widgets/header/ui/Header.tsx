@@ -26,11 +26,13 @@ export default function Header() {
           <div onClick={goToWrite} style={{ cursor: "pointer" }}>
             새글 작성
           </div>
-          <div onClick={goToProfile} style={{ cursor: "pointer" }}>
-            profile
-          </div>
+          {isLogined && (
+            <div onClick={goToProfile} style={{ cursor: "pointer" }}>
+              profile
+            </div>
+          )}
           {isLogined ? (
-            <div onClick={goToLogOut}>프로필</div>
+            <div onClick={goToLogOut}>로그아웃</div>
           ) : (
             <div onClick={goToLoginGoogle}>로그인</div>
           )}

@@ -1,16 +1,12 @@
-// import CardList from "@/components/server/profilePostList/CardList";
-// import CardList from "@/widgets/postList/ui/CardList";
 import CardList from "@/widgets/postList/ui/UserProfilePostList/CardList";
 import styles from "./page.module.css";
-import { getPosts } from "@/entities/post/api/getPosts"; //이후에 userPost에 대한건 widget의 modle에 넣자.
 import { Post } from "@/entities/post/model/types";
 import { urlParams } from "@/shared/types/types";
-// interface Props {
-//   params: Promise<{ id: string }>;
-// }
+import { getPostsBySubdomain } from "@/entities/post/api/postApi";
+
 export default async function ProfilePage({ params }: urlParams) {
-  const posts: Post[] = await getPosts();
   const { id } = await params;
+  const posts: Post[] = await getPostsBySubdomain(id); //params.id로 바꿔야함
 
   return (
     <div className={styles.container}>

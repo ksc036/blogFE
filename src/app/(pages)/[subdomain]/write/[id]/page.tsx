@@ -1,4 +1,3 @@
-/// src/app/write/[id]/page.tsx
 import { urlParams } from "@/shared/types/types";
 import PostForm from "@/widgets/postForm/ui/PostForm";
 

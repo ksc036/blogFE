@@ -10,7 +10,8 @@ import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
 import PostEditButton from "@/features/post/ui/PostEditButton";
 
 export default async function postPage({ params }: urlParams) {
-  const { id } = await params;
+  const { subdomain, id } = await params;
+  console.log("subdomain", subdomain);
   const post = await getPostsById(Number(id));
   const posts = await getPosts();
   return (

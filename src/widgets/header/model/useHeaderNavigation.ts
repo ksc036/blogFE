@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 
 export function useHeaderNavigation() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const me = useAppSelector((state: RootState) => state.user.me);
 
   const goToWrite = () => {
     router.push("/write");
@@ -20,7 +22,7 @@ export function useHeaderNavigation() {
   };
 
   const goToProfile = () => {
-    router.push("/profile/ksc036");
+    router.push(`https://${me.subdomain}.ksc036.store/`);
   };
   const goToLoginGoogle = async () => {
     const { data } = await axiosInstance.get("/users/social/google");
@@ -28,7 +30,6 @@ export function useHeaderNavigation() {
     window.location.href = url;
   };
   const goToLogOut = async () => {
-    const dispatch = useAppDispatch();
     dispatch(logout());
   };
 

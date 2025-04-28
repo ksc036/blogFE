@@ -18,10 +18,11 @@ export function middleware(request: NextRequest) {
 
     // 여기까지 왔으면 무조건 서브도메인이다.
     const subdomain = hostname.replace(`.${domainOnly}`, ""); // 서브도메인 추출
-    url.pathname = `/profile/${subdomain}`;
+    url.pathname = `/${subdomain}${request.nextUrl.pathname}`;
+    // const response = NextResponse.next();
+    // response.cookies.set("subdomain", subdomain);
     return NextResponse.rewrite(url);
   }
-
   // 그 외 요청은 그냥 통과
   return NextResponse.next();
 }

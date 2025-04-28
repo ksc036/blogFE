@@ -1,5 +1,12 @@
 import axiosInstance from "@/shared/lib/axiosInstance";
-import axios from "axios";
+import { Post } from "../model/types";
+
+export const getPostsBySubdomain = async (
+  subdomain: string
+): Promise<Post[]> => {
+  const res = await axiosInstance.get(`/posts/subdomain/${subdomain}`);
+  return res.data;
+};
 
 export const createPostApi = async (
   title: string,
