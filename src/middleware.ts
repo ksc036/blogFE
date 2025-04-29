@@ -23,6 +23,13 @@ export function middleware(request: NextRequest) {
         url.pathname = `/home${pathname}`;
         return NextResponse.rewrite(url);
       }
+
+      const writesRegex = /^\/write\/[^\/]+$/;
+      if (writesRegex.test(pathname)) {
+        // 기본 도메인에서는 subdomain을 "home"으로 간주
+        url.pathname = `/home${pathname}`;
+        return NextResponse.rewrite(url);
+      }
       return NextResponse.rewrite(url);
     }
 
