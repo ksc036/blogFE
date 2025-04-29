@@ -13,7 +13,16 @@ export function middleware(request: NextRequest) {
   if (hostname.endsWith(domainOnly)) {
     if (hostname === domainOnly || hostname === `www.${domainOnly}`) {
       // 👉 기본 도메인(kcs036.store 또는 www.ksc036.store) 요청이면 쓰기,읽기에 대해서 예외처리리
-      url.pathname = `/home/${request.nextUrl.pathname}`;
+      const pathname = request.nextUrl.pathname;
+
+      // 경로가 "/posts/:id" 형태일 때만 서브도메인처럼 취급
+      const postsRegex = /^\/posts\/[^\/]+$/; // /posts/다음에 하나의 id가 오는 경우
+
+      if (postsRegex.test(pathname)) {
+        // 기본 도메인에서는 subdomain을 "home"으로 간주
+        url.pathname = `/home${pathname}`;
+        return NextResponse.rewrite(url);
+      }
       return NextResponse.rewrite(url);
     }
 
