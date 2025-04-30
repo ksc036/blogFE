@@ -15,7 +15,7 @@ export default function Header() {
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
-
+  const test = () => {};
   return (
     <header className={styles.header}>
       <div className={styles.mainHeader}>
@@ -29,7 +29,6 @@ export default function Header() {
               새 글 작성
             </Link>
           )}
-
           {isLogined ? (
             <div className={styles.profileWrapper} onClick={toggleDropdown}>
               <Image
@@ -66,6 +65,9 @@ export default function Header() {
             </div>
           )}
         </div>
+      </div>
+      <div className={styles.test} onClick={test}>
+        테스트버튼
       </div>
     </header>
   );
