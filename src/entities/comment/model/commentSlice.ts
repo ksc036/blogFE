@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Comment } from "@/entities/comment/model/types";
 
-const initialState = { comments: [] };
+const initialState = { comments: [] as Comment[] };
 
 export const commentSlice = createSlice({
   name: "comment",
@@ -28,6 +29,8 @@ export const commentSlice = createSlice({
       const targetId = action.payload.id;
 
       // 1. 최상위 댓글에서 찾기
+      console.log(state.comments);
+      console.log(state.comments[0].id);
       const topLevelIndex = state.comments.findIndex((c) => c.id === targetId);
       console.log("topLevelIndex", topLevelIndex);
       if (topLevelIndex !== -1) {
