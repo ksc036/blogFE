@@ -37,7 +37,7 @@ export default function UserProfileForm() {
   const handleSave = async () => {
     try {
       const value = profileData[editField as keyof typeof profileData];
-      await axiosInstance.put("/users/profile", {
+      await axiosInstance.put("/users", {
         field: editField,
         value: value,
       });
@@ -64,7 +64,7 @@ export default function UserProfileForm() {
       await uploadImg(file, url);
       const imageUrl = process.env.NEXT_PUBLIC_S3_URL + url.split("?")[0];
       console.log("Image URL:", imageUrl);
-      await axiosInstance.put("/users/profile", {
+      await axiosInstance.put("/users", {
         field: "thumbnailUrl",
         value: imageUrl,
       });
