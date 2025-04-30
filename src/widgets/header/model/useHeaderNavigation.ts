@@ -5,32 +5,13 @@ import axiosInstance from "@/shared/lib/axiosInstance";
 import { RootState } from "@/shared/store";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useRouter } from "next/navigation";
-// function getSubdomainFromCookie() {
-//   const cookies = document.cookie.split("; ");
-//   const subdomainCookie = cookies.find((cookie) =>
-//     cookie.startsWith("subdomain=")
-//   );
-//   return subdomainCookie?.split("=")[1] || "";
-// }
+
 export function useHeaderNavigation() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const me = useAppSelector((state: RootState) => state.user.me);
   const isLogined = useAppSelector((state: RootState) => state.user.isLogined);
   // const subdomain = getSubdomainFromCookie();
-
-  const goToWrite = () => {
-    if (isLogined) {
-      router.push("/write");
-    }
-    router.push("/write");
-  };
-  const goToHome = () => {
-    window.location.href = "https://ksc036.store/";
-  };
-  const goToUserPage = () => {
-    router.push("/");
-  };
 
   const goToProfile = () => {
     router.push(`https://${me.subdomain}.ksc036.store`);
@@ -41,13 +22,17 @@ export function useHeaderNavigation() {
     window.location.href = url;
   };
   const goToLogOut = async () => {
-    dispatch(logout());
+    try {
+      const { data } = await axiosInstance.get("/users/logout");
+      console.log("data", data);
+      dispatch(logout());
+    } catch (error) {
+      console.log(error);
+    }
+    router.push(`https://ksc036.store`);
   };
 
   return {
-    goToWrite,
-    goToHome,
-    goToUserPage,
     goToProfile,
     goToLoginGoogle,
     isLogined,
