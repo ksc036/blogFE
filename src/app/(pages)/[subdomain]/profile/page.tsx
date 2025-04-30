@@ -90,7 +90,7 @@ export default function UserProfileForm() {
       // });
       // setThumbnailUrl(imageUrl);
       await axiosInstance.put("/users", {
-        field: editField,
+        field: "thumbnailUrl",
         value: imageUrl,
       });
       dispatch(updateMeField({ field: "thumbnailUrl", value: imageUrl }));
