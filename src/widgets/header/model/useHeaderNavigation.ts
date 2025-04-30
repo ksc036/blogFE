@@ -52,5 +52,6 @@ export function useHeaderNavigation() {
     goToLoginGoogle,
     isLogined,
     goToLogOut,
+    me,
   };
 }

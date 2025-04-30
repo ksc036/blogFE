@@ -2,6 +2,7 @@
 
 import styles from "./Header.module.css";
 import { useHeaderNavigation } from "../model/useHeaderNavigation";
+import Link from "next/link";
 
 export default function Header() {
   const {
@@ -12,6 +13,7 @@ export default function Header() {
     goToProfile,
     isLogined,
     goToLogOut,
+    me,
   } = useHeaderNavigation();
 
   return (
@@ -23,9 +25,12 @@ export default function Header() {
         </div>
 
         <div style={{ display: "flex", gap: "20px" }}>
-          <div onClick={goToWrite} style={{ cursor: "pointer" }}>
-            새글 작성
-          </div>
+          {isLogined && (
+            <Link href={`https://${me.subdomain}.ksc036.store/write`}></Link>
+            // <div onClick={goToWrite} style={{ cursor: "pointer" }}>
+            //   새글 작성
+            // </div>
+          )}
           {isLogined && (
             <div onClick={goToProfile} style={{ cursor: "pointer" }}>
               profile
