@@ -29,13 +29,13 @@ export const commentSlice = createSlice({
       const targetId = action.payload.id;
 
       // 1. 최상위 댓글에서 찾기
-      console.log(state.comments);
-      console.log(state.comments[0].id);
+      console.log(typeof state.comments[0].id);
+      console.log(typeof action.payload.id);
+      console.log(state.comments[0].id === action.payload.id);
       const topLevelIndex = state.comments.findIndex((c) => c.id === targetId);
       console.log("topLevelIndex", topLevelIndex);
       if (topLevelIndex !== -1) {
         const comment = state.comments[topLevelIndex];
-
         if (comment.replies && comment.replies.length > 0) {
           // replies가 있으면 content만 '삭제된 댓글입니다.'로 바꿈
           comment.content = "삭제된 댓글입니다.";
