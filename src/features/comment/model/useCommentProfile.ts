@@ -9,7 +9,7 @@ import {
   deleteComment,
 } from "@/entities/comment/model/commentSlice";
 import { Comment } from "@/entities/comment/model/types";
-import { useAppDispatch } from "@/shared/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -17,6 +17,7 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
   const dispatch = useAppDispatch();
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [editContent, setEditContent] = useState<string>("");
+  const me = useAppSelector((state) => state.auth.me);
 
   const handleEdit = async () => {
     //console.log("editCommentId", comment);
@@ -46,5 +47,6 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
     editContent,
     setEditContent,
     editCommentId,
+    me,
   };
 }

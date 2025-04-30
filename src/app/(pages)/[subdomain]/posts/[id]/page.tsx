@@ -8,18 +8,26 @@ import PostMarkDownContent from "@/entities/post/ui/postContent/PostMarkDownCont
 import PostDeleteButton from "@/features/post/ui/PostDeleteButton";
 import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
 import PostEditButton from "@/features/post/ui/PostEditButton";
+import { useAppSelector } from "@/shared/store/hooks";
 
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
   console.log("subdomain", subdomain);
   const post = await getPostsById(Number(id));
   const posts = await getPosts();
+  console.log("post", post);
+  const me = useAppSelector((state) => state.auth.me);
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>{post.title} </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <PostDeleteButton postId={id}></PostDeleteButton>
-        <PostEditButton postId={id}></PostEditButton>
+        {me.id === post.userId && (
+          <div>
+            <PostDeleteButton postId={id}></PostDeleteButton>
+            <PostEditButton postId={id}></PostEditButton>
+          </div>
+        )}
       </div>
       <div className={styles.content}>
         <PostMarkDownContent content={post.content}></PostMarkDownContent>

@@ -11,9 +11,11 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
     editContent,
     setEditContent,
     editCommentId,
+    me,
   } = useCommentProfile({
     comment,
   });
+  console.log("comment", comment);
   return (
     <div>
       <div className={styles.commentHeader}>
@@ -29,17 +31,19 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
             src="/default-profile.png"
             alt="프로필"
           />
-          <div style={{ display: "flex", gap: "10px" }}>
-            <div
-              onClick={() => {
-                handleToggleEdit(); // ✅ 댓글 수정 버튼 클릭 시
-              }}
-            >
-              수정
+          {comment.userId === me.id && (
+            <div style={{ display: "flex", gap: "10px" }}>
+              <div
+                onClick={() => {
+                  handleToggleEdit(); // ✅ 댓글 수정 버튼 클릭 시
+                }}
+              >
+                수정
+              </div>
+              <div onClick={handleDelete}>삭제</div>
+              {/* <div>{comment.id}</div> */}
             </div>
-            <div onClick={handleDelete}>삭제</div>
-            {/* <div>{comment.id}</div> */}
-          </div>
+          )}
         </div>
 
         <div>
