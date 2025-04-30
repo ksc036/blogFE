@@ -29,7 +29,7 @@ export const commentSlice = createSlice({
 
       // 1. 최상위 댓글에서 찾기
       const topLevelIndex = state.comments.findIndex((c) => c.id === targetId);
-
+      console.log("topLevelIndex", topLevelIndex);
       if (topLevelIndex !== -1) {
         const comment = state.comments[topLevelIndex];
 
@@ -48,7 +48,9 @@ export const commentSlice = createSlice({
       // 2. 대댓글(replies)에서 찾기
       for (const comment of state.comments) {
         const replyIndex = comment.replies?.findIndex((r) => r.id === targetId);
+        console.log("replyIndex 찾기", replyIndex);
         if (replyIndex !== undefined && replyIndex !== -1) {
+          console.log("댓글 삭제 replyIndex", replyIndex);
           comment.replies!.splice(replyIndex, 1); // 대댓글 제거
           return;
         }
