@@ -28,6 +28,8 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
 
   const handleDelete = async () => {
     const res = await deleteCommentApi(comment.id);
+    console.log("deleteCommentApi success");
+    console.log("res", res);
     dispatch(deleteComment({ id: res.data }));
   };
 

@@ -38,6 +38,7 @@ export const commentSlice = createSlice({
           comment.content = "삭제된 댓글입니다.";
         } else {
           // replies가 없으면 아예 제거
+          console.log("댓글 삭제 topLevelIndex", topLevelIndex);
           state.comments.splice(topLevelIndex, 1);
         }
 
