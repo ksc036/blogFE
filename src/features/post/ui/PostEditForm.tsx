@@ -10,7 +10,7 @@ export default function PostEditForm({
   postUserId: number;
   postId: number;
 }) {
-  const me = useAppSelector((state) => state.auth.me);
+  const me = useAppSelector((state) => state.user.me);
   return (
     <div>
       {me?.id === postUserId && (

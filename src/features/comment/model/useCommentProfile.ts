@@ -17,7 +17,7 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
   const dispatch = useAppDispatch();
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [editContent, setEditContent] = useState<string>("");
-  const me = useAppSelector((state) => state.auth.me);
+  const me = useAppSelector((state) => state.user.me);
 
   const handleEdit = async () => {
     //console.log("editCommentId", comment);
