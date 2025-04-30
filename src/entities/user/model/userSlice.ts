@@ -16,8 +16,16 @@ export const userSlice = createSlice({
       state.me = {};
       state.isLogined = false;
     },
+    updateMeField: (
+      state,
+      action: PayloadAction<{ field: keyof Me; value: string }>
+    ) => {
+      if (state.me) {
+        state.me[action.payload.field] = action.payload.value;
+      }
+    },
   },
 });
 
-export const { setMe, logout } = userSlice.actions;
+export const { setMe, logout, updateMeField } = userSlice.actions;
 export default userSlice.reducer;

@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./UserProfileForm.module.css";
 import { Me } from "@/entities/user/model/types";
+import { updateMeField } from "@/entities/user/model/userSlice";
 import axiosInstance from "@/shared/lib/axiosInstance";
 import { useAppSelector } from "@/shared/store/hooks";
 import { getPresign } from "@/entities/post/api/presign";
@@ -9,6 +10,7 @@ import { uploadImg } from "@/entities/post/api/uploadImg";
 
 export default function UserProfileForm() {
   const me: Me = useAppSelector((state) => state.user.me);
+  const dispatch = useAppSelector((state) => state.user.dispatch);
   if (!me) {
     return <div>사용자 정보 읽기 실패했습니다</div>;
   }
@@ -19,14 +21,30 @@ export default function UserProfileForm() {
     bio: me.bio,
     blogName: me.blogName,
   };
-  const [profileData, setProfileData] = useState(initialData);
+  // const [profileData, setProfileData] = useState(initialData);
+  const [profileData, setProfileData] = useState({
+    name: "",
+    email: "",
+    subdomain: "",
+    bio: "",
+    blogName: "",
+  });
   const [editField, setEditField] = useState<string | null>(null);
   const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    setThumbnailUrl(me.thumbnailUrl);
-  }, []);
+    if (me) {
+      setProfileData({
+        name: me.name,
+        email: me.email,
+        subdomain: me.subdomain,
+        bio: me.bio,
+        blogName: me.blogName,
+      });
+      setThumbnailUrl(me.thumbnailUrl);
+    }
+  }, [me]);
 
   const handleEdit = (field: string) => setEditField(field);
   const handleChange = (
@@ -41,6 +59,7 @@ export default function UserProfileForm() {
         field: editField,
         value: value,
       });
+      dispatch(updateMeField({ field: editField as keyof Me, value }));
     } catch (error) {
       console.error("Error saving profile data:", error);
       alert("프로필 저장에 실패했습니다.");
@@ -64,11 +83,12 @@ export default function UserProfileForm() {
       await uploadImg(file, url);
       const imageUrl = process.env.NEXT_PUBLIC_S3_URL + url.split("?")[0];
       console.log("Image URL:", imageUrl);
-      await axiosInstance.put("/users", {
-        field: "thumbnailUrl",
-        value: imageUrl,
-      });
-      setThumbnailUrl(imageUrl);
+      // await axiosInstance.put("/users", {
+      //   field: "thumbnailUrl",
+      //   value: imageUrl,
+      // });
+      // setThumbnailUrl(imageUrl);
+      dispatch(updateMeField({ field: "thumbnailUrl", value: imageUrl }));
     } catch (err) {
       console.error("Error uploading image:", err);
       alert("이미지 업로드에 실패했습니다.");
