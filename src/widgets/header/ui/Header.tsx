@@ -26,7 +26,9 @@ export default function Header() {
 
         <div style={{ display: "flex", gap: "20px" }}>
           {isLogined && (
-            <Link href={`https://${me.subdomain}.ksc036.store/write`}></Link>
+            <Link href={`https://${me.subdomain}.ksc036.store/write`}>
+              글쓰기
+            </Link>
             // <div onClick={goToWrite} style={{ cursor: "pointer" }}>
             //   새글 작성
             // </div>
