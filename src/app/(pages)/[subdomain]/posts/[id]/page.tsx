@@ -6,6 +6,7 @@ import { getPosts } from "@/entities/post/api/getPosts";
 import CardList from "@/widgets/postList/ui/PostList/CardList";
 import PostMarkDownContent from "@/entities/post/ui/postContent/PostMarkDownContent";
 import PostDeleteButton from "@/features/post/ui/PostDeleteButton";
+import PostEditForm from "@/features/post/ui/PostEditForm";
 import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
 import PostEditButton from "@/features/post/ui/PostEditButton";
 import { useAppSelector } from "@/shared/store/hooks";
@@ -16,18 +17,12 @@ export default async function postPage({ params }: urlParams) {
   const post = await getPostsById(Number(id));
   const posts = await getPosts();
   console.log("post", post);
-  const me = useAppSelector((state) => state.auth.me);
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>{post.title} </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        {me.id === post.userId && (
-          <div>
-            <PostDeleteButton postId={id}></PostDeleteButton>
-            <PostEditButton postId={id}></PostEditButton>
-          </div>
-        )}
+        <PostEditForm postUserId={post.userId} postId={post.id}></PostEditForm>
       </div>
       <div className={styles.content}>
         <PostMarkDownContent content={post.content}></PostMarkDownContent>
