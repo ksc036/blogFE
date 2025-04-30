@@ -16,7 +16,7 @@ export default function PostEditForm({
       {me?.id === postUserId && (
         <div>
           <PostDeleteButton postId={postId}></PostDeleteButton>
-          <PostEditButton postId={postId}></PostEditButton>)
+          <PostEditButton postId={postId}></PostEditButton>
         </div>
       )}
     </div>

@@ -15,7 +15,6 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
   } = useCommentProfile({
     comment,
   });
-  console.log("comment", comment);
   return (
     <div>
       <div className={styles.commentHeader}>
@@ -31,7 +30,7 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
             src="/default-profile.png"
             alt="프로필"
           />
-          {comment.userId === me.id && (
+          {me?.id === comment.userId && (
             <div style={{ display: "flex", gap: "10px" }}>
               <div
                 onClick={() => {
