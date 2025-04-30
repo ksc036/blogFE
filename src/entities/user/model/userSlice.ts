@@ -20,8 +20,13 @@ export const userSlice = createSlice({
       state,
       action: PayloadAction<{ field: keyof Me; value: string }>
     ) => {
-      if (state.me) {
-        state.me[action.payload.field] = action.payload.value;
+      console.log("updateMeField", action.payload.field, action.payload.value);
+      try {
+        if (state.me) {
+          state.me[action.payload.field] = action.payload.value;
+        }
+      } catch (error) {
+        console.error("Error updating user field:", error);
       }
     },
   },
