@@ -12,7 +12,7 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.mainHeader}>
         <Link href={`https://ksc036.store`} style={{ cursor: "pointer" }}>
-          Delog
+          Notefic
         </Link>
 
         <div style={{ display: "flex", gap: "20px" }}>
@@ -22,10 +22,16 @@ export default function Header() {
             </Link>
           )}
           {isLogined && (
-            <div onClick={goToProfile} style={{ cursor: "pointer" }}>
-              profile
+            <div>
+              <div onClick={goToProfile} style={{ cursor: "pointer" }}>
+                내페이지 가기
+              </div>
+              <Link href={`https://${me.subdomain}.ksc036.store/profile`}>
+                프로필 설정
+              </Link>
             </div>
           )}
+
           {isLogined ? (
             <div onClick={goToLogOut}>로그아웃</div>
           ) : (
