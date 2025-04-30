@@ -4,23 +4,24 @@ import styles from "./UserProfileForm.module.css";
 import { Me } from "@/entities/user/model/types";
 import { updateMeField } from "@/entities/user/model/userSlice";
 import axiosInstance from "@/shared/lib/axiosInstance";
-import { useAppSelector } from "@/shared/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { getPresign } from "@/entities/post/api/presign";
 import { uploadImg } from "@/entities/post/api/uploadImg";
+import { useDispatch } from "react-redux";
 
 export default function UserProfileForm() {
   const me: Me = useAppSelector((state) => state.user.me);
-  const dispatch = useAppSelector((state) => state.user.dispatch);
+  const dispatch = useAppDispatch();
   if (!me) {
     return <div>사용자 정보 읽기 실패했습니다</div>;
   }
-  const initialData = {
-    name: me.name,
-    email: me.email,
-    subdomain: me.subdomain,
-    bio: me.bio,
-    blogName: me.blogName,
-  };
+  // const initialData = {
+  //   name: me.name,
+  //   email: me.email,
+  //   subdomain: me.subdomain,
+  //   bio: me.bio,
+  //   blogName: me.blogName,
+  // };
   // const [profileData, setProfileData] = useState(initialData);
   const [profileData, setProfileData] = useState({
     name: "",
