@@ -89,6 +89,10 @@ export default function UserProfileForm() {
       //   value: imageUrl,
       // });
       // setThumbnailUrl(imageUrl);
+      await axiosInstance.put("/users", {
+        field: editField,
+        value: imageUrl,
+      });
       dispatch(updateMeField({ field: "thumbnailUrl", value: imageUrl }));
     } catch (err) {
       console.error("Error uploading image:", err);
