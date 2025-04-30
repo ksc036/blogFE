@@ -30,7 +30,7 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
     const res = await deleteCommentApi(comment.id);
     console.log("deleteCommentApi success");
     console.log("res", res);
-    dispatch(deleteComment({ id: res.data }));
+    dispatch(deleteComment({ id: res }));
   };
 
   const handleToggleEdit = () => {

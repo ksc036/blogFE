@@ -31,6 +31,7 @@ export const commentSlice = createSlice({
       // 1. 최상위 댓글에서 찾기
       console.log(typeof state.comments[0].id);
       console.log(typeof action.payload.id);
+      console.log(action.payload.id);
       console.log(state.comments[0].id === action.payload.id);
       const topLevelIndex = state.comments.findIndex((c) => c.id === targetId);
       console.log("topLevelIndex", topLevelIndex);
