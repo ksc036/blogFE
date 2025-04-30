@@ -13,13 +13,21 @@
 
 .profileWrapper {
   position: relative;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  gap: 6px;
 }
 
 .profileImage {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+}
+.arrow {
+  margin-left: 6px;
+  font-size: 12px;
+  vertical-align: middle;
 }
 
 .dropdownMenu {
@@ -30,7 +38,7 @@
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-width: 120px;
+  min-width: 140px;
   z-index: 10;
   padding: 10px 0;
 }
