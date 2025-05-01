@@ -55,9 +55,6 @@ export default function Header() {
                     <Link href={`https://${me.subdomain}.ksc036.store/write`}>
                       <div>글쓰기</div>
                     </Link>
-                    <Link href={`https://${me.subdomain}.ksc036.store/reading`}>
-                      <div>읽기 목록</div>
-                    </Link>
                     <Link href={`https://${me.subdomain}.ksc036.store/profile`}>
                       <div>프로필 설정</div>
                     </Link>
