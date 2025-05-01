@@ -6,9 +6,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function BlogPage({ params }) {
+export default async function BlogPage({ params }) {
   //postsList & userInfo 받아오기
-  const { subdomain } = params;
+  const { subdomain } = await params;
   const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
