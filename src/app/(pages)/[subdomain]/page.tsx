@@ -6,9 +6,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function BlogPage() {
+export default function BlogPage({ params }) {
   //postsList & userInfo 받아오기
-  const subdomain = "ksc036";
+  const { subdomain } = params;
   const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -56,19 +56,19 @@ export default function BlogPage() {
         <>
           {/* 프로필 섹션 */}
           <section className={styles.profileSection}>
-            {/* <Link href={https</section>}> */}
-            <Image
-              src={data.user.thumbnailUrl}
-              alt="User profile"
-              width={80}
-              height={80}
-              className={styles.avatar}
-            />
-            <div className={styles.profileInfo}>
-              <h2 className={styles.name}>{data.user.blogName}</h2>
-              <p className={styles.bio}>{data.user.bio}</p>
-            </div>
-            {/* </Link> */}
+            <Link href={`/posts/${data.post.id}`}>
+              <Image
+                src={data.user.thumbnailUrl}
+                alt="User profile"
+                width={80}
+                height={80}
+                className={styles.avatar}
+              />
+              <div className={styles.profileInfo}>
+                <h2 className={styles.name}>{data.user.blogName}</h2>
+                <p className={styles.bio}>{data.user.bio}</p>
+              </div>
+            </Link>
           </section>
 
           {/* 포스트 목록 */}
