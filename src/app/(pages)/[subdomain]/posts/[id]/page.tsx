@@ -11,6 +11,7 @@ import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
 import PostEditButton from "@/features/post/ui/PostEditButton";
 import { useAppSelector } from "@/shared/store/hooks";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
+import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
@@ -22,7 +23,7 @@ export default async function postPage({ params }: urlParams) {
   return (
     <div>
       <div className={styles.container}>
-        <div className={styles.title}>{post.title} </div>
+        <h1 className={styles.title}>{post.title} </h1>
 
         {/* <div className={styles.meta}>
           <div className={styles.profile}>
@@ -38,11 +39,19 @@ export default async function postPage({ params }: urlParams) {
           </div>
           <div className={styles.subscribeButton}>+ 구독</div>
         </div> */}
-        <div style={{ display: "flex", justifyContent: "end" }}>
-          <PostEditForm
-            postUserId={post.userId}
-            postId={post.id}
-          ></PostEditForm>
+        {/* <div style={{ display: "flex", justifyContent: "end" }}>
+            </div> */}
+        <div className={styles.userInfoWrap}>
+          <div className={styles.userInfo}>
+            <span className={styles.name}>{post.user.name}</span>
+            {formatToKoreanDate(post.createdAt)}
+          </div>
+          <div className={styles.editForm}>
+            <PostEditForm
+              postUserId={post.userId}
+              postId={post.id}
+            ></PostEditForm>
+          </div>
         </div>
         <div className={styles.content}>
           <PostMarkDownContent content={post.content}></PostMarkDownContent>

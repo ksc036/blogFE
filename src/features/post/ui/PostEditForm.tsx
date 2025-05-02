@@ -14,7 +14,7 @@ export default function PostEditForm({
   return (
     <div>
       {me?.id === postUserId && (
-        <div>
+        <div style={{ display: "flex", gap: "8px" }}>
           <PostDeleteButton postId={postId}></PostDeleteButton>
           <PostEditButton postId={postId}></PostEditButton>
         </div>

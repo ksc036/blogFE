@@ -5,6 +5,19 @@
 .title {
   font-size: 36px;
   padding-top: 60px;
+  margin-bottom: 32px;
+}
+.userInfoWrap {
+  display: flex;
+}
+.userInfo {
+  align-items: flex-start;
+}
+.name {
+  padding-right: 8px;
+}
+.editForm {
+  margin-left: auto;
 }
 .meta {
   display: flex;
