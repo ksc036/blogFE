@@ -3,15 +3,13 @@ import styles from "./Card.module.css";
 import { CardType, Post } from "@/entities/post/model/types";
 import PostLike from "../PostLike/PostLike";
 import Link from "next/link";
+import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 export default function Card({ post }: { post: Post }) {
   // console.log("Card", post);
   return (
     <Link href={`/posts/${post.id}`}>
       <div className={styles.card}>
-        <div
-          style={{ width: "100%", aspectRatio: "16/9", overflow: "hidden" }}
-          className={styles.thumbnail}
-        >
+        <div className={styles.thumbnail}>
           <img
             className={styles.img}
             src={
@@ -26,11 +24,15 @@ export default function Card({ post }: { post: Post }) {
         <div className={styles.main}>
           <div className={styles.title}>{post.title}</div>
           <div className={styles.content}>{post.desc}</div>
-          <div className={styles.date}>{post.createdAt}</div>
         </div>
         <div className={styles.info}>
-          <PostUserProfile user={post.user}></PostUserProfile>
-          <PostLike></PostLike>
+          <div className={styles.date}>
+            {formatToKoreanDate(post.createdAt)}
+          </div>
+          <div className={styles.cardFooter}>
+            <PostUserProfile user={post.user}></PostUserProfile>
+            <PostLike></PostLike>
+          </div>
         </div>
       </div>
     </Link>

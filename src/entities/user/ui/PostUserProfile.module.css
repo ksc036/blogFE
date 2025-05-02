@@ -1,7 +1,7 @@
 .contianer {
   display: flex;
   align-items: center;
-  padding: 8px 5px;
+  /* padding: 8px 5px; */
 }
 .avatar {
   border-radius: 50%;
