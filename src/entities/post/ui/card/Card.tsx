@@ -4,7 +4,7 @@ import { CardType, Post } from "@/entities/post/model/types";
 import PostLike from "../PostLike/PostLike";
 import Link from "next/link";
 export default function Card({ post }: { post: Post }) {
-  console.log("Card", post);
+  // console.log("Card", post);
   return (
     <Link href={`/posts/${post.id}`}>
       <div className={styles.card}>

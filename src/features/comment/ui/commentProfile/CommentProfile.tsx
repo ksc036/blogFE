@@ -2,6 +2,7 @@
 import styles from "./CommentProfile.module.css";
 import { Comment } from "@/entities/comment/model/types";
 import { useCommentProfile } from "@/features/comment/model/useCommentProfile";
+import Link from "next/link";
 
 export default function CommentProfile({ comment }: { comment: Comment }) {
   const {
@@ -26,7 +27,10 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
             width: "100%",
           }}
         >
-          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+          <Link
+            href={`https://${comment.user.subdomain}.ksc036.store`}
+            style={{ display: "flex", gap: "8px", alignItems: "center" }}
+          >
             <img
               className={styles.avatar}
               src={
@@ -37,7 +41,7 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
               alt="프로필"
             />
             <div>{comment.user.blogName}</div>
-          </div>
+          </Link>
 
           {me?.id === comment.userId && (
             <div style={{ display: "flex", gap: "10px" }}>
