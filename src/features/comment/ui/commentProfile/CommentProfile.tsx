@@ -15,6 +15,7 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
   } = useCommentProfile({
     comment,
   });
+  console.log(comment);
   return (
     <div>
       <div className={styles.commentHeader}>
@@ -25,11 +26,19 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
             width: "100%",
           }}
         >
-          <img
-            className={styles.avatar}
-            src="/default-profile.png"
-            alt="프로필"
-          />
+          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+            <img
+              className={styles.avatar}
+              src={
+                comment.user.thumbnailUrl
+                  ? comment.user.thumbnailUrl
+                  : "https://minio.ksc036.store/log404default/default-profile.png"
+              }
+              alt="프로필"
+            />
+            <div>{comment.user.blogName}</div>
+          </div>
+
           {me?.id === comment.userId && (
             <div style={{ display: "flex", gap: "10px" }}>
               <div

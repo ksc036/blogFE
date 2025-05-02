@@ -2,10 +2,11 @@ import PostUserProfile from "@/entities/user/ui/PostUserProfile";
 import styles from "./Card.module.css";
 import { CardType, Post } from "@/entities/post/model/types";
 import PostLike from "../PostLike/PostLike";
+import Link from "next/link";
 export default function Card({ post }: { post: Post }) {
   console.log("Card", post);
   return (
-    <a href={`/posts/${post.id}`}>
+    <Link href={`/posts/${post.id}`}>
       <div className={styles.card}>
         <div
           style={{ width: "100%", aspectRatio: "16/9", overflow: "hidden" }}
@@ -32,6 +33,6 @@ export default function Card({ post }: { post: Post }) {
           <PostLike></PostLike>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
