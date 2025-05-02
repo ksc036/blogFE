@@ -23,7 +23,7 @@ export default async function postPage({ params }: urlParams) {
     <div>
       <div className={styles.container}>
         <div className={styles.title}>{post.title} </div>
-        <BlogProfile user={post.user}></BlogProfile>
+
         {/* <div className={styles.meta}>
           <div className={styles.profile}>
             <img
@@ -47,11 +47,12 @@ export default async function postPage({ params }: urlParams) {
         <div className={styles.content}>
           <PostMarkDownContent content={post.content}></PostMarkDownContent>
         </div>
-
         <div className={styles.actionBar}>
           <button className={styles.likeButton}>♡ 0</button>
           <button className={styles.shareButton}>🔗 공유</button>
         </div>
+        <BlogProfile user={post.user}></BlogProfile>
+
         <CommentArea postId={post.id} comments={post.comments}></CommentArea>
         <div className={styles.advertise}>
           <div
