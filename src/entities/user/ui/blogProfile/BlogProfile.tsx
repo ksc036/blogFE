@@ -5,8 +5,11 @@ export default function BlogProfile({ user }: { user: Me }) {
   return (
     <div className={styles.meta}>
       <div className={styles.profile}>
-        <Image
-          src={user.thumbnailUrl || "/default-profile.png"}
+        <img
+          src={
+            user.thumbnailUrl ||
+            "https://minio.ksc036.storehttps://minio.ksc036.store/log404default/default-profile.png"
+          }
           alt="User profile"
           className={styles.avatar}
           width={128}

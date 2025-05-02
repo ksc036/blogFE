@@ -40,7 +40,7 @@ export default function Header() {
                 로그아웃
               </div>
               <div className={styles.profileWrapper} onClick={toggleDropdown}>
-                <Image
+                <img
                   src={
                     me.thumbnailUrl ??
                     "https://minio.ksc036.store/delog/uploads/1746009561156_ChatGPT%20Image%202025%EB%85%84%204%EC%9B%94%2030%EC%9D%BC%20%EC%98%A4%ED%9B%84%2007_39_17.png"
@@ -48,7 +48,6 @@ export default function Header() {
                   alt="프로필 이미지"
                   width={40}
                   height={40}
-                  priority // ✅ 로딩 지연 해결
                   className={styles.profileImage}
                 />
                 <span className={styles.arrow}>▼</span> {/* ▼ 아이콘 추가 */}

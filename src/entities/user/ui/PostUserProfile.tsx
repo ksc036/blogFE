@@ -8,7 +8,7 @@ export default function PostUserProfile({ user }) {
       href={`https://${user.subdomain}.ksc036.store`}
       className={styles.contianer}
     >
-      <Image
+      <img
         src={
           user.thumbnailUrl
             ? user.thumbnailUrl
