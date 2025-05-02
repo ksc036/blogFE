@@ -28,19 +28,19 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
           }}
         >
           <Link
-            href={`https://${comment.user.subdomain}.ksc036.store`}
+            href={`https://${comment.user?.subdomain}.ksc036.store`}
             style={{ display: "flex", gap: "8px", alignItems: "center" }}
           >
             <img
               className={styles.avatar}
               src={
-                comment.user.thumbnailUrl
-                  ? comment.user.thumbnailUrl
+                comment.user?.thumbnailUrl
+                  ? comment.user?.thumbnailUrl
                   : "https://minio.ksc036.store/log404default/default-profile.png"
               }
               alt="프로필"
             />
-            <div>{comment.user.blogName}</div>
+            <div>{comment.user?.blogName}</div>
           </Link>
 
           {me?.id === comment.userId && (

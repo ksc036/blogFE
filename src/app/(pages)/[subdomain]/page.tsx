@@ -37,7 +37,11 @@ export default async function BlogPage({ params }) {
           >
             <article key={post.id} className={styles.postCard}>
               <Image
-                src={post.thumbnailUrl}
+                src={
+                  post.thumbnailUrl
+                    ? post.thumbnailUrl
+                    : "https://minio.ksc036.store/log404default/default-thumbnail.png"
+                }
                 width={80}
                 height={80}
                 className={styles.thumbnail}
