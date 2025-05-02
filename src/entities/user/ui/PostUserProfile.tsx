@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./PostUserProfile.module.css";
@@ -7,6 +8,7 @@ export default function PostUserProfile({ user }) {
     <Link
       href={`https://${user.subdomain}.ksc036.store`}
       className={styles.contianer}
+      onClick={(e) => e.stopPropagation()}
     >
       <img
         src={

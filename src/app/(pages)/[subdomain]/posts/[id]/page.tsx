@@ -12,6 +12,7 @@ import PostEditButton from "@/features/post/ui/PostEditButton";
 import { useAppSelector } from "@/shared/store/hooks";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
+import Link from "next/link";
 
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
@@ -43,7 +44,13 @@ export default async function postPage({ params }: urlParams) {
             </div> */}
         <div className={styles.userInfoWrap}>
           <div className={styles.userInfo}>
-            <span className={styles.name}>{post.user.name}</span>
+            <span className={styles.name}>
+              by{" "}
+              <Link href={`https://${post.user.subdomain}.ksc036.store`}>
+                {post.user.name}
+              </Link>
+            </span>
+            <span className={styles.dot}>·</span>
             {formatToKoreanDate(post.createdAt)}
           </div>
           <div className={styles.editForm}>

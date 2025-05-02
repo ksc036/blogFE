@@ -11,10 +11,17 @@
   display: flex;
 }
 .userInfo {
-  align-items: flex-start;
+  font-size: 14px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 4px; /* 간격 조정 */
 }
 .name {
-  padding-right: 8px;
+}
+.dot {
+  font-size: 14px;
+  margin: 0 4px;
 }
 .editForm {
   margin-left: auto;
