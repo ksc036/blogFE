@@ -38,7 +38,7 @@ export default async function BlogPage({ params }) {
             ]}`}
           >
             <article key={post.id} className={styles.postCard}>
-              <Image
+              <img
                 src={
                   post.thumbnailUrl
                     ? post.thumbnailUrl

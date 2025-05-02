@@ -34,13 +34,14 @@
   position: absolute;
   top: 40px;
   right: 0;
-  background-color: white;
-  border: 1px solid #ddd;
+  background-color: var(--background);
+  border: 1px solid var(--background);
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   min-width: 140px;
   z-index: 10;
   padding: 10px 0;
+  color: var(--foreground);
 }
 
 .dropdownMenu div {

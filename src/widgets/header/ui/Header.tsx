@@ -19,7 +19,8 @@ export default function Header() {
     setIsDropdownOpen((prev) => !prev);
   };
   const test = () => {
-    dispatch(testUserInput(1));
+    // dispatch(testUserInput(1));\
+    setIsDropdownOpen(true);
   };
   return (
     <header className={styles.header}>
