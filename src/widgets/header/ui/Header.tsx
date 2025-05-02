@@ -25,12 +25,24 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.mainHeader}>
         <Link href="https://ksc036.store" style={{ cursor: "pointer" }}>
-          <img
+          {/* <img
             src="https://minio.ksc036.store/log404default/logo.png"
             width={100}
             height={90}
             alt=""
-          />
+          /> */}
+          <picture>
+            <source
+              srcSet="https://minio.ksc036.store/log404default/logo-black-version.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="https://minio.ksc036.store/log404default/logo-white-version.png"
+              alt="로고"
+              width={100}
+              height={90}
+            />
+          </picture>
         </Link>
 
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
