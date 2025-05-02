@@ -1,7 +1,48 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
 .title {
   font-size: 36px;
 }
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.blogInfo {
+  display: flex;
+  flex-direction: column;
+}
 
+.blogName {
+  font-weight: bold;
+  font-size: 24px;
+}
+.avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+.subscribeButton {
+  background-color: #000;
+  color: #fff;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+  font-size: 16px;
+}
 .imgContainer {
   width: 100%;
   height: 200px;
@@ -28,7 +69,21 @@
   justify-content: space-between;
   padding: 20px 0;
 }
-
+.likeButton,
+.shareButton {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.actionBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 24px 0;
+}
 .commentSection {
   margin-top: 40px;
   display: flex;

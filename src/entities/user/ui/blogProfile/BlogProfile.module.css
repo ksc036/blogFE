@@ -1,0 +1,44 @@
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.blogInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogName {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.bio {
+  margin-top: 8px;
+  font-size: 1.1rem;
+  color: #444;
+}
+.avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+.subscribeButton {
+  background-color: #000;
+  color: #fff;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+  font-size: 16px;
+}

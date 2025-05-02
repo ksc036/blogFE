@@ -2,6 +2,7 @@ import axiosInstance from "@/shared/lib/axiosInstance";
 import styles from "./BlogPage.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
 
 export default async function BlogPage({ params }) {
   const { subdomain } = await params;
@@ -14,7 +15,8 @@ export default async function BlogPage({ params }) {
   return (
     <main className={styles.container}>
       <section className={styles.profileSection}>
-        <Image
+        <BlogProfile user={data.user}></BlogProfile>
+        {/* <Image
           src={data.user.thumbnailUrl}
           alt="User profile"
           width={80}
@@ -24,7 +26,7 @@ export default async function BlogPage({ params }) {
         <div className={styles.profileInfo}>
           <h2 className={styles.name}>{data.user.blogName}</h2>
           <p className={styles.bio}>{data.user.bio}</p>
-        </div>
+        </div> */}
       </section>
 
       {/* 포스트 목록 */}
