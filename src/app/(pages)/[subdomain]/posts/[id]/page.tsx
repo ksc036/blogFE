@@ -65,9 +65,11 @@ export default async function postPage({ params }: urlParams) {
         </div>
         <div className={styles.actionBar}>
           <button className={styles.likeButton}>♡ 0</button>
-          <button className={styles.shareButton}>🔗 공유</button>
+          <button className={styles.shareButton}>🔗 공유d</button>
         </div>
-        <BlogProfile user={post.user}></BlogProfile>
+        <div className={styles.profile}>
+          <BlogProfile user={post.user}></BlogProfile>
+        </div>
 
         <CommentArea postId={post.id} comments={post.comments}></CommentArea>
         <div className={styles.advertise}>
