@@ -164,7 +164,9 @@ export default function UserProfileForm() {
                 )
               ) : (
                 <div className={styles.staticField}>
-                  <span>{profileData[key as keyof typeof profileData]}</span>
+                  <span className={styles.fildContent}>
+                    {profileData[key as keyof typeof profileData]}
+                  </span>
                   <button
                     onClick={() => handleEdit(key)}
                     className={styles.editButton}
