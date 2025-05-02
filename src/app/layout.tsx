@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Log404",
   description: "Make your own blog",
+  icons: {
+    icon: "/favicon.png", // 또는 { url: "/favicon.png", type: "image/png" }
+  },
 };
 
 export default function RootLayout({
