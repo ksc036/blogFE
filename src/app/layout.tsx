@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Delog",
-  description: "Make your own delog",
+  title: "Log404",
+  description: "Make your own blog",
 };
 
 export default function RootLayout({

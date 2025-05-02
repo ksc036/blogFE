@@ -1,0 +1,11 @@
+.contianer {
+  display: flex;
+  align-items: center;
+  padding: 8px 5px;
+}
+.avatar {
+  border-radius: 50%;
+}
+.blog {
+  margin-left: 8px;
+}

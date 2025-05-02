@@ -25,7 +25,12 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.mainHeader}>
         <Link href="https://ksc036.store" style={{ cursor: "pointer" }}>
-          Notefic
+          <img
+            src="https://minio.ksc036.store/log404default/logo.png"
+            width={100}
+            height={90}
+            alt=""
+          />
         </Link>
 
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
