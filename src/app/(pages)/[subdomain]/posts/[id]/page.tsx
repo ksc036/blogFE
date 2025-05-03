@@ -47,10 +47,6 @@ export default async function postPage({ params }: urlParams) {
         <div className={styles.content}>
           <PostMarkDownContent content={post.content}></PostMarkDownContent>
         </div>
-        {/* <div className={styles.actionBar}>
-          <button className={styles.likeButton}>♡ 0</button>
-          <button className={styles.shareButton}>🔗 공유</button>
-        </div> */}
         <PostActionBar
           isLiked={post.isLiked}
           likeCount={post._count.likes}

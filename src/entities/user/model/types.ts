@@ -6,4 +6,5 @@ export type Me = {
   bio: string;
   blogName: string;
   thumbnailUrl: string;
+  isSubscribed?: boolean;
 };

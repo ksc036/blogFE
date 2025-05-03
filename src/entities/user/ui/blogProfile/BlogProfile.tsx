@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Me } from "../../model/types";
 import styles from "./BlogProfile.module.css";
 import Link from "next/link";
+import SubscribeButton from "@/entities/user/ui/blogProfile/BlogProfile";
 export default function BlogProfile({ user }: { user: Me }) {
   return (
     <div className={styles.meta}>
@@ -25,7 +25,11 @@ export default function BlogProfile({ user }: { user: Me }) {
           <p className={styles.bio}>{user.bio}</p>
         </div>
       </div>
-      <div className={styles.subscribeButton}>+ 구독</div>
+      <SubscribeButton
+        isSubscribed={user.isSubscribed}
+        userId={user.id}
+      ></SubscribeButton>
+      {/* <div className={styles.subscribeButton}>+ 구독</div> */}
     </div>
   );
 }

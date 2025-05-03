@@ -9,6 +9,7 @@ export default async function BlogPage({ params }) {
   const res = await axiosInstance.get(`users/blogProfile/${subdomain}`);
   const data = res.data;
   console.log(data);
+
   if (!data) {
     return <div>사용자없음</div>;
   }
@@ -16,17 +17,6 @@ export default async function BlogPage({ params }) {
     <main className={styles.container}>
       <section className={styles.profileSection}>
         <BlogProfile user={data.user}></BlogProfile>
-        {/* <Image
-          src={data.user.thumbnailUrl}
-          alt="User profile"
-          width={80}
-          height={80}
-          className={styles.avatar}
-        />
-        <div className={styles.profileInfo}>
-          <h2 className={styles.name}>{data.user.blogName}</h2>
-          <p className={styles.bio}>{data.user.bio}</p>
-        </div> */}
       </section>
 
       {/* 포스트 목록 */}
