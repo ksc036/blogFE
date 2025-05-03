@@ -13,6 +13,7 @@ import { useAppSelector } from "@/shared/store/hooks";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
+import PostActionBar from "@/entities/post/ui/postActionBar/PostActionBar";
 
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
@@ -25,23 +26,6 @@ export default async function postPage({ params }: urlParams) {
     <div>
       <div className={styles.container}>
         <h1 className={styles.title}>{post.title} </h1>
-
-        {/* <div className={styles.meta}>
-          <div className={styles.profile}>
-            <img
-              src={post.user.thumbnailUrl || "/default-profile.png"}
-              alt="작성자"
-              className={styles.avatar}
-            />
-            <div className={styles.blogInfo}>
-              <div className={styles.blogName}>{post.user.blogName}</div>
-              <div>{post.user.bio}</div>
-            </div>
-          </div>
-          <div className={styles.subscribeButton}>+ 구독</div>
-        </div> */}
-        {/* <div style={{ display: "flex", justifyContent: "end" }}>
-            </div> */}
         <div className={styles.userInfoWrap}>
           <div className={styles.userInfo}>
             <span className={styles.name}>
@@ -63,10 +47,16 @@ export default async function postPage({ params }: urlParams) {
         <div className={styles.content}>
           <PostMarkDownContent content={post.content}></PostMarkDownContent>
         </div>
-        <div className={styles.actionBar}>
+
+        {/* <div className={styles.actionBar}>
           <button className={styles.likeButton}>♡ 0</button>
           <button className={styles.shareButton}>🔗 공유</button>
-        </div>
+        </div> */}
+        <PostActionBar
+          isLiked={post.isLiked}
+          likeCount={post._count.likes}
+          postId={post.id}
+        ></PostActionBar>
         <div className={styles.profile}>
           <BlogProfile user={post.user}></BlogProfile>
         </div>
