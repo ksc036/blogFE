@@ -54,9 +54,11 @@
   transition: transform 0.2s ease;
   border-bottom: 1px solid #f0f0f0;
 }
-
-.postCard:hover {
-  transform: translateY(-2px);
+@media (prefers-color-scheme: dark) {
+  .postCard {
+    background-color: #2c2c2c;
+    border-bottom: none; /* 은은한 흰색 투명선 */
+  }
 }
 
 .thumbnail {
@@ -85,7 +87,11 @@
   margin: 0;
   color: #666;
 }
-
+@media (prefers-color-scheme: dark) {
+  .postSummary {
+    color: #ccc;
+  }
+}
 @media (max-width: 640px) {
   .postCard {
     flex-direction: column;
