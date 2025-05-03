@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import { urlParams } from "@/shared/types/types";
-import { getPostsById } from "@/entities/post/api/getPostsById";
+import { getPostsById } from "@/entities/post/api/getPostsByIdServer";
 import { getPosts } from "@/entities/post/api/getPosts";
 
 import CardList from "@/widgets/postList/ui/PostList/CardList";

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import PostMarkDownContent from "@/entities/post/ui/postContent/PostMarkDownContent";
-import { getPostsById } from "@/entities/post/api/getPostsById";
+import { getPostsById } from "@/entities/post/api/getPostsByIdClient";
 import { getPresign } from "@/entities/post/api/presign";
 import { uploadImg } from "@/entities/post/api/uploadImg";
 import PostUpload from "@/widgets/postUpload/ui/PostUpload";
