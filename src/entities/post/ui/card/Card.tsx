@@ -31,7 +31,10 @@ export default function Card({ post }: { post: Post }) {
           </div>
           <div className={styles.cardFooter}>
             <PostUserProfile user={post.user}></PostUserProfile>
-            <PostLike></PostLike>
+            <PostLike
+              likeCnt={post._count.likes}
+              commentCnt={post.commentCount}
+            ></PostLike>
           </div>
         </div>
       </div>
