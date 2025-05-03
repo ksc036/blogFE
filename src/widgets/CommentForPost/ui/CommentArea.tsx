@@ -59,8 +59,9 @@ export default function CommentArea({
             )}
           </div>
         ))}
-
-        <CommentInput postId={postId} />
+        <div className={styles.commentInput}>
+          <CommentInput postId={postId} />
+        </div>
       </div>
     </div>
   );
