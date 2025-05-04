@@ -9,6 +9,8 @@ export default function subscribeButton({
   isSubscribed: initialSubscribed,
   userId: userId,
 }) {
+  console.log("initialSubscribed : ", initialSubscribed);
+  // console.log(" : ", !isLogined);
   const [isSubscribed, setIsSubscribed] = useState(initialSubscribed);
   const isLogined = useAppSelector((stat) => stat.user.isLogined);
   const handleSubscribe = async () => {
@@ -29,7 +31,7 @@ export default function subscribeButton({
   };
   return (
     <div className={styles.subscribeButton} onClick={handleSubscribe}>
-      {!isLogined || isSubscribed ? "구독 V" : "+ 구독"}
+      {isLogined && isSubscribed ? "구독 V" : "+ 구독"}
     </div>
   );
 }

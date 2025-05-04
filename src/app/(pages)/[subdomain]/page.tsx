@@ -8,7 +8,7 @@ export default async function BlogPage({ params }) {
   const { subdomain } = await params;
   const res = await axiosInstance.get(`users/blogProfile/${subdomain}`);
   const data = res.data;
-  console.log(data);
+  console.log("data==", data);
 
   if (!data) {
     return <div>사용자없음</div>;
@@ -16,7 +16,11 @@ export default async function BlogPage({ params }) {
   return (
     <main className={styles.container}>
       <section className={styles.profileSection}>
-        <BlogProfile user={data.user}></BlogProfile>
+        {/* <BlogProfile user={data.user}></BlogProfile> */}
+        <BlogProfile
+          user={data.user}
+          isSubscribed={data.isSubscribed}
+        ></BlogProfile>
       </section>
 
       {/* 포스트 목록 */}
