@@ -3,6 +3,10 @@ import styles from "./BlogProfile.module.css";
 import Link from "next/link";
 import SubscribeButton from "@/entities/user/ui/blogProfile/BlogProfile";
 export default function BlogProfile({ user }: { user: Me }) {
+  if (!user) {
+    // 로딩 중이거나 데이터가 없는 경우
+    return <div>Loading...</div>; // 또는 Skeleton 컴포넌트 등
+  }
   return (
     <div className={styles.meta}>
       <div className={styles.profile}>
