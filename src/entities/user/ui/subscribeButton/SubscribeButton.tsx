@@ -14,6 +14,7 @@ export default function subscribeButton({
   const [isSubscribed, setIsSubscribed] = useState(initialSubscribed);
   const isLogined = useAppSelector((stat) => stat.user.isLogined);
   const myId = useAppSelector((state) => state.user.id); // 본인 ID
+  console.log("myId ::::::", myId, userId);
   if (userId === myId) return null;
   const handleSubscribe = async () => {
     if (!isLogined) {
