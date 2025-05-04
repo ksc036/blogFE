@@ -13,6 +13,8 @@ export default function subscribeButton({
   // console.log(" : ", !isLogined);
   const [isSubscribed, setIsSubscribed] = useState(initialSubscribed);
   const isLogined = useAppSelector((stat) => stat.user.isLogined);
+  const myId = useAppSelector((state) => state.user.id); // 본인 ID
+  if (userId === myId) return null;
   const handleSubscribe = async () => {
     if (!isLogined) {
       alert("로그인이 필요합니다.");
