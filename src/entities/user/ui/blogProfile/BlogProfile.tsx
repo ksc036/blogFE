@@ -1,11 +1,18 @@
 import { Me } from "../../model/types";
 import styles from "./BlogProfile.module.css";
 import Link from "next/link";
-import SubscribeButton from "@/entities/user/ui/blogProfile/BlogProfile";
-export default function BlogProfile({ user }: { user: Me }) {
+import SubscribeButton from "@/entities/user/ui/subscribeButton/SubscribeButton";
+export default function BlogProfile({
+  user,
+  isSubscribed,
+}: {
+  user?: any;
+  isSubscribed: boolean;
+}) {
+  console.log("user 출력 ", user);
   if (!user) {
     // 로딩 중이거나 데이터가 없는 경우
-    return <div>Loading...</div>; // 또는 Skeleton 컴포넌트 등
+    return <div>Loading... d{user?.id}d</div>; // 또는 Skeleton 컴포넌트 등
   }
   return (
     <div className={styles.meta}>
@@ -30,7 +37,7 @@ export default function BlogProfile({ user }: { user: Me }) {
         </div>
       </div>
       <SubscribeButton
-        isSubscribed={user.isSubscribed}
+        isSubscribed={isSubscribed ?? false}
         userId={user.id}
       ></SubscribeButton>
       {/* <div className={styles.subscribeButton}>+ 구독</div> */}

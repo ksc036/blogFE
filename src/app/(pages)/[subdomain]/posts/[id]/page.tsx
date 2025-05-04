@@ -19,7 +19,7 @@ export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
   console.log("subdomain", subdomain);
   const post = await getPostsById(Number(id));
-  console.log("post", post);
+  console.log("post userssss", post);
   const posts = await getPosts();
 
   return (
@@ -53,7 +53,10 @@ export default async function postPage({ params }: urlParams) {
           postId={post.id}
         ></PostActionBar>
         <div className={styles.profile}>
-          <BlogProfile user={post.user}></BlogProfile>
+          <BlogProfile
+            user={post.user}
+            isSubscribed={post.isSubscribed}
+          ></BlogProfile>
         </div>
         <CommentArea postId={post.id} comments={post.comments}></CommentArea>
         <div className={styles.advertise}>
