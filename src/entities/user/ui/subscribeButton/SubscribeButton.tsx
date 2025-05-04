@@ -29,7 +29,7 @@ export default function subscribeButton({
   };
   return (
     <div className={styles.subscribeButton} onClick={handleSubscribe}>
-      {!isLogined || isSubscribed ? "+ 구독" : "구독 V"}
+      {!isLogined || isSubscribed ? "구독 V" : "+ 구독"}
     </div>
   );
 }
