@@ -6,7 +6,7 @@ import { getPresign } from "@/entities/post/api/presign";
 import { uploadImg } from "@/entities/post/api/uploadImg";
 import PostUpload from "@/widgets/postUpload/ui/PostUpload";
 // import PostUpload from "@/components/client/postUpload/PostUpload";
-
+import styles from "./PostForm.module.css";
 interface PostFormProps {
   postId?: number;
 }
@@ -21,6 +21,7 @@ export default function PostForm({ postId }: PostFormProps) {
     start: number;
     end: number;
   } | null>(null);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
   const [showPublishScreen, setShowPublishScreen] = useState(false);
   useEffect(() => {
@@ -149,7 +150,11 @@ export default function PostForm({ postId }: PostFormProps) {
   const handleLinkInsert = () => {
     const textarea = textareaRef.current;
     if (!textarea) return;
-
+    const rect = textarea.getBoundingClientRect();
+    setPosition({
+      top: rect.bottom + window.scrollY + 8,
+      left: rect.left + window.scrollX,
+    });
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     setLinkInsertInfo({ start, end });
@@ -235,33 +240,83 @@ export default function PostForm({ postId }: PostFormProps) {
     <div>
       <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
         <input
+          className={styles.title}
           type="text"
           placeholder="제목을 입력하세요"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ flex: 1 }}
         />
-        <button onClick={handleCompleteWrite}>작성완료</button>
+        <button className={styles.submitButton} onClick={handleCompleteWrite}>
+          작성완료
+        </button>
       </div>
-      <div style={{ marginBottom: "0.5rem" }}>
-        <button onClick={() => insertMarkdownSyntax("heading1")}>H1</button>
-        <button onClick={() => insertMarkdownSyntax("heading2")}>H2</button>
-        <button onClick={() => insertMarkdownSyntax("heading3")}>H3</button>
-        <button onClick={() => insertMarkdownSyntax("heading4")}>H4</button>
-        <button onClick={() => insertMarkdownSyntax("bold")}>굵게</button>
-        <button onClick={() => insertMarkdownSyntax("italic")}>기울임</button>
-        <button onClick={() => insertMarkdownSyntax("strike")}>취소선</button>
-        <button onClick={() => insertMarkdownSyntax("code")}>코드</button>
-        <button onClick={handleImageInsert}>이미지</button>
-        <input
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          onChange={handleImageUpload}
-          style={{ display: "none" }}
-        />
-        <button onClick={handleLinkInsert}>링크</button>
+      <div className={styles.toolbar}>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("heading1")}
+          // style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}
+        >
+          H1
+        </button>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("heading2")}
+        >
+          H2
+        </button>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("heading3")}
+        >
+          H3
+        </button>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("heading4")}
+        >
+          H4
+        </button>
+        <div className={styles.toolbarDivider}></div>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("bold")}
+        >
+          굵게
+        </button>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("italic")}
+        >
+          기울임
+        </button>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("strike")}
+        >
+          취소선
+        </button>
+        <button
+          className={styles.toolbarButton}
+          onClick={() => insertMarkdownSyntax("code")}
+        >
+          &lt;/&gt;
+        </button>
+        <div className={styles.toolbarDivider}></div>
+        <button className={styles.toolbarButton} onClick={handleImageInsert}>
+          🖼️
+        </button>
+        <button onClick={handleLinkInsert} className={styles.toolbarButton}>
+          🔗
+        </button>
       </div>
+
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        onChange={handleImageUpload}
+        style={{ display: "none" }}
+      />
 
       {showLinkInput && (
         <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
@@ -279,21 +334,12 @@ export default function PostForm({ postId }: PostFormProps) {
       <div style={{ display: "flex", height: "90vh" }}>
         <textarea
           ref={textareaRef}
-          style={{ width: "50%", padding: "1rem", fontSize: "16px" }}
+          className={styles.mainText}
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Markdown을 입력하세요..."
+          placeholder="내용을 입력하세요..."
         />
-        <div
-          style={{
-            width: "50%",
-            padding: "1rem",
-            backgroundColor: "#f4f4f4",
-            overflowY: "auto",
-          }}
-        >
-          <PostMarkDownContent content={content}></PostMarkDownContent>
-        </div>
+        <PostMarkDownContent content={content}></PostMarkDownContent>
       </div>
 
       {showPublishScreen && (
