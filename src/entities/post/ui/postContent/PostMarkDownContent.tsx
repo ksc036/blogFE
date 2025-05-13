@@ -17,18 +17,19 @@ export default function PostContent({ content }: { content: string }) {
       <ReactMarkdown
         components={{
           img: ({ node, ...props }) => (
-            <img
-              {...props}
-              style={{ height: "auto", maxWidth: "100%" }} // 예시
-              alt={props.alt}
-            />
+            <div style={{ textAlign: "center" }}>
+              <img
+                {...props}
+                style={{ height: "auto", maxWidth: "100%" }}
+                alt={props.alt}
+              />
+            </div>
           ),
         }}
         remarkPlugins={[remarkGfm, remarkBreaks]}
         rehypePlugins={[rehypeRaw]}
       >
         {content}
-        {/* {convertNewlinesToBreaks(content)} */}
       </ReactMarkdown>
     </div>
   );
