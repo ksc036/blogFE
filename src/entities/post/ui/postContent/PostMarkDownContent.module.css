@@ -1,9 +1,18 @@
 .markdown {
-  background-color: #f4f4f4;
-  color: #171717;
+  /* background-color: #f4f4f4;
+  color: #171717; */
+  color: var(--foreground);
+  background: var(--background);
   /* color: red; */
   width: 50%;
   padding: 1rem;
   overflow-y: auto;
   white-space: pre-wrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown {
+    color: var(--foreground);
+    background: var(--background);
+  }
 }
