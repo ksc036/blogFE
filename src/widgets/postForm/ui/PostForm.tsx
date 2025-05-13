@@ -156,6 +156,12 @@ export default function PostForm({ postId }: PostFormProps) {
     const textarea = textareaRef.current;
     const mirror = mirrorRef.current;
     if (!textarea || !mirror) return;
+    const style = window.getComputedStyle(textarea);
+    mirror.style.width = style.width;
+    mirror.style.padding = style.padding;
+    mirror.style.border = style.border;
+    mirror.style.font = style.font;
+    mirror.style.lineHeight = style.lineHeight;
 
     const value = textarea.value;
     const endPoint = textarea.selectionEnd;
@@ -168,6 +174,9 @@ export default function PostForm({ postId }: PostFormProps) {
 
     mirror.innerHTML = ""; // 초기화
     mirror.textContent = before;
+    // mirror.innerHTML = `${escapeHtml(
+    //   before
+    // )}<span id="caret-marker">|</span>${escapeHtml(after)}`;
     mirror.appendChild(span);
     mirror.appendChild(document.createTextNode(after));
 
@@ -184,14 +193,15 @@ export default function PostForm({ postId }: PostFormProps) {
     setShowLinkInput(true);
     setLinkURL("");
   };
-  const escapeHtml = (text: string) =>
-    text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/\n$/g, "\n\u200b") // 줄 끝 정확하게
-      .replace(/\n/g, "<br/>")
-      .replace(/ /g, "&nbsp;"); // 공백 유지
+  // const escapeHtml = (text: string) =>
+  //   text
+  //     .replace(/&/g, "&amp;")
+  //     .replace(/</g, "&lt;")
+  //     .replace(/>/g, "&gt;")
+  //     .replace(/\n$/g, "\n\u200b") // 줄 끝 정확하게
+  //     .replace(/\n/g, "<br/>")
+  //     .replace(/ /g, "&nbsp;"); // 공백 유지
+
   const confirmLinkInsert = () => {
     const { start, end } = linkInsertInfo!;
     const selectedText = content.slice(start, end);
