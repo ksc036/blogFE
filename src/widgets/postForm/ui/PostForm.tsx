@@ -44,6 +44,12 @@ export default function PostForm({ postId }: PostFormProps) {
     fetchPost();
   }, [postId]);
 
+  useEffect(() => {
+    if (showLinkInput && linkRef.current) {
+      linkRef.current.focus(); // ✅ 렌더링된 후 실행됨
+    }
+  }, [showLinkInput]);
+
   const handleCompleteWrite = () => {
     setShowPublishScreen(true); // 슬라이드 화면 열기
   };
@@ -51,6 +57,7 @@ export default function PostForm({ postId }: PostFormProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const mirrorRef = useRef<HTMLDivElement>(null);
+  const linkRef = useRef<HTMLInputElement>(null);
 
   const insertMarkdownSyntax = (syntaxType: string) => {
     const textarea = textareaRef.current;
@@ -371,11 +378,20 @@ export default function PostForm({ postId }: PostFormProps) {
           <input
             type="text"
             placeholder="URL을 입력하세요"
+            ref={linkRef}
             value={linkURL}
             onChange={(e) => setLinkURL(e.target.value)}
-            style={{ flex: 1 }}
+            className={styles.urlInput}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault(); // 폼 제출 막기 (선택)
+                confirmLinkInsert(); // ✅ 확인 버튼 대신 실행
+              }
+            }}
           />
-          <button onClick={confirmLinkInsert}>확인</button>
+          <button onClick={confirmLinkInsert} className={styles.urlButton}>
+            확인
+          </button>
         </div>
       )}
 
@@ -385,6 +401,7 @@ export default function PostForm({ postId }: PostFormProps) {
           className={styles.mainText}
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          onFocus={() => setShowLinkInput(false)}
           placeholder="내용을 입력하세요..."
         />
         <div

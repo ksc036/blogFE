@@ -9,7 +9,11 @@
   outline: none;
   font-size: 38px;
 }
-
+@media (prefers-color-scheme: dark) {
+  .title {
+    background: var(--background);
+  }
+}
 .title:hover {
   border: none;
   outline: none;
@@ -19,7 +23,20 @@
   border: none;
   outline: none;
 }
-
+.urlInput {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  outline: none;
+}
+.urlButton {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 14px;
+}
 .mainText {
   width: 50%;
   padding: 1rem;
@@ -37,9 +54,9 @@
   border-radius: 4px;
 }
 .textareaMirror {
-  position: absolute; /* ✅ 좌표 계산 가능하게 */
-  visibility: hidden; /* ✅ 화면엔 안 보이게 */
-  white-space: pre-wrap; /* ✅ 줄바꿈 유지 */
+  position: absolute;
+  visibility: hidden;
+  white-space: pre-wrap;
   visibility: hidden;
 }
 
