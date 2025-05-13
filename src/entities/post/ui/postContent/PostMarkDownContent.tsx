@@ -27,8 +27,8 @@ export default function PostContent({ content }: { content: string }) {
         remarkPlugins={[remarkGfm, remarkBreaks]}
         rehypePlugins={[rehypeRaw]}
       >
-        {/* {content} */}
-        {convertNewlinesToBreaks(content)}
+        {content}
+        {/* {convertNewlinesToBreaks(content)} */}
       </ReactMarkdown>
     </div>
   );

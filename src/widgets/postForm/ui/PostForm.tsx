@@ -50,6 +50,7 @@ export default function PostForm({ postId }: PostFormProps) {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const mirrorRef = useRef<HTMLDivElement>(null);
 
   const insertMarkdownSyntax = (syntaxType: string) => {
     const textarea = textareaRef.current;
@@ -148,20 +149,49 @@ export default function PostForm({ postId }: PostFormProps) {
   };
 
   const handleLinkInsert = () => {
+    if (showLinkInput) {
+      setShowLinkInput(false);
+      return;
+    }
     const textarea = textareaRef.current;
-    if (!textarea) return;
-    const rect = textarea.getBoundingClientRect();
+    const mirror = mirrorRef.current;
+    if (!textarea || !mirror) return;
+
+    const value = textarea.value;
+    const endPoint = textarea.selectionEnd;
+
+    const before = value.slice(0, endPoint);
+    const after = value.slice(endPoint);
+
+    const span = document.createElement("span");
+    span.textContent = "|";
+
+    mirror.innerHTML = ""; // 초기화
+    mirror.textContent = before;
+    mirror.appendChild(span);
+    mirror.appendChild(document.createTextNode(after));
+
+    const rect = span.getBoundingClientRect();
+    // const rect = textarea.getBoundingClientRect();
     setPosition({
-      top: rect.bottom + window.scrollY + 8,
+      top: rect.top + window.scrollY + 20,
       left: rect.left + window.scrollX,
     });
+
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     setLinkInsertInfo({ start, end });
     setShowLinkInput(true);
     setLinkURL("");
   };
-
+  const escapeHtml = (text: string) =>
+    text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\n$/g, "\n\u200b") // 줄 끝 정확하게
+      .replace(/\n/g, "<br/>")
+      .replace(/ /g, "&nbsp;"); // 공백 유지
   const confirmLinkInsert = () => {
     const { start, end } = linkInsertInfo!;
     const selectedText = content.slice(start, end);
@@ -237,7 +267,7 @@ export default function PostForm({ postId }: PostFormProps) {
   };
 
   return (
-    <div>
+    <div className={styles.mainSize}>
       <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
         <input
           className={styles.title}
@@ -254,7 +284,6 @@ export default function PostForm({ postId }: PostFormProps) {
         <button
           className={styles.toolbarButton}
           onClick={() => insertMarkdownSyntax("heading1")}
-          // style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}
         >
           H1
         </button>
@@ -319,7 +348,16 @@ export default function PostForm({ postId }: PostFormProps) {
       />
 
       {showLinkInput && (
-        <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
+        <div
+          style={{
+            marginBottom: "1rem",
+            display: "flex",
+            gap: "0.5rem",
+            position: "fixed",
+            top: position.top,
+            left: position.left,
+          }}
+        >
           <input
             type="text"
             placeholder="URL을 입력하세요"
@@ -331,7 +369,7 @@ export default function PostForm({ postId }: PostFormProps) {
         </div>
       )}
 
-      <div style={{ display: "flex", height: "90vh" }}>
+      <div style={{ display: "flex", height: "100%", flex: 1 }}>
         <textarea
           ref={textareaRef}
           className={styles.mainText}
@@ -339,6 +377,11 @@ export default function PostForm({ postId }: PostFormProps) {
           onChange={(e) => setContent(e.target.value)}
           placeholder="내용을 입력하세요..."
         />
+        <div
+          ref={mirrorRef}
+          className={styles.textareaMirror}
+          aria-hidden
+        ></div>
         <PostMarkDownContent content={content}></PostMarkDownContent>
       </div>
 
