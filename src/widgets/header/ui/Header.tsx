@@ -86,9 +86,9 @@ export default function Header() {
           )}
         </div>
       </div>
-      <div className={styles.test} onClick={test}>
+      {/* <div className={styles.test} onClick={test}>
         테스트버튼
-      </div>
+      </div> */}
     </header>
   );
 }
