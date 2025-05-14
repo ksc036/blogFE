@@ -50,8 +50,10 @@ export function usePostUpload({
           postUrl,
           Number(postId)
         );
-        alert(res);
-        router.push(`https://${me.subdomain}.ksc036.store/posts/${postUrl}`); // Next.js의 클라이언트 라우팅
+        alert(res.postUrl);
+        router.push(
+          `https://${me.subdomain}.ksc036.store/posts/${res.postUrl}`
+        ); // Next.js의 클라이언트 라우팅
       } else {
         const res = await createPostApi(
           title,
@@ -61,9 +63,12 @@ export function usePostUpload({
           visibility,
           postUrl
         );
-        const id = res.postId; // 서버에서 반환해주는 고유 URL
-        alert(res);
-        router.push(`https://${me.subdomain}.ksc036.store/posts/${postUrl}`); // Next.js의 클라이언트 라우팅
+        // const id = res.postId; // 서버에서 반환해주는 고유 URL
+        console.log(res);
+        alert(res.postUrl);
+        router.push(
+          `https://${me.subdomain}.ksc036.store/posts/${res.postUrl}`
+        ); // Next.js의 클라이언트 라우팅
       }
     } catch (err) {
       //console.error("포스트 업로드 실패", err);
