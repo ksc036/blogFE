@@ -20,6 +20,7 @@ export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
   console.log("subdomain", subdomain);
   // const post = await getPostsById(Number(id));
+  console.log("getPostsBySubdomainWithId called", subdomain, id);
   const post = await getPostsBySubdomainWithId(subdomain, Number(id));
   console.log("post userssss", post);
   const posts = await getPosts();
