@@ -3,6 +3,8 @@ import { useRouter } from "next/navigation";
 import { createPostApi, updatePostApi } from "@/entities/post/api/postApi";
 import { getPresign } from "@/entities/post/api/presign";
 import { uploadImg } from "@/entities/post/api/uploadImg";
+import { useAppSelector } from "@/shared/store/hooks";
+import { Me } from "@/entities/user/model/types";
 type ModalProps = {
   showPublishScreen: boolean;
   setShowPublishScreen: (value: boolean) => void;
@@ -34,7 +36,8 @@ export function usePostUpload({
   const [desc, setDesc] = useState<string>("");
   const [visibility, setVisibility] = useState<boolean>(true);
   const [postUrl, setPostUrl] = useState<string>("");
-
+  // const me = useAppSelector((stat) => stat.user.me);
+  const me: Me = useAppSelector((state) => state.user.me); // 본인 ID
   const onPublish = async () => {
     try {
       if (isUpdate) {
@@ -47,7 +50,8 @@ export function usePostUpload({
           postUrl,
           Number(postId)
         );
-        router.push(`/posts/${postId}`); // Next.js의 클라이언트 라우팅
+        alert(res);
+        router.push(`https://${me.subdomain}.ksc036.store/posts/${postUrl}`); // Next.js의 클라이언트 라우팅
       } else {
         const res = await createPostApi(
           title,
@@ -58,8 +62,8 @@ export function usePostUpload({
           postUrl
         );
         const id = res.postId; // 서버에서 반환해주는 고유 URL
-        //console.log(id);
-        router.push(`/posts/${id}`); // Next.js의 클라이언트 라우팅
+        alert(res);
+        router.push(`https://${me.subdomain}.ksc036.store/posts/${postUrl}`); // Next.js의 클라이언트 라우팅
       }
     } catch (err) {
       //console.error("포스트 업로드 실패", err);
