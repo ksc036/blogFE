@@ -121,8 +121,10 @@ jobs:
             --username ${{ secrets.ARGOCD_USERNAME }} \
             --password ${{ secrets.ARGOCD_PASSWORD }} \
             --insecure
-
+            --grpc-web
       - name: Sync application
         run: |
           echo "ENV_DIR is ${{ needs.gitops-update.outputs.dir }}"
-          argocd app sync argocd/${{ needs.gitops-update.outputs.dir }}-app
+          argocd app sync argocd/${{ needs.gitops-update.outputs.dir }}-app \
+          --grpc-web \
+          --insecure
