@@ -1,7 +1,7 @@
 import axiosInstance from "@/shared/lib/axiosInstance";
 import { cookies } from "next/headers";
 export async function getPostsById(id: number) {
-  // const cookieStore = await cookies();
+  const cookieStore = await cookies();
   // const token = cookieStore.get("token")?.value;
   const cookieHeader = cookies().toString(); // "token=...; other=value"
   console.log("token,", cookieHeader);
