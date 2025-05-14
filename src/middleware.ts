@@ -26,19 +26,20 @@ export function middleware(request: NextRequest) {
         return NextResponse.rewrite(url);
       }
 
-      const writesRegex = /^\/write\/[^\/]+$/;
-      if (writesRegex.test(pathname)) {
-        console.log("write subdomain", request.nextUrl.pathname);
-        // 기본 도메인에서는 subdomain을 "home"으로 간주
-        url.pathname = `/home${pathname}`;
-        console.log("url.pathname", url.pathname);
-        return NextResponse.rewrite(url);
-      }
+      // const writesRegex = /^\/write\/[^\/]+$/;
+      // if (writesRegex.test(pathname)) {
+      //   console.log("write subdomain", request.nextUrl.pathname);
+      //   // 기본 도메인에서는 subdomain을 "home"으로 간주
+      //   url.pathname = `/home${pathname}`;
+      //   console.log("url.pathname", url.pathname);
+      //   return NextResponse.rewrite(url);
+      // }
       console.log("else subdomain", request.nextUrl.pathname);
       return NextResponse.rewrite(url);
     }
 
     // 여기까지 왔으면 무조건 서브도메인이다.
+    console.log("here is a subdomain", request.nextUrl.pathname);
     const subdomain = hostname.replace(`.${domainOnly}`, ""); // 서브도메인 추출
     url.pathname = `/${subdomain}${request.nextUrl.pathname}`;
     // const response = NextResponse.next();

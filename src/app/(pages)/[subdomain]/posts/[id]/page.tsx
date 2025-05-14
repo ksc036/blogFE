@@ -14,11 +14,13 @@ import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
 import PostActionBar from "@/entities/post/ui/postActionBar/PostActionBar";
-
+import { getPostsBySubdomain } from "@/entities/post/api/postApi";
+import { getPostsBySubdomainWithId } from "@/entities/post/api/getPostsByIdWithSubdomainServer";
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
   console.log("subdomain", subdomain);
-  const post = await getPostsById(Number(id));
+  // const post = await getPostsById(Number(id));
+  const post = await getPostsBySubdomainWithId(subdomain, Number(id));
   console.log("post userssss", post);
   const posts = await getPosts();
 

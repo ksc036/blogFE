@@ -7,7 +7,10 @@ import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 export default function Card({ post }: { post: Post }) {
   console.log("Card", post);
   return (
-    <Link href={`/posts/${post.id}`}>
+    <Link
+      href={`https://${post.user.subdomain}.ksc036.store/posts/${post.postUrl}`}
+    >
+      {/* <Link href={`/posts/${post.id}`}> */}
       <div className={styles.card}>
         <div className={styles.thumbnail}>
           <img
