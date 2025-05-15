@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { usePostUpload } from "../model/usePostUpload";
-
+import styles from "./PostUpload.module.css";
 type ModalProps = {
   showPublishScreen: boolean;
   setShowPublishScreen: (value: boolean) => void;
@@ -53,27 +53,9 @@ export default function PostUpload({
   });
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        width: "100%",
-        height: "100vh",
-        backgroundColor: "white",
-        borderTop: "1px solid #ddd",
-        boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
-        transition: "transform 0.3s ease-in-out",
-        transform: showPublishScreen ? "translateY(0%)" : "translateY(100%)",
-        zIndex: 1000,
-        padding: "2rem",
-        display: "flex",
-        gap: "2rem",
-      }}
-    >
+    <div className={styles.container}>
       {/* 썸네일 및 설명 */}
-      <div style={{ width: "40%", textAlign: "center" }}>
+      <div style={{ flex: 1, textAlign: "center" }}>
         <div
           style={{
             width: "100%",
@@ -124,7 +106,7 @@ export default function PostUpload({
       </div>
 
       {/* 설정 패널 */}
-      <div style={{ width: "60%" }}>
+      <div style={{ flex: 1 }}>
         <div style={{ marginBottom: "1rem" }}>
           <label style={{ fontWeight: "bold", display: "block" }}>
             공개 설정
@@ -137,6 +119,7 @@ export default function PostUpload({
                 border: "1px solid #ccc",
                 background: visibility ? "#000000" : "#f9f9f9",
                 color: visibility ? "#fff" : "#333",
+                flex: 1,
               }}
             >
               전체 공개
@@ -148,6 +131,7 @@ export default function PostUpload({
                 border: "1px solid #ccc",
                 background: visibility ? "#f9f9f9" : "#000000",
                 color: visibility ? "#333" : "#fff",
+                flex: 1,
               }}
             >
               비공개
@@ -175,7 +159,14 @@ export default function PostUpload({
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "1rem", marginTop: "2rem" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            marginTop: "3rem",
+            justifyContent: "flex-end",
+          }}
+        >
           <button
             onClick={() => setShowPublishScreen(false)}
             style={{

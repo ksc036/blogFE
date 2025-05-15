@@ -27,11 +27,12 @@ export default async function BlogPage({ params }) {
       <section className={styles.postList}>
         {data.posts.map((post) => (
           <Link
+            key={post.id}
             href={`https://${post.user.subdomain}.ksc036.store/posts/${[
               post.id,
             ]}`}
           >
-            <article key={post.id} className={styles.postCard}>
+            <article className={styles.postCard}>
               <img
                 src={
                   post.thumbnailUrl

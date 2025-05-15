@@ -413,18 +413,33 @@ export default function PostForm({ postId }: PostFormProps) {
       </div>
 
       {showPublishScreen && (
-        <PostUpload
-          showPublishScreen={showPublishScreen}
-          setShowPublishScreen={setShowPublishScreen}
-          title={title}
-          content={content}
-          thumbnailUrl={info?.thumbnailUrl}
-          desc={info?.desc}
-          visibility={info?.visibility}
-          postUrl={info?.postUrl}
-          isUpdate={postId ? true : false}
-          postId={info?.id}
-        ></PostUpload>
+        <div>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backdropFilter: "blur(5px)",
+              backgroundColor: "rgba(0,0,0,0.3)", // 어두운 반투명 + 블러
+              zIndex: 999,
+            }}
+            onClick={() => setShowPublishScreen(false)} // 클릭 시 닫기 등의 로직 가능
+          />
+          <PostUpload
+            showPublishScreen={showPublishScreen}
+            setShowPublishScreen={setShowPublishScreen}
+            title={title}
+            content={content}
+            thumbnailUrl={info?.thumbnailUrl}
+            desc={info?.desc}
+            visibility={info?.visibility}
+            postUrl={info?.postUrl}
+            isUpdate={postId ? true : false}
+            postId={info?.id}
+          ></PostUpload>
+        </div>
       )}
     </div>
   );
