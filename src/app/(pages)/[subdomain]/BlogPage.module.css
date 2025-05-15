@@ -45,14 +45,14 @@
 
 .postCard {
   display: flex;
+  flex-direction: column;
   gap: 24px;
-  align-items: flex-start;
-  /* background-color: #fafafa; */
-  /* border-radius: 12px; */
   padding: 24px;
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); */
   transition: transform 0.2s ease;
   border-bottom: 1px solid #f0f0f0;
+}
+.postCard:hover {
+  transform: translateY(-5px); /* 위로 5px 이동 */
 }
 @media (prefers-color-scheme: dark) {
   .postCard {
@@ -60,22 +60,39 @@
     border-bottom: none; /* 은은한 흰색 투명선 */
   }
 }
-
+.postContent {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 640px) {
+  .postContent {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
 .thumbnail {
+  /* width: 100%; */
   width: 220px;
+  /* padding-top: 56.25%;  */
   height: 150px;
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
+  /* width: 100%; */
+  /* padding-top: 56.25%; */
+  /* overflow: hidden; */
 }
-
-.postContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+@media (max-width: 640px) {
+  .thumbnail {
+    order: -1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 8px;
+  }
 }
-
 .postTitle {
   font-size: 1.25rem;
   font-weight: 600;
@@ -92,8 +109,19 @@
     color: #ccc;
   }
 }
+.date {
+  color: #999999;
+  font-size: 11px;
+}
+.extraInfo {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 50px; */
+}
 @media (max-width: 640px) {
-  .postCard {
+  .postContent {
+  }
+  /* .postCard {
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -103,8 +131,10 @@
     width: 100%;
     height: auto;
   }
-
+  .extraInfo {
+    display: flex;
+  }
   .postContent {
     align-items: center;
-  }
+  } */
 }

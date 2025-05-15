@@ -26,6 +26,11 @@
   font-size: 1.1rem;
   color: #444;
 }
+@media (prefers-color-scheme: dark) {
+  .bio {
+    color: #b0b0b0;
+  }
+}
 .avatar {
   width: 128px;
   height: 128px;

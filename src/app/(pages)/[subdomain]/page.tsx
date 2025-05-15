@@ -3,6 +3,8 @@ import styles from "./BlogPage.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
+import { formatToKoreanDate } from "@/shared/lib/date/formatData";
+import PostLike from "@/entities/post/ui/postLike_tmp/PostLike";
 
 export default async function BlogPage({ params }) {
   const { subdomain } = await params;
@@ -33,20 +35,31 @@ export default async function BlogPage({ params }) {
             ]}`}
           >
             <article className={styles.postCard}>
-              <img
-                src={
-                  post.thumbnailUrl
-                    ? post.thumbnailUrl
-                    : "https://minio.ksc036.store/log404default/default-thumbnail.png"
-                }
-                width={80}
-                height={80}
-                className={styles.thumbnail}
-                alt="post-thumbnail"
-              />
               <div className={styles.postContent}>
-                <h3 className={styles.postTitle}>{post.title}</h3>
-                <p className={styles.postSummary}>{post.desc}</p>
+                <div>
+                  <h3 className={styles.postTitle}>{post.title}</h3>
+                  <p className={styles.postSummary}>{post.desc}</p>
+                </div>
+                <img
+                  src={
+                    post.thumbnailUrl
+                      ? post.thumbnailUrl
+                      : "https://minio.ksc036.store/log404default/default-thumbnail.png"
+                  }
+                  className={styles.thumbnail}
+                  alt="post-thumbnail"
+                />
+              </div>
+
+              <div className={styles.extraInfo}>
+                <div className={styles.date}>
+                  {formatToKoreanDate(post.createdAt)}
+                </div>
+
+                <PostLike
+                  likeCnt={post._count.likes}
+                  commentCnt={post.commentCount}
+                ></PostLike>
               </div>
             </article>
           </Link>
