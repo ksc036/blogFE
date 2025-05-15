@@ -52,7 +52,17 @@ export default function PostUpload({
     initialPostUrl,
     postId,
   });
+  useEffect(() => {
+    if (!postUrl && title) {
+      setPostUrl(title);
+    }
+  }, [title]);
 
+  useEffect(() => {
+    if (!desc && content) {
+      setDesc(content);
+    }
+  }, [content]);
   return (
     <div className={styles.container}>
       {/* 썸네일 및 설명 */}
@@ -108,8 +118,8 @@ export default function PostUpload({
         </div>
         <input
           type="text"
-          value={desc ? desc : content}
-          maxLength={100}
+          value={desc}
+          maxLength={150}
           onChange={(e) => setDesc(e.target.value)}
           placeholder="당신의 포스트를 짧게 소개해보세요."
           className={styles.desc}
@@ -130,7 +140,7 @@ export default function PostUpload({
             marginTop: "4px",
           }}
         >
-          {desc ? desc.length : content.length} / 150자
+          {desc.length} / 150자
         </div>
       </div>
 
@@ -179,7 +189,7 @@ export default function PostUpload({
               onChange={(e) => setPostUrl(e.target.value)}
               placeholder="url"
               maxLength={100}
-              value={postUrl ? postUrl : title}
+              value={postUrl}
               style={{
                 marginTop: "0.5rem",
                 width: "100%",

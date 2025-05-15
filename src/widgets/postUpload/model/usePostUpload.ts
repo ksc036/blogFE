@@ -54,6 +54,20 @@ export function usePostUpload({
           `https://${me.subdomain}.ksc036.store/posts/${res.post.postUrl}`
         ); // Next.js의 클라이언트 라우팅
       } else {
+        // console.log(
+        //   "titie:",
+        //   title,
+        //   "content:",
+        //   content,
+        //   "thumbnailUrl:",
+        //   thumbnailUrl,
+        //   "desc:",
+        //   desc,
+        //   "visibility:",
+        //   visibility,
+        //   "postUrl:",
+        //   postUrl
+        // );
         const res = await createPostApi(
           title,
           content,
@@ -62,7 +76,7 @@ export function usePostUpload({
           visibility,
           postUrl
         );
-        // const id = res.postId; // 서버에서 반환해주는 고유 URL
+        // // const id = res.postId; // 서버에서 반환해주는 고유 URL
         router.push(
           `https://${me.subdomain}.ksc036.store/posts/${res.post.postUrl}`
         ); // Next.js의 클라이언트 라우팅
