@@ -94,8 +94,8 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background-color: #000; /* 검정색 */
-  color: white; /* 흰색 글자 */
+  color: var(--background);
+  background-color: var(--foreground);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;

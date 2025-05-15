@@ -101,6 +101,7 @@ export function usePostUpload({
   }, [content, thumbnailUrl]);
 
   return {
+    postUrl,
     thumbnailInputRef,
     thumbnailUrl,
     onPublish,

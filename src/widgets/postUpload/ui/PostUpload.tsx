@@ -39,6 +39,7 @@ export default function PostUpload({
     setDesc,
     setVisibility,
     setPostUrl,
+    postUrl,
   } = usePostUpload({
     content,
     title,
@@ -59,7 +60,7 @@ export default function PostUpload({
         <div
           style={{
             width: "100%",
-            height: "200px",
+            // height: "200px",
             backgroundColor: "#f0f0f0",
             display: "flex",
             alignItems: "center",
@@ -67,15 +68,35 @@ export default function PostUpload({
             marginBottom: "1rem",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <img
-              src={thumbnailUrl || "/placeholder-thumbnail.png"}
-              alt="썸네일 미리보기"
-              style={{ width: "200px", height: "auto", objectFit: "cover" }}
-            />
-            <span style={{ color: "#999" }} onClick={handleThumbnailClick}>
-              썸네일 업로드
-            </span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              position: "relative",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <img
+                src={
+                  thumbnailUrl ||
+                  "https://minio.ksc036.store/log404default/default-thumbnail.png"
+                }
+                alt="썸네일 미리보기"
+                style={{ width: "200px", height: "auto", objectFit: "cover" }}
+              />
+              <span
+                style={{
+                  color: "#999",
+                  top: "50%",
+                  left: "50%",
+                  cursor: "pointer",
+                }}
+                onClick={handleThumbnailClick}
+              >
+                {thumbnailUrl ? "썸네일 수정 " : "썸네일 업로드"}
+              </span>
+            </div>
+
             <input
               type="file"
               accept="image/*"
@@ -85,17 +106,15 @@ export default function PostUpload({
             />
           </div>
         </div>
-        {/* <div style={{ fontSize: "14px", color: "#666" }}>
-          당신의 포스트를 짧게 소개해보세요.
-        </div> */}
         <input
           type="text"
-          value={desc}
+          value={desc ? desc : content}
+          maxLength={100}
           onChange={(e) => setDesc(e.target.value)}
           placeholder="당신의 포스트를 짧게 소개해보세요."
+          className={styles.desc}
           style={{
             fontSize: "14px",
-            color: "#333",
             border: "1px solid #ccc",
             borderRadius: "4px",
             padding: "6px 10px",
@@ -103,6 +122,16 @@ export default function PostUpload({
             boxSizing: "border-box",
           }}
         />
+        <div
+          style={{
+            textAlign: "right",
+            fontSize: "12px",
+            color: "#999",
+            marginTop: "4px",
+          }}
+        >
+          {desc ? desc.length : content.length} / 150자
+        </div>
       </div>
 
       {/* 설정 패널 */}
@@ -144,11 +173,13 @@ export default function PostUpload({
             URL 설정
           </label>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <span style={{ marginRight: 4 }}>ksc036/</span>
+            <span style={{ marginRight: 4 }}>posts/</span>
             <input
               type="text"
               onChange={(e) => setPostUrl(e.target.value)}
-              placeholder="default"
+              placeholder="url"
+              maxLength={100}
+              value={postUrl ? postUrl : title}
               style={{
                 marginTop: "0.5rem",
                 width: "100%",
