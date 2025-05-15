@@ -1,11 +1,13 @@
 .contianer {
   display: flex;
   align-items: center;
-  /* padding: 8px 5px; */
+  padding: 8px 5px;
+  padding-top: 0px;
 }
 .avatar {
   border-radius: 50%;
 }
 .blog {
   margin-left: 8px;
+  font-size: 12px;
 }
