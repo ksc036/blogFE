@@ -7,6 +7,7 @@ import SubComment from "@/features/comment/ui/subComment/SubComment";
 import CommentInput from "@/features/comment/ui/CommentInput";
 import { useCommentArea } from "../model/useCommentArea";
 import { Comment } from "@/entities/comment/model/types";
+import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 
 export default function CommentArea({
   comments,
@@ -38,16 +39,20 @@ export default function CommentArea({
                 ))}
               </div>
             )}
-
-            <div
-              className={styles.replyWrite}
-              onClick={() =>
-                setActiveReplyId((prev) =>
-                  prev === comment.id ? null : comment.id
-                )
-              }
-            >
-              답글달기
+            <div className={styles.dateAndReply}>
+              <div className={styles.date}>
+                {formatToKoreanDate(comment.createdAt)}
+              </div>
+              <div
+                className={styles.replyWrite}
+                onClick={() =>
+                  setActiveReplyId((prev) =>
+                    prev === comment.id ? null : comment.id
+                  )
+                }
+              >
+                답글달기
+              </div>
             </div>
 
             {activeReplyId === comment.id && (

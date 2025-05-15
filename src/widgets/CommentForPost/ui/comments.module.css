@@ -99,11 +99,18 @@
   color: #999999;
   cursor: pointer;
 }
-
+.dateAndReply {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.date {
+  font-size: 13px;
+  color: #999999;
+}
 .replyWrite {
   font-size: 13px;
   color: #999999;
-  margin-top: 8px;
   cursor: pointer;
 }
 .commentInput {
