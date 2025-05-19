@@ -95,6 +95,8 @@ jobs:
           sed -i "s/\(image: .*:\).*/\1${GIT_TAG}/" namespaces/${ENV_DIR}/blog/fe/deployment.yaml
 
       - name: Commit and Push to GitOps Repo
+        env:
+          GIT_TAG: ${{ needs.docker-build-and-push.outputs.tag }}
         run: |
           git config user.name "github-actions"
           git config user.email "ksc036@gmail.com"
