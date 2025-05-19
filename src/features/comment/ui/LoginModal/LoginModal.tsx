@@ -1,12 +1,14 @@
 "use client";
 import { useHeaderNavigation } from "@/widgets/header/model/useHeaderNavigation";
 import styles from "./LoginModal.module.css";
+import { useState } from "react";
 
 type Props = {
   onClose: () => void;
 };
 
 const LoginModal = ({ onClose }: Props) => {
+  const [isSignedIn, setIsSignedIn] = useState(true);
   return (
     <div className={styles.backdrop}>
       <div className={styles.modal}>
@@ -14,7 +16,9 @@ const LoginModal = ({ onClose }: Props) => {
           ×
         </button>
         <div className={styles.title}>환영합니다!</div>
-        <div className={styles.subtitle}>소셜 계정으로 로그인</div>
+        <div className={styles.subtitle}>
+          소셜 계정으로 {isSignedIn ? "로그인" : "회원가입"}
+        </div>
 
         <div className={styles.socialButtons}>
           <SocialButton platform="github" />
@@ -23,10 +27,15 @@ const LoginModal = ({ onClose }: Props) => {
         </div>
 
         <div className={styles.signupText}>
-          아직 회원이 아니신가요?{" "}
-          <a href="/signup" className={styles.signupLink}>
-            회원가입
-          </a>
+          {isSignedIn ? "아직 회원이 아니신가요?" : "이미 계정이 있으신가요?"}{" "}
+          <div
+            onClick={() => {
+              setIsSignedIn(!isSignedIn);
+            }}
+            className={styles.signupLink}
+          >
+            {isSignedIn ? "회원가입" : "로그인"}
+          </div>
         </div>
       </div>
     </div>
