@@ -7,6 +7,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/shared/store/hooks";
 import { testUserInput } from "@/entities/user/model/userSlice";
+import LoginModal from "@/features/comment/ui/LoginModal/LoginModal";
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ export default function Header() {
     useHeaderNavigation();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -80,8 +82,19 @@ export default function Header() {
               </div>
             </div>
           ) : (
-            <div onClick={goToLoginGoogle} style={{ cursor: "pointer" }}>
-              로그인
+            <div>
+              {/* <div onClick={goToLoginGoogle} style={{ cursor: "pointer" }}>
+                로그인
+              </div> */}
+              <div
+                onClick={() => setOpenLoginModal(true)}
+                style={{ cursor: "pointer" }}
+              >
+                로그인
+              </div>
+              {openLoginModal && (
+                <LoginModal onClose={() => setOpenLoginModal(false)} />
+              )}
             </div>
           )}
         </div>
