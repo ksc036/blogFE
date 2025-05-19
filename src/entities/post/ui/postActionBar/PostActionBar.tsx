@@ -2,8 +2,16 @@
 import { useState } from "react";
 import styles from "./PostActionBar.module.css";
 import axiosInstance from "@/shared/lib/axiosInstance";
-
-export default function PostActionBar({ isLiked, likeCount, postId }) {
+interface PostActionBarProps {
+  isLiked: boolean;
+  likeCount: number;
+  postId: number;
+}
+export default function PostActionBar({
+  isLiked,
+  likeCount,
+  postId,
+}: PostActionBarProps) {
   const [likeCnt, setLikeCnt] = useState(likeCount);
   const [isLike, setIsLike] = useState(isLiked);
 

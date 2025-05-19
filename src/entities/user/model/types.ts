@@ -7,4 +7,4 @@ export type Me = {
   blogName: string;
   thumbnailUrl: string;
   isSubscribed?: boolean;
-};
+} | null;

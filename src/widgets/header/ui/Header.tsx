@@ -57,7 +57,7 @@ export default function Header() {
               <div className={styles.profileWrapper} onClick={toggleDropdown}>
                 <img
                   src={
-                    me.thumbnailUrl ??
+                    me?.thumbnailUrl ??
                     "https://minio.ksc036.store/delog/uploads/1746009561156_ChatGPT%20Image%202025%EB%85%84%204%EC%9B%94%2030%EC%9D%BC%20%EC%98%A4%ED%9B%84%2007_39_17.png"
                   }
                   alt="프로필 이미지"
@@ -68,13 +68,15 @@ export default function Header() {
                 <span className={styles.arrow}>▼</span> {/* ▼ 아이콘 추가 */}
                 {isDropdownOpen && (
                   <div className={styles.dropdownMenu}>
-                    <Link href={`https://${me.subdomain}.ksc036.store`}>
+                    <Link href={`https://${me?.subdomain}.ksc036.store`}>
                       <div>내 블로그</div>
                     </Link>
-                    <Link href={`https://${me.subdomain}.ksc036.store/write`}>
+                    <Link href={`https://${me?.subdomain}.ksc036.store/write`}>
                       <div>글쓰기</div>
                     </Link>
-                    <Link href={`https://${me.subdomain}.ksc036.store/profile`}>
+                    <Link
+                      href={`https://${me?.subdomain}.ksc036.store/profile`}
+                    >
                       <div>프로필 설정</div>
                     </Link>
                   </div>

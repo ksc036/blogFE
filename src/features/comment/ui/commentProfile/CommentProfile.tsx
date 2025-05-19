@@ -44,7 +44,7 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
             <div>
               <div>{comment.user?.blogName}</div>
               <div className={styles.date}>
-                {formatToKoreanDate(comment.createdAt)}
+                {formatToKoreanDate(comment?.createdAt)}
               </div>
             </div>
           </Link>

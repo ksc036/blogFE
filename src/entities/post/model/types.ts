@@ -1,8 +1,16 @@
+import { Me } from "@/entities/user/model/types";
+type Count = { likes: number } | null;
 export type Post = {
   id: number;
   title: string;
   content: string;
   thumbnailUrl: string;
+  desc: string;
+  postUrl: string;
+  user: Me;
+  createdAt: string;
+  commentCount?: number;
+  _count?: Count;
 };
 export type PostContent = {};
 

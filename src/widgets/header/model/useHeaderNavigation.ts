@@ -14,7 +14,7 @@ export function useHeaderNavigation() {
   // const subdomain = getSubdomainFromCookie();
 
   const goToProfile = () => {
-    router.push(`https://${me.subdomain}.ksc036.store`);
+    router.push(`https://${me?.subdomain}.ksc036.store`);
   };
   const goToLoginGoogle = async () => {
     const { data } = await axiosInstance.get("/users/social/google");

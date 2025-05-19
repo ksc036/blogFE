@@ -1,4 +1,10 @@
-export default function PostLike({ likeCnt, commentCnt }) {
+export default function PostLike({
+  likeCnt,
+  commentCnt,
+}: {
+  likeCnt: number;
+  commentCnt: number;
+}) {
   return (
     <div
       style={{

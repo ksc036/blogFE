@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/shared/lib/axiosInstance";
 
-export function usePostDelete(postId: string) {
+export function usePostDelete(postId: number) {
   const router = useRouter();
 
   const handleDelete = async () => {

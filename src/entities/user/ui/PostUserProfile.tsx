@@ -2,17 +2,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./PostUserProfile.module.css";
+import { Me } from "../model/types";
 
-export default function PostUserProfile({ user }) {
+export default function PostUserProfile({ user }: { user: Me }) {
   return (
     <Link
-      href={`https://${user.subdomain}.ksc036.store`}
+      href={`https://${user?.subdomain}.ksc036.store`}
       className={styles.contianer}
       onClick={(e) => e.stopPropagation()}
     >
       <img
         src={
-          user.thumbnailUrl
+          user?.thumbnailUrl
             ? user.thumbnailUrl
             : "https://minio.ksc036.store/log404default/default-profile.png"
         }
@@ -21,7 +22,7 @@ export default function PostUserProfile({ user }) {
         height={24}
         className={styles.avatar}
       />
-      <div className={styles.blog}>{user.blogName}</div>
+      <div className={styles.blog}>{user?.blogName}</div>
     </Link>
   );
 }

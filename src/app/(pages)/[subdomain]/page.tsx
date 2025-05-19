@@ -5,8 +5,10 @@ import Link from "next/link";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import PostLike from "@/entities/post/ui/postLike_tmp/PostLike";
+import { urlParams } from "@/shared/types/types";
+import { Post } from "@/entities/post/model/types";
 
-export default async function BlogPage({ params }) {
+export default async function BlogPage({ params }: urlParams) {
   const { subdomain } = await params;
   const res = await axiosInstance.get(`users/blogProfile/${subdomain}`);
   const data = res.data;
@@ -27,10 +29,10 @@ export default async function BlogPage({ params }) {
 
       {/* 포스트 목록 */}
       <section className={styles.postList}>
-        {data.posts.map((post) => (
+        {data.posts.map((post: Post) => (
           <Link
             key={post.id}
-            href={`https://${post.user.subdomain}.ksc036.store/posts/${post.postUrl}`}
+            href={`https://${post?.user?.subdomain}.ksc036.store/posts/${post.postUrl}`}
             // href={`https://${post.user.subdomain}.ksc036.store/posts/${[
             //   post.id,
             // ]}`}
@@ -58,8 +60,8 @@ export default async function BlogPage({ params }) {
                 </div>
 
                 <PostLike
-                  likeCnt={post._count.likes}
-                  commentCnt={post.commentCount}
+                  likeCnt={post._count?.likes ?? 0}
+                  commentCnt={post.commentCount ?? 0}
                 ></PostLike>
               </div>
             </article>

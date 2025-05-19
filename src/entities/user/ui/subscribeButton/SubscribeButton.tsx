@@ -9,6 +9,9 @@ import { Me } from "../../model/types";
 export default function subscribeButton({
   isSubscribed: initialSubscribed,
   userId: userId,
+}: {
+  isSubscribed: boolean;
+  userId: number;
 }) {
   console.log("initialSubscribed : ", initialSubscribed);
   // console.log(" : ", !isLogined);
@@ -17,8 +20,8 @@ export default function subscribeButton({
   const me: Me = useAppSelector((state) => state.user.me); // 본인 ID
   // const me = useAppSelector((state) => state.user.me);
   console.log(me);
-  console.log("myId ::::::", me.id, userId);
-  if (userId === me.id) return null;
+  console.log("myId ::::::", me?.id, userId);
+  if (userId === me?.id) return null;
   const handleSubscribe = async () => {
     if (!isLogined) {
       alert("로그인이 필요합니다.");

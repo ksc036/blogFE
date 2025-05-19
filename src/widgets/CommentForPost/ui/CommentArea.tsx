@@ -27,12 +27,12 @@ export default function CommentArea({
           <div key={comment.id} className={styles.comment}>
             <CommentProfile comment={comment}></CommentProfile>
 
-            {comment.replies?.length > 0 && (
+            {comment.replies?.length && comment?.replies?.length > 0 && (
               <div className={styles.replyBox}>
                 <div className={styles.replyToggle}>
-                  {comment.replies.length}개의 답글
+                  {comment.replies!.length}개의 답글
                 </div>
-                {comment.replies.map((reply: Comment) => (
+                {comment.replies!.map((reply: Comment) => (
                   <div key={reply.id} className={styles.reply}>
                     <CommentProfile comment={reply}></CommentProfile>
                   </div>

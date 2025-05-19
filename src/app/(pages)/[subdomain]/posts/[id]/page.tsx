@@ -5,7 +5,6 @@ import { getPosts } from "@/entities/post/api/getPosts";
 
 import CardList from "@/widgets/postList/ui/PostList/CardList";
 import PostMarkDownContent from "@/entities/post/ui/postContent/PostMarkDownContent";
-import PostDeleteButton from "@/features/post/ui/PostDeleteButton";
 import PostEditForm from "@/features/post/ui/PostEditForm";
 import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
 import PostEditButton from "@/features/post/ui/PostEditButton";

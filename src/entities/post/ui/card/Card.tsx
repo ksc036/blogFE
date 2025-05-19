@@ -9,7 +9,7 @@ export default function Card({ post }: { post: Post }) {
   return (
     <div className={styles.card}>
       <Link
-        href={`https://${post.user.subdomain}.ksc036.store/posts/${post.postUrl}`}
+        href={`https://${post?.user?.subdomain}.ksc036.store/posts/${post.postUrl}`}
       >
         {/* <Link href={`/posts/${post.id}`}> */}
         <div>
@@ -39,8 +39,8 @@ export default function Card({ post }: { post: Post }) {
       <div className={styles.cardFooter}>
         <PostUserProfile user={post.user}></PostUserProfile>
         <PostLike
-          likeCnt={post._count.likes}
-          commentCnt={post.commentCount}
+          likeCnt={post._count?.likes ?? 0}
+          commentCnt={post.commentCount ?? 0}
         ></PostLike>
       </div>
     </div>

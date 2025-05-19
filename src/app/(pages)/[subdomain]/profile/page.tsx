@@ -10,7 +10,7 @@ import { uploadImg } from "@/entities/post/api/uploadImg";
 import { useDispatch } from "react-redux";
 
 export default function UserProfileForm() {
-  const me: Me = useAppSelector((state) => state.user.me);
+  const me = useAppSelector((state) => state.user.me) as Me | null;
   const dispatch = useAppDispatch();
   if (!me) {
     return <div>사용자 정보 읽기 실패했습니다</div>;
@@ -60,7 +60,12 @@ export default function UserProfileForm() {
         field: editField,
         value: value,
       });
-      dispatch(updateMeField({ field: editField as keyof Me, value }));
+      dispatch(
+        updateMeField({
+          field: editField as keyof Me,
+          value: value as Me[keyof Me],
+        })
+      );
     } catch (error) {
       console.error("Error saving profile data:", error);
       alert("프로필 저장에 실패했습니다.");
@@ -93,7 +98,13 @@ export default function UserProfileForm() {
         field: "thumbnailUrl",
         value: imageUrl,
       });
-      dispatch(updateMeField({ field: "thumbnailUrl", value: imageUrl }));
+      // dispatch(updateMeField({ field: "thumbnailUrl", value: imageUrl }));
+      dispatch(
+        updateMeField({
+          field: "thumbnailUrl" as keyof Me,
+          value: imageUrl as Me[keyof Me],
+        })
+      );
     } catch (err) {
       console.error("Error uploading image:", err);
       alert("이미지 업로드에 실패했습니다.");

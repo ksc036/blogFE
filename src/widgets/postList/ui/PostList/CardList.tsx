@@ -4,7 +4,7 @@ import Card from "@/entities/post/ui/card/Card";
 interface Props {
   posts: Post[];
 }
-export default function CardList({ posts }: { posts: Props }) {
+export default function CardList({ posts }: Props) {
   return (
     <div className={styles.cardList}>
       {posts.map((post: Post) => (
