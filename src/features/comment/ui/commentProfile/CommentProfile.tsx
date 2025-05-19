@@ -2,6 +2,7 @@
 import styles from "./CommentProfile.module.css";
 import { Comment } from "@/entities/comment/model/types";
 import { useCommentProfile } from "@/features/comment/model/useCommentProfile";
+import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
 
 export default function CommentProfile({ comment }: { comment: Comment }) {
@@ -16,7 +17,7 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
   } = useCommentProfile({
     comment,
   });
-  console.log(comment);
+  console.log("ccccc", comment);
   return (
     <div>
       <div className={styles.commentHeader}>
@@ -40,7 +41,12 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
               }
               alt="프로필"
             />
-            <div>{comment.user?.blogName}</div>
+            <div>
+              <div>{comment.user?.blogName}</div>
+              <div className={styles.date}>
+                {formatToKoreanDate(comment.user.createdAt)}
+              </div>
+            </div>
           </Link>
 
           {me?.id === comment.userId && (
@@ -56,11 +62,6 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
               {/* <div>{comment.id}</div> */}
             </div>
           )}
-        </div>
-
-        <div>
-          <div className={styles.nickname}>{comment.nickname}</div>
-          <div className={styles.date}>{comment.date}</div>
         </div>
       </div>
 

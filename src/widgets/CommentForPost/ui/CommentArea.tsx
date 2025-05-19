@@ -40,9 +40,6 @@ export default function CommentArea({
               </div>
             )}
             <div className={styles.dateAndReply}>
-              <div className={styles.date}>
-                {formatToKoreanDate(comment.createdAt)}
-              </div>
               <div
                 className={styles.replyWrite}
                 onClick={() =>

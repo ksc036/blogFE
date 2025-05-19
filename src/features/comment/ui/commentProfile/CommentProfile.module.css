@@ -15,8 +15,9 @@
   font-size: 15px;
 }
 .date {
-  font-size: 13px;
+  font-size: 12px;
   color: #999;
+  margin-top: 2px;
 }
 .textarea {
   width: 100%;
