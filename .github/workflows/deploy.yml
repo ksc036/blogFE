@@ -16,8 +16,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Create .env.production from secret
-        run: echo "${{ secrets.ENV }}" > .env
+      - name: Create .env from secret (DEV)
+        if: startsWith(github.ref, 'refs/tags/dev-')
+        run: echo "${{ secrets.ENV_LOCAL }}" > .env.local
+
+      - name: Create .env from secret(PROD)
+        if: startsWith(github.ref, 'refs/tags/prod-')
+        run: echo "${{ secrets.ENV_PRODUCTION }}" > .env.production
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -34,15 +39,6 @@ jobs:
           echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
           echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
 
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     file: ./Dockerfile
-      #     push: true
-      #     tags: |
-      #       ksc036/blog-frontend:${{ env.TAG }}
-      #       ksc036/blog-frontend:latest
       - name: Build and push (dev)
         if: startsWith(github.ref, 'refs/tags/dev-')
         uses: docker/build-push-action@v5
