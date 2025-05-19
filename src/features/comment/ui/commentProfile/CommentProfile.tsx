@@ -37,7 +37,7 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
               src={
                 comment.user?.thumbnailUrl
                   ? comment.user?.thumbnailUrl
-                  : "https://minio.ksc036.store/log404default/default-profile.png"
+                  : "/images/common/default-profile.png"
               }
               alt="프로필"
             />

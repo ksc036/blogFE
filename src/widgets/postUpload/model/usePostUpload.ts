@@ -54,20 +54,6 @@ export function usePostUpload({
           `https://${me?.subdomain}.ksc036.store/posts/${res.post.postUrl}`
         ); // Next.js의 클라이언트 라우팅
       } else {
-        // console.log(
-        //   "titie:",
-        //   title,
-        //   "content:",
-        //   content,
-        //   "thumbnailUrl:",
-        //   thumbnailUrl,
-        //   "desc:",
-        //   desc,
-        //   "visibility:",
-        //   visibility,
-        //   "postUrl:",
-        //   postUrl
-        // );
         const res = await createPostApi(
           title,
           content,

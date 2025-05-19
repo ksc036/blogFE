@@ -47,7 +47,7 @@ export default async function BlogPage({ params }: urlParams) {
                   src={
                     post.thumbnailUrl
                       ? post.thumbnailUrl
-                      : "https://minio.ksc036.store/log404default/default-thumbnail.png"
+                      : "/images/common/default-thumbnail.png"
                   }
                   className={styles.thumbnail}
                   alt="post-thumbnail"

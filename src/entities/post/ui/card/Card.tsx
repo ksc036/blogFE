@@ -19,7 +19,7 @@ export default function Card({ post }: { post: Post }) {
               src={
                 post.thumbnailUrl
                   ? post.thumbnailUrl
-                  : "https://minio.ksc036.store/log404default/default-thumbnail.png"
+                  : "/images/common/default-thumbnail.png"
               }
               alt=""
             />

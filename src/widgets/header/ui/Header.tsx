@@ -28,19 +28,13 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.mainHeader}>
         <Link href="https://ksc036.store" style={{ cursor: "pointer" }}>
-          {/* <img
-            src="https://minio.ksc036.store/log404default/logo.png"
-            width={100}
-            height={90}
-            alt=""
-          /> */}
           <picture>
             <source
-              srcSet="https://minio.ksc036.store/log404default/logo-black-version.png"
+              srcSet="/images/darkmode/logo.png"
               media="(prefers-color-scheme: dark)"
             />
             <img
-              src="https://minio.ksc036.store/log404default/logo-white-version.png"
+              src="/images/lightmode/logo.png"
               alt="로고"
               width={100}
               height={90}
@@ -56,10 +50,7 @@ export default function Header() {
               </div>
               <div className={styles.profileWrapper} onClick={toggleDropdown}>
                 <img
-                  src={
-                    me?.thumbnailUrl ??
-                    "https://minio.ksc036.store/delog/uploads/1746009561156_ChatGPT%20Image%202025%EB%85%84%204%EC%9B%94%2030%EC%9D%BC%20%EC%98%A4%ED%9B%84%2007_39_17.png"
-                  }
+                  src={me?.thumbnailUrl ?? "/images/common/default-profile.png"}
                   alt="프로필 이미지"
                   width={40}
                   height={40}

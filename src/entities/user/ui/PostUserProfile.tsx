@@ -15,7 +15,7 @@ export default function PostUserProfile({ user }: { user: Me }) {
         src={
           user?.thumbnailUrl
             ? user.thumbnailUrl
-            : "https://minio.ksc036.store/log404default/default-profile.png"
+            : "/images/common/default-profile.png"
         }
         alt="User profile"
         width={24}

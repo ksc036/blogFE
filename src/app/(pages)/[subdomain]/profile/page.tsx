@@ -125,7 +125,7 @@ export default function UserProfileForm() {
             />
             <div className={styles.cameraIcon} onClick={handleImageClick}>
               <img
-                src="https://minio.ksc036.store/delog/uploads/1746013309205_camera.png"
+                src="/images/common/camera.png"
                 alt="Edit"
                 className={styles.cameraIconImage}
               />

@@ -87,10 +87,7 @@ export default function PostUpload({
           >
             <div style={{ display: "flex", flexDirection: "column" }}>
               <img
-                src={
-                  thumbnailUrl ||
-                  "https://minio.ksc036.store/log404default/default-thumbnail.png"
-                }
+                src={thumbnailUrl || "/images/common/default-thumbnail.png"}
                 alt="썸네일 미리보기"
                 style={{ width: "200px", height: "auto", objectFit: "cover" }}
               />

@@ -16,11 +16,11 @@ export default function PostLike({
     >
       <picture>
         <source
-          srcSet="https://minio.ksc036.store/log404default/white-heart.svg"
+          srcSet="/images/darkmode/heart.svg"
           media="(prefers-color-scheme: dark)"
         />
         <img
-          src="https://minio.ksc036.store/log404default/heart.svg"
+          src="/images/lightmode/heart.svg"
           alt="heart"
           width={20}
           height={20}
@@ -29,11 +29,11 @@ export default function PostLike({
       <span style={{ fontSize: "12px" }}>{likeCnt}</span>
       <picture style={{ marginLeft: "2px" }}>
         <source
-          srcSet="https://minio.ksc036.store/log404default/message-circle-white.svg"
+          srcSet="/images/darkmode/message-circle.svg"
           media="(prefers-color-scheme: dark)"
         />
         <img
-          src="https://minio.ksc036.store/log404default/message-circle-black.svg"
+          src="/images/lightmode/message-circle.svg"
           alt="heart"
           width={20}
           height={20}
