@@ -1,6 +1,6 @@
 import { postSubComment } from "@/entities/comment/api/postComment";
 import { addReplieComment, set } from "@/entities/comment/model/commentSlice";
-import { useAppDispatch } from "@/shared/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useState } from "react";
 
 export function useSubCommentInput(
@@ -11,8 +11,10 @@ export function useSubCommentInput(
   //   //console.log("type checkin function", typeof setActiveReplyId);
   const [text, setText] = useState("");
   const dispatch = useAppDispatch();
+  const me = useAppSelector((state) => state.user.me);
   const handleSubmit = async () => {
     const res = await postSubComment(postId, text, commentId);
+    res.user = me;
     dispatch(addReplieComment({ parentId: commentId, comment: res }));
     setText("");
     setActiveReplyId(null);
