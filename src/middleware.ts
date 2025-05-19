@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
 
   console.log("Request Hostname:", hostname);
 
-  const domainOnly = "ksc036.store"; // 기본 도메인
+  const domainOnly = process.env.NEXT_PUBLIC_DOMAIN ?? "ksc036.store"; // 기본 도메인
   console.log("middleware request", request.nextUrl.pathname);
   // "ksc036.store"로 끝나는 요청만 처리
   if (hostname.endsWith(domainOnly)) {

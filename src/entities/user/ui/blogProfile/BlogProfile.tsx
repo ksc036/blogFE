@@ -17,7 +17,9 @@ export default function BlogProfile({
   return (
     <div className={styles.meta}>
       <div className={styles.profile}>
-        <Link href={`https://${user.subdomain}.ksc036.store`}>
+        <Link
+          href={`https://${user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
+        >
           <img
             src={user.thumbnailUrl || "/images/common/default-profile.png"}
             alt="User profile"
@@ -27,7 +29,9 @@ export default function BlogProfile({
           />
         </Link>
         <div className={styles.blogInfo}>
-          <Link href={`https://${user.subdomain}.ksc036.store`}>
+          <Link
+            href={`https://${user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
+          >
             <h2 className={styles.blogName}>{user.blogName}</h2>
           </Link>
           <p className={styles.bio}>{user.bio}</p>

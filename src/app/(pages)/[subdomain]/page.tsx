@@ -32,10 +32,7 @@ export default async function BlogPage({ params }: urlParams) {
         {data.posts.map((post: Post) => (
           <Link
             key={post.id}
-            href={`https://${post?.user?.subdomain}.ksc036.store/posts/${post.postUrl}`}
-            // href={`https://${post.user.subdomain}.ksc036.store/posts/${[
-            //   post.id,
-            // ]}`}
+            href={`https://${post?.user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${post.postUrl}`}
           >
             <article className={styles.postCard}>
               <div className={styles.postContent}>

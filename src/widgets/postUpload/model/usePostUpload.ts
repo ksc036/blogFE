@@ -51,7 +51,7 @@ export function usePostUpload({
           Number(postId)
         );
         router.push(
-          `https://${me?.subdomain}.ksc036.store/posts/${res.post.postUrl}`
+          `https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${res.post.postUrl}`
         ); // Next.js의 클라이언트 라우팅
       } else {
         const res = await createPostApi(
@@ -64,7 +64,7 @@ export function usePostUpload({
         );
         // // const id = res.postId; // 서버에서 반환해주는 고유 URL
         router.push(
-          `https://${me?.subdomain}.ksc036.store/posts/${res.post.postUrl}`
+          `https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${res.post.postUrl}`
         ); // Next.js의 클라이언트 라우팅
       }
     } catch (err) {

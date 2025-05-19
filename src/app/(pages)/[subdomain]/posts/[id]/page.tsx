@@ -32,7 +32,9 @@ export default async function postPage({ params }: urlParams) {
           <div className={styles.userInfo}>
             <span className={styles.name}>
               by{" "}
-              <Link href={`https://${post.user.subdomain}.ksc036.store`}>
+              <Link
+                href={`https://${post.user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
+              >
                 {post.user.name}
               </Link>
             </span>

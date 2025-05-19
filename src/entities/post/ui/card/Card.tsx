@@ -9,7 +9,7 @@ export default function Card({ post }: { post: Post }) {
   return (
     <div className={styles.card}>
       <Link
-        href={`https://${post?.user?.subdomain}.ksc036.store/posts/${post.postUrl}`}
+        href={`https://${post?.user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${post.postUrl}`}
       >
         {/* <Link href={`/posts/${post.id}`}> */}
         <div>

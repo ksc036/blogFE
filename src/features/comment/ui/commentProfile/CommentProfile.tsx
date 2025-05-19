@@ -29,7 +29,7 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
           }}
         >
           <Link
-            href={`https://${comment.user?.subdomain}.ksc036.store`}
+            href={`https://${comment.user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
             style={{ display: "flex", gap: "8px", alignItems: "center" }}
           >
             <img

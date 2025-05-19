@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/shared/store/hooks";
-import { testUserInput } from "@/entities/user/model/userSlice";
 import LoginModal from "@/features/comment/ui/LoginModal/LoginModal";
 
 export default function Header() {
@@ -27,7 +26,10 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.mainHeader}>
-        <Link href="https://ksc036.store" style={{ cursor: "pointer" }}>
+        <Link
+          href={`https://${process.env.NEXT_PUBLIC_DOMAIN}`}
+          style={{ cursor: "pointer" }}
+        >
           <picture>
             <source
               srcSet="/images/darkmode/logo.png"
@@ -59,14 +61,18 @@ export default function Header() {
                 <span className={styles.arrow}>▼</span> {/* ▼ 아이콘 추가 */}
                 {isDropdownOpen && (
                   <div className={styles.dropdownMenu}>
-                    <Link href={`https://${me?.subdomain}.ksc036.store`}>
+                    <Link
+                      href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
+                    >
                       <div>내 블로그</div>
                     </Link>
-                    <Link href={`https://${me?.subdomain}.ksc036.store/write`}>
+                    <Link
+                      href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/write`}
+                    >
                       <div>글쓰기</div>
                     </Link>
                     <Link
-                      href={`https://${me?.subdomain}.ksc036.store/profile`}
+                      href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/profile`}
                     >
                       <div>프로필 설정</div>
                     </Link>

@@ -7,7 +7,7 @@ import { Me } from "../model/types";
 export default function PostUserProfile({ user }: { user: Me }) {
   return (
     <Link
-      href={`https://${user?.subdomain}.ksc036.store`}
+      href={`https://${user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
       className={styles.contianer}
       onClick={(e) => e.stopPropagation()}
     >
