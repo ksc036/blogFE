@@ -12,9 +12,7 @@ import { useDispatch } from "react-redux";
 export default function UserProfileForm() {
   const me = useAppSelector((state) => state.user.me) as Me | null;
   const dispatch = useAppDispatch();
-  if (!me) {
-    return <div>사용자 정보 읽기 실패했습니다</div>;
-  }
+
   // const initialData = {
   //   name: me.name,
   //   email: me.email,
@@ -110,7 +108,9 @@ export default function UserProfileForm() {
       alert("이미지 업로드에 실패했습니다.");
     }
   };
-
+  if (!me) {
+    return <div>사용자 정보 읽기 실패했습니다</div>;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.formBox}>
