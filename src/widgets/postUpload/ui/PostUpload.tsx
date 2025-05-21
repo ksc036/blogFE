@@ -43,6 +43,7 @@ export default function PostUpload({
     setVisibility,
     setPostUrl,
     postUrl,
+    setThumbnailUrl,
   } = usePostUpload({
     content,
     title,
@@ -55,6 +56,7 @@ export default function PostUpload({
     initialPostUrl,
     postId,
   });
+
   useEffect(() => {
     console.log("info,", info);
     if (!info) {
@@ -65,24 +67,20 @@ export default function PostUpload({
       if (!desc && content) {
         setDesc(content.slice(0, 150));
       }
+      const match = content.match(/!\[.*?\]\((.*?)\)/);
+      if (match && !thumbnailUrl) {
+        setThumbnailUrl(match[1]);
+      }
     } else {
       console.log("수졍한다.");
       //수정
       setPostUrl(info?.postUrl.slice(0, 100));
       setDesc(info?.desc.slice(0, 150));
+      setThumbnailUrl(info?.thumbnailUrl);
+      // setVisibility(info?.visi)
     }
   }, [info, title, content]);
-  // useEffect(() => {
-  //   if (!postUrl && title) {
-  //     setPostUrl(title);
-  //   }
-  // }, [title]);
 
-  // useEffect(() => {
-  //   if (!desc && content) {
-  //     setDesc(content);
-  //   }
-  // }, [content]);
   return (
     <div className={styles.container}>
       {/* 썸네일 및 설명 */}

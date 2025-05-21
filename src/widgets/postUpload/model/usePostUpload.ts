@@ -92,13 +92,6 @@ export function usePostUpload({
       alert("썸네일 업로드에 실패했습니다.");
     }
   };
-  useEffect(() => {
-    // content 내 첫 번째 이미지 URL 추출
-    const match = content.match(/!\[.*?\]\((.*?)\)/);
-    if (match && !thumbnailUrl) {
-      setThumbnailUrl(match[1]);
-    }
-  }, [content, thumbnailUrl]);
 
   return {
     postUrl,
@@ -112,5 +105,6 @@ export function usePostUpload({
     setDesc,
     setVisibility,
     setPostUrl,
+    setThumbnailUrl,
   };
 }
