@@ -1,6 +1,5 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import remarkBreaks from "remark-breaks";
 import styles from "./PostMarkDownContent.module.css";
 import rehypeRaw from "rehype-raw"; // ✅ 추가
 

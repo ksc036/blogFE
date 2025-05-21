@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { usePostUpload } from "../model/usePostUpload";
 import styles from "./PostUpload.module.css";
+import { Post } from "@/entities/post/model/types";
 type ModalProps = {
   showPublishScreen: boolean;
   setShowPublishScreen: (value: boolean) => void;
@@ -15,6 +16,7 @@ type ModalProps = {
   visibility?: boolean;
   postUrl?: string;
   postId?: number;
+  info: Post;
 };
 export default function PostUpload({
   content,
@@ -27,6 +29,7 @@ export default function PostUpload({
   visibility: initialVisibility,
   postUrl: initialPostUrl,
   postId: postId,
+  info,
 }: ModalProps) {
   const {
     thumbnailInputRef,
@@ -53,16 +56,31 @@ export default function PostUpload({
     postId,
   });
   useEffect(() => {
-    if (!postUrl && title) {
-      setPostUrl(title);
+    if (!info) {
+      // 게시글 쓰기이면
+      if (!postUrl && title) {
+        setPostUrl(title.slice(0, 100));
+      }
+      if (!desc && content) {
+        setDesc(content.slice(0, 150));
+      }
+    } else {
+      //수정
+      setPostUrl(info?.postUrl.slice(0, 100));
+      setDesc(info?.desc.slice(0, 150));
     }
-  }, [title]);
+  }, [info, title, content]);
+  // useEffect(() => {
+  //   if (!postUrl && title) {
+  //     setPostUrl(title);
+  //   }
+  // }, [title]);
 
-  useEffect(() => {
-    if (!desc && content) {
-      setDesc(content);
-    }
-  }, [content]);
+  // useEffect(() => {
+  //   if (!desc && content) {
+  //     setDesc(content);
+  //   }
+  // }, [content]);
   return (
     <div className={styles.container}>
       {/* 썸네일 및 설명 */}
