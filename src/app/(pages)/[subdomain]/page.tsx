@@ -11,7 +11,7 @@ import { Post } from "@/entities/post/model/types";
 export default async function BlogPage({ params }: urlParams) {
   console.log("BlogPage rendering..");
   const { subdomain } = await params;
-  const res = await axiosInstance.get(`users/blogProfile/${subdomain}`);
+  const res = await axiosInstance.get(`/users/blogProfile/${subdomain}`);
   const data = res.data;
   console.log("data==", data);
 
