@@ -16,18 +16,29 @@
   }
 }
 @media (min-width: 1057px) and (max-width: 1440px) {
+  /* .cardList {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  } 
+  */
   .cardList {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3열 */
+    /* grid-template-columns: repeat(3, 1fr);  */
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
   }
 }
 @media (min-width: 1441px) and (max-width: 1919px) {
+  /* .cardList {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  } */
   .cardList {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3열 */
+    grid-template-columns: repeat(4, minmax(300px, 1fr)); /* 항상 3열 */
   }
 }
 /* ≥1920: 5개 */
 @media (min-width: 1920px) {
   .cardList {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3열 */
+    grid-template-columns: repeat(5, minmax(300px, 1fr)); /* 항상 3열 */
   }
+  /* .cardList {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  } */
 }
