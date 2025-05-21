@@ -26,19 +26,19 @@ export default function CommentArea({
         {reduxComments.map((comment: Comment) => (
           <div key={comment.id} className={styles.comment}>
             <CommentProfile comment={comment}></CommentProfile>
-
-            {comment.replies?.length && comment?.replies?.length > 0 && (
-              <div className={styles.replyBox}>
-                <div className={styles.replyToggle}>
-                  {comment.replies!.length}개의 답글
-                </div>
-                {comment.replies!.map((reply: Comment) => (
-                  <div key={reply.id} className={styles.reply}>
-                    <CommentProfile comment={reply}></CommentProfile>
+            {comment.replies?.length != undefined &&
+              comment?.replies?.length > 0 && (
+                <div className={styles.replyBox}>
+                  <div className={styles.replyToggle}>
+                    {comment.replies!.length}개의 답글
                   </div>
-                ))}
-              </div>
-            )}
+                  {comment.replies!.map((reply: Comment) => (
+                    <div key={reply.id} className={styles.reply}>
+                      <CommentProfile comment={reply}></CommentProfile>
+                    </div>
+                  ))}
+                </div>
+              )}
             <div className={styles.dateAndReply}>
               <div
                 className={styles.replyWrite}
@@ -51,7 +51,6 @@ export default function CommentArea({
                 답글달기
               </div>
             </div>
-
             {activeReplyId === comment.id && (
               <SubComment
                 commentId={comment.id}
