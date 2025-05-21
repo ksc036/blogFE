@@ -8,6 +8,10 @@ export function middleware(request: NextRequest) {
   console.log("Request Hostname:", hostname);
   const domainOnly = process.env.NEXT_PUBLIC_DOMAIN ?? "ksc036.store"; // 기본 도메인
   console.log("NEXT_PUBLIC_DOMAIN::", process.env.NEXT_PUBLIC_DOMAIN);
+  console.log(
+    "process.env.NEXT_PUBLIC_API_URL:::",
+    process.env.NEXT_PUBLIC_API_URL
+  );
   console.log("middleware request", request.nextUrl.pathname);
   // "ksc036.store"로 끝나는 요청만 처리
   if (hostname.endsWith(domainOnly)) {
@@ -22,6 +26,7 @@ export function middleware(request: NextRequest) {
     console.log("here is a subdomain", request.nextUrl.pathname);
     const subdomain = hostname.replace(`.${domainOnly}`, ""); // 서브도메인 추출
     url.pathname = `/${subdomain}${request.nextUrl.pathname}`;
+    console.log("url pathname :", url.pathname);
     // const response = NextResponse.next();
     // response.cookies.set("subdomain", subdomain);
     return NextResponse.rewrite(url);

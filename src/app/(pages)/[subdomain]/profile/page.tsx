@@ -7,7 +7,6 @@ import axiosInstance from "@/shared/lib/axiosInstance";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { getPresign } from "@/entities/post/api/presign";
 import { uploadImg } from "@/entities/post/api/uploadImg";
-import { useDispatch } from "react-redux";
 
 export default function UserProfileForm() {
   const me = useAppSelector((state) => state.user.me) as Me | null;
