@@ -5,13 +5,6 @@ import styles from "./PostMarkDownContent.module.css";
 import rehypeRaw from "rehype-raw"; // ✅ 추가
 
 export default function PostContent({ content }: { content: string }) {
-  function convertNewlinesToBreaks(markdown: string): string {
-    // 연속된 줄바꿈 (\n 2개 이상)을 <br/> 반복으로 변환
-    return markdown.replace(/\n{2,}/g, (match) => {
-      const count = match.length;
-      return "<br />".repeat(count - 1);
-    });
-  }
   return (
     <div className={styles.markdown}>
       <ReactMarkdown
@@ -25,8 +18,9 @@ export default function PostContent({ content }: { content: string }) {
               />
             </div>
           ),
+          li: ({ children }) => <li className="list-item">{children}</li>,
         }}
-        remarkPlugins={[remarkGfm, remarkBreaks]}
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
       >
         {content}

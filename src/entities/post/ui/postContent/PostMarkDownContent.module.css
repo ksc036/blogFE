@@ -1,13 +1,12 @@
 .markdown {
-  /* background-color: #f4f4f4;
-  color: #171717; */
   color: var(--foreground);
   background: var(--background);
-  /* color: red; */
-  width: 50%;
   padding: 1rem;
+  width: 100%;
   overflow-y: auto;
   white-space: pre-wrap;
+  white-space: normal;
+  line-height: 1.6;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,4 +14,29 @@
     color: var(--foreground);
     background: var(--background);
   }
+}
+/* 리스트 들여쓰기 및 정렬 */
+.markdown ol,
+.markdown ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* li 내부 줄 간격 및 정렬 */
+.markdown .list-item {
+  margin-top: 0;
+  margin-bottom: 0.1rem;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+/* 이미지 자동 크기 조정 (예: 마크다운 img) */
+.markdown img {
+  max-width: 100%;
+  height: auto;
+}
+
+.markdown p {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
