@@ -6,11 +6,18 @@ import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import PostLike from "@/entities/post/ui/postLike_tmp/PostLike";
 import { urlParams } from "@/shared/types/types";
 import { Post } from "@/entities/post/model/types";
+import { cookies } from "next/headers";
 
 export const dynamic = "force-dynamic";
 export default async function BlogPage({ params }: urlParams) {
   const { subdomain } = await params;
-  const res = await axiosInstance.get(`/users/blogProfile/${subdomain}`);
+  const cookieStore = cookies();
+  const cookie = cookieStore.toString(); // 쿠키 문자열로 변환
+  const res = await axiosInstance.get(`/users/blogProfile/${subdomain}`, {
+    headers: {
+      Cookie: cookie, // 직접 쿠키 전달
+    },
+  });
   const data = res.data;
 
   if (!data) {
