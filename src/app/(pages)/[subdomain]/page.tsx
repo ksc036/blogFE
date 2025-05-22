@@ -1,4 +1,5 @@
-import axiosInstance from "@/shared/lib/axiosInstance";
+// import axiosInstance from "@/shared/lib/axiosInstance";
+import axiosServerInstance from "@/shared/lib/axiosInstnaceServer";
 import styles from "./BlogPage.module.css";
 import Link from "next/link";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
@@ -11,13 +12,7 @@ import { cookies } from "next/headers";
 export const dynamic = "force-dynamic";
 export default async function BlogPage({ params }: urlParams) {
   const { subdomain } = await params;
-  const cookieStore = cookies();
-  const cookie = cookieStore.toString(); // 쿠키 문자열로 변환
-  const res = await axiosInstance.get(`/users/blogProfile/${subdomain}`, {
-    headers: {
-      Cookie: cookie, // 직접 쿠키 전달
-    },
-  });
+  const res = await axiosServerInstance.get(`/users/blogProfile/${subdomain}`);
   const data = res.data;
 
   if (!data) {
