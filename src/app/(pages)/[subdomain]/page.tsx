@@ -17,7 +17,6 @@ export default async function BlogPage({ params }: urlParams) {
   const axiosServerInstance = createServerAxios(cookie);
   const res = await axiosServerInstance.get(`/users/blogProfile/${subdomain}`);
   const data = res.data;
-
   if (!data) {
     return <div>사용자없음</div>;
   }
@@ -44,7 +43,32 @@ export default async function BlogPage({ params }: urlParams) {
                   <h3 className={styles.postTitle}>{post.title}</h3>
                   <p className={styles.postSummary}>{post.desc}</p>
                 </div>
-                <img
+                <div className={styles.thumbnailWrapper}>
+                  <img
+                    src={
+                      post.thumbnailUrl
+                        ? post.thumbnailUrl
+                        : "/images/common/default-thumbnail.png"
+                    }
+                    className={
+                      !post.visibility
+                        ? styles.hiddenThumbnail
+                        : styles.normalThumbnail
+                    }
+                    alt="post-thumbnail"
+                  />
+                  {!post.visibility && (
+                    <div className={styles.overlay}>
+                      <img
+                        src="/icons/lock.svg"
+                        alt="잠금"
+                        className={styles.lockIcon}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* <img
                   src={
                     post.thumbnailUrl
                       ? post.thumbnailUrl
@@ -52,7 +76,7 @@ export default async function BlogPage({ params }: urlParams) {
                   }
                   className={styles.thumbnail}
                   alt="post-thumbnail"
-                />
+                /> */}
               </div>
 
               <div className={styles.extraInfo}>
