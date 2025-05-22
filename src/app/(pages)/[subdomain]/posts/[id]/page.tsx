@@ -24,7 +24,7 @@ export async function generateMetadata({
     description: post.desc,
     openGraph: {
       type: "article",
-      url: `https://${post.user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/${post.id}`,
+      url: `https://${post.user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/${post.postUrl}`,
       title: post.title,
       description: post.desc,
       images: [
