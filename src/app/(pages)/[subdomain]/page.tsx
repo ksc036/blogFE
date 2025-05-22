@@ -60,7 +60,7 @@ export default async function BlogPage({ params }: urlParams) {
                   {!post.visibility && (
                     <div className={styles.overlay}>
                       <img
-                        src="/icons/lock.svg"
+                        src="/icons/lock.png"
                         alt="잠금"
                         className={styles.lockIcon}
                       />
