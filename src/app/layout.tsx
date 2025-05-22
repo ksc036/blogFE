@@ -30,7 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable}`}
+        style={{ minHeight: "100vh" }}
+      >
         <AppProviders>
           <div className="container">
             <AuthProvider>
