@@ -11,6 +11,7 @@ export type Post = {
   createdAt: string;
   commentCount?: number;
   _count?: Count;
+  visibility: boolean;
 };
 export type PostContent = {};
 

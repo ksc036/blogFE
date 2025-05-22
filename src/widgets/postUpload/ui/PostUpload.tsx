@@ -77,7 +77,7 @@ export default function PostUpload({
       setPostUrl(info?.postUrl.slice(0, 100));
       setDesc(info?.desc.slice(0, 150));
       setThumbnailUrl(info?.thumbnailUrl);
-      // setVisibility(info?.visi)
+      setVisibility(info?.visibility);
     }
   }, [info, title, content]);
 
