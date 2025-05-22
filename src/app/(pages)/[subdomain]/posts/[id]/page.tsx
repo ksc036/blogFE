@@ -89,6 +89,7 @@ export default async function postPage({ params }: urlParams) {
               isLiked={post.isLiked}
               likeCount={post._count.likes}
               postId={post.id}
+              post={post}
             ></PostActionBar>
             <div className={styles.profile}>
               <BlogProfile
