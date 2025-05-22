@@ -1,5 +1,5 @@
 // import axiosInstance from "@/shared/lib/axiosInstance";
-import axiosServerInstance from "@/shared/lib/axiosInstnaceServer";
+import { createServerAxios } from "@/shared/lib/axiosInstnaceServer";
 import styles from "./BlogPage.module.css";
 import Link from "next/link";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
@@ -12,6 +12,9 @@ import { cookies } from "next/headers";
 export const dynamic = "force-dynamic";
 export default async function BlogPage({ params }: urlParams) {
   const { subdomain } = await params;
+  const cookieStore = cookies();
+  const cookie = cookieStore.toString();
+  const axiosServerInstance = createServerAxios(cookie);
   const res = await axiosServerInstance.get(`/users/blogProfile/${subdomain}`);
   const data = res.data;
 

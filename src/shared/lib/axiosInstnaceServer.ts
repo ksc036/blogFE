@@ -1,17 +1,13 @@
-// lib/axiosInstance.js
+// shared/lib/axiosInstanceServer.ts
 import axios from "axios";
-import { cookies } from "next/headers";
 
-const cookieStore = cookies();
-const cookie = cookieStore.toString(); // 쿠키 문자열로 변환
-const axiosInstance = axios.create({
-  // baseURL: "http://localhost:2999", // 공통 base URL
-  baseURL: process.env.NEXT_PUBLIC_API_URL, // 공통 base URL1
-  timeout: 5000,
-  withCredentials: true,
-  headers: {
-    Cookie: cookie,
-  },
-});
-
-export default axiosInstance;
+// 요청 범위 안에서만 호출되도록 유틸 함수로 정의
+export function createServerAxios(cookie: string) {
+  return axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    timeout: 5000,
+    headers: {
+      Cookie: cookie,
+    },
+  });
+}
