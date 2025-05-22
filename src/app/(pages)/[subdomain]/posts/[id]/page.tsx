@@ -11,22 +11,14 @@ import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
 import PostActionBar from "@/entities/post/ui/postActionBar/PostActionBar";
 import { getPostsBySubdomainWithId } from "@/entities/post/api/getPostsByIdWithSubdomainServer";
-import Head from "next/head";
 import type { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Log404",
-  description: "Make your own blog",
-  icons: {
-    icon: "/favicon.png", // 또는 { url: "/favicon.png", type: "image/png" }
-  },
-};
+
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
   params,
 }: urlParams): Promise<Metadata> {
   const { subdomain, id } = await params;
   const post = await getPostsBySubdomainWithId(subdomain, id);
-
   return {
     title: post.title,
     description: post.desc,
@@ -45,6 +37,7 @@ export async function generateMetadata({
     },
   };
 }
+
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
   console.log("subdomain", subdomain);
