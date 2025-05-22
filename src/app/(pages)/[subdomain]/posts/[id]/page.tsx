@@ -12,13 +12,20 @@ import Link from "next/link";
 import PostActionBar from "@/entities/post/ui/postActionBar/PostActionBar";
 import { getPostsBySubdomainWithId } from "@/entities/post/api/getPostsByIdWithSubdomainServer";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { createServerAxios } from "@/shared/lib/axiosInstnaceServer";
 
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
   params,
 }: urlParams): Promise<Metadata> {
   const { subdomain, id } = await params;
-  const post = await getPostsBySubdomainWithId(subdomain, id);
+  const cookieStore = cookies();
+  const cookie = cookieStore.toString();
+  const axiosServerInstance = createServerAxios(cookie);
+  const res = await axiosServerInstance.get(`/posts/${subdomain}/${id}`);
+  const post = res.data;
+  // const post = await getPostsBySubdomainWithId(subdomain, id);
   return {
     title: post.title,
     description: post.desc,
@@ -40,11 +47,12 @@ export async function generateMetadata({
 
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
-  console.log("subdomain", subdomain);
-  // const post = await getPostsById(Number(id));
-  console.log("getPostsBySubdomainWithId called", subdomain, id);
-  const post = await getPostsBySubdomainWithId(subdomain, id);
-  console.log("post userssss", post);
+  const cookieStore = cookies();
+  const cookie = cookieStore.toString();
+  const axiosServerInstance = createServerAxios(cookie);
+  const res = await axiosServerInstance.get(`/posts/${subdomain}/${id}`);
+  const post = res.data;
+  // const post = await getPostsBySubdomainWithId(subdomain, id);
   const posts = await getPosts();
 
   return (
