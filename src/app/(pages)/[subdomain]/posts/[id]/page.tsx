@@ -1,21 +1,50 @@
 import styles from "./page.module.css";
 import { urlParams } from "@/shared/types/types";
-import { getPostsById } from "@/entities/post/api/getPostsByIdServer";
 import { getPosts } from "@/entities/post/api/getPosts";
 
 import CardList from "@/widgets/postList/ui/PostList/CardList";
 import PostMarkDownContent from "@/entities/post/ui/postContent/PostMarkDownContent";
 import PostEditForm from "@/features/post/ui/PostEditForm";
 import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
-import PostEditButton from "@/features/post/ui/PostEditButton";
-import { useAppSelector } from "@/shared/store/hooks";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
 import PostActionBar from "@/entities/post/ui/postActionBar/PostActionBar";
 import { getPostsBySubdomainWithId } from "@/entities/post/api/getPostsByIdWithSubdomainServer";
 import Head from "next/head";
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Log404",
+  description: "Make your own blog",
+  icons: {
+    icon: "/favicon.png", // 또는 { url: "/favicon.png", type: "image/png" }
+  },
+};
+export const dynamic = "force-dynamic";
+export async function generateMetadata({
+  params,
+}: urlParams): Promise<Metadata> {
+  const { subdomain, id } = await params;
+  const post = await getPostsBySubdomainWithId(subdomain, id);
 
+  return {
+    title: post.title,
+    description: post.desc,
+    openGraph: {
+      type: "article",
+      url: `https://${post.user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/${post.id}`,
+      title: post.title,
+      description: post.desc,
+      images: [
+        {
+          url:
+            post.thumbnailUrl ??
+            `https://${process.env.NEXT_PUBLIC_DOMAIN}/images/common/default-thumbnail.png`,
+        },
+      ],
+    },
+  };
+}
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
   console.log("subdomain", subdomain);
@@ -27,24 +56,6 @@ export default async function postPage({ params }: urlParams) {
 
   return (
     <>
-      <Head>
-        <title>{post.title}</title>
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.desc} />
-        <meta
-          property="og:image"
-          content={
-            post?.thumbnailUrl
-              ? post?.thumbnailUrl
-              : `https://${process.env.NEXT_PUBLIC_DOMAIN}/images/common/default-thumbnail.png`
-          }
-        />
-        <meta
-          property="og:url"
-          content={`https://${post?.user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/post/handshake`}
-        />
-        <meta property="og:type" content="article" />
-      </Head>
       <main>
         {" "}
         <div>
