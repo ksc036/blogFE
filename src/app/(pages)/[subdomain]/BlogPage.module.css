@@ -47,12 +47,19 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 24px;
+  padding: 20px;
   transition: transform 0.2s ease;
   border-bottom: 1px solid #f0f0f0;
 }
 .postCard:hover {
   transform: translateY(-5px); /* 위로 5px 이동 */
+}
+@media (max-width: 640px) {
+  .postCard {
+    padding: 0;
+    padding-bottom: 5px;
+    border-radius: 8px;
+  }
 }
 @media (prefers-color-scheme: dark) {
   .postCard {
@@ -104,15 +111,27 @@
   margin: 0;
   color: #666;
 }
+.date {
+  color: #999999;
+  font-size: 11px;
+}
+@media (max-width: 640px) {
+  .postTitle {
+    padding-left: 8px;
+  }
+  .postSummary {
+    padding-left: 8px;
+  }
+  .date {
+    padding-left: 8px;
+  }
+}
 @media (prefers-color-scheme: dark) {
   .postSummary {
     color: #ccc;
   }
 }
-.date {
-  color: #999999;
-  font-size: 11px;
-}
+
 .extraInfo {
   display: flex;
   justify-content: space-between;
