@@ -396,7 +396,7 @@ export default function PostForm({ postId }: PostFormProps) {
         </div>
       )}
 
-      <div style={{ display: "flex", height: "100%", flex: 1 }}>
+      <div style={{ display: "flex", height: "100%", flex: 1, gap: "2px" }}>
         <textarea
           ref={textareaRef}
           className={styles.mainText}
