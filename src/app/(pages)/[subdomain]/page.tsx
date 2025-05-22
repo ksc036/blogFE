@@ -1,6 +1,5 @@
 import axiosInstance from "@/shared/lib/axiosInstance";
 import styles from "./BlogPage.module.css";
-import Image from "next/image";
 import Link from "next/link";
 import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
@@ -8,12 +7,11 @@ import PostLike from "@/entities/post/ui/postLike_tmp/PostLike";
 import { urlParams } from "@/shared/types/types";
 import { Post } from "@/entities/post/model/types";
 
+export const dynamic = "force-dynamic";
 export default async function BlogPage({ params }: urlParams) {
-  console.log("BlogPage rendering..");
   const { subdomain } = await params;
   const res = await axiosInstance.get(`/users/blogProfile/${subdomain}`);
   const data = res.data;
-  console.log("data==", data);
 
   if (!data) {
     return <div>사용자없음</div>;

@@ -116,7 +116,11 @@ export default function UserProfileForm() {
         <div className={styles.profileSection}>
           <div className={styles.imageWrapper}>
             <img
-              src={thumbnailUrl}
+              src={
+                thumbnailUrl
+                  ? thumbnailUrl
+                  : "/images/common/default-profile.png"
+              }
               onClick={handleImageClick}
               style={{ cursor: "pointer" }}
               alt="Profile"
