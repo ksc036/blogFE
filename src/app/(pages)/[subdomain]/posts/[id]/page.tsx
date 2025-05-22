@@ -14,6 +14,8 @@ import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
 import PostActionBar from "@/entities/post/ui/postActionBar/PostActionBar";
 import { getPostsBySubdomainWithId } from "@/entities/post/api/getPostsByIdWithSubdomainServer";
+import Head from "next/head";
+
 export default async function postPage({ params }: urlParams) {
   const { subdomain, id } = await params;
   console.log("subdomain", subdomain);
@@ -24,58 +26,84 @@ export default async function postPage({ params }: urlParams) {
   const posts = await getPosts();
 
   return (
-    <div>
-      <div className={styles.container}>
-        <h1 className={styles.title}>{post.title} </h1>
-        <div className={styles.userInfoWrap}>
-          <div className={styles.userInfo}>
-            <span className={styles.name}>
-              by{" "}
-              <Link
-                href={`https://${post.user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
-              >
-                {post.user.name}
-              </Link>
-            </span>
-            <span className={styles.dot}>·</span>
-            {formatToKoreanDate(post.createdAt)}
-          </div>
-          <div className={styles.editForm}>
-            <PostEditForm
-              postUserId={post.userId}
+    <>
+      <Head>
+        <title>{post.title}</title>
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.desc} />
+        <meta
+          property="og:image"
+          content={
+            post?.thumbnailUrl
+              ? post?.thumbnailUrl
+              : `https://${process.env.NEXT_PUBLIC_DOMAIN}/images/common/default-thumbnail.png`
+          }
+        />
+        <meta
+          property="og:url"
+          content={`https://${post?.user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/post/handshake`}
+        />
+        <meta property="og:type" content="article" />
+      </Head>
+      <main>
+        {" "}
+        <div>
+          <div className={styles.container}>
+            <h1 className={styles.title}>{post.title} </h1>
+            <div className={styles.userInfoWrap}>
+              <div className={styles.userInfo}>
+                <span className={styles.name}>
+                  by{" "}
+                  <Link
+                    href={`https://${post.user.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
+                  >
+                    {post.user.name}
+                  </Link>
+                </span>
+                <span className={styles.dot}>·</span>
+                {formatToKoreanDate(post.createdAt)}
+              </div>
+              <div className={styles.editForm}>
+                <PostEditForm
+                  postUserId={post.userId}
+                  postId={post.id}
+                ></PostEditForm>
+              </div>
+            </div>
+            <div className={styles.content}>
+              <PostMarkDownContent content={post.content}></PostMarkDownContent>
+            </div>
+            <PostActionBar
+              isLiked={post.isLiked}
+              likeCount={post._count.likes}
               postId={post.id}
-            ></PostEditForm>
+            ></PostActionBar>
+            <div className={styles.profile}>
+              <BlogProfile
+                user={post.user}
+                isSubscribed={post.isSubscribed}
+              ></BlogProfile>
+            </div>
+            <CommentArea
+              postId={post.id}
+              comments={post.comments}
+            ></CommentArea>
+            <div className={styles.advertise}>
+              <div
+                style={{
+                  fontSize: "18px",
+                  color: "#999999",
+                  textAlign: "center",
+                  padding: "10px 0",
+                }}
+              >
+                이런 게시글은 어때요?
+              </div>
+            </div>
           </div>
+          <CardList posts={posts}></CardList>
         </div>
-        <div className={styles.content}>
-          <PostMarkDownContent content={post.content}></PostMarkDownContent>
-        </div>
-        <PostActionBar
-          isLiked={post.isLiked}
-          likeCount={post._count.likes}
-          postId={post.id}
-        ></PostActionBar>
-        <div className={styles.profile}>
-          <BlogProfile
-            user={post.user}
-            isSubscribed={post.isSubscribed}
-          ></BlogProfile>
-        </div>
-        <CommentArea postId={post.id} comments={post.comments}></CommentArea>
-        <div className={styles.advertise}>
-          <div
-            style={{
-              fontSize: "18px",
-              color: "#999999",
-              textAlign: "center",
-              padding: "10px 0",
-            }}
-          >
-            이런 게시글은 어때요?
-          </div>
-        </div>
-      </div>
-      <CardList posts={posts}></CardList>
-    </div>
+      </main>
+    </>
   );
 }
