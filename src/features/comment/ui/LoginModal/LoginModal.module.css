@@ -19,8 +19,13 @@
   max-width: 400px;
   position: relative;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
 }
-
+@media (prefers-color-scheme: dark) {
+  .modal {
+    background-color: #121212;
+  }
+}
 .closeButton {
   position: absolute;
   top: 16px;
@@ -38,11 +43,21 @@
   text-align: center;
   margin-bottom: 8px;
 }
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: #ffffff;
+  }
+}
 
 .subtitle {
   text-align: center;
   color: #666;
   margin-bottom: 24px;
+}
+@media (prefers-color-scheme: dark) {
+  .subtitle {
+    color: #888;
+  }
 }
 
 .socialButtons {
@@ -76,12 +91,19 @@
 }
 
 .signupLink {
-  color: #00c471;
+  color: #999;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
 }
-
+@media (prefers-color-scheme: dark) {
+  .signupText {
+    color: #666;
+  }
+  .signupLink {
+    color: #ccc;
+  }
+}
 .signupLink:hover {
   text-decoration: underline;
 }

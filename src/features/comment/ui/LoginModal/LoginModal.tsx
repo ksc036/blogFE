@@ -10,8 +10,8 @@ type Props = {
 const LoginModal = ({ onClose }: Props) => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   return (
-    <div className={styles.backdrop}>
-      <div className={styles.modal}>
+    <div className={styles.backdrop} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={onClose}>
           ×
         </button>
