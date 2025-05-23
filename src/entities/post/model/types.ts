@@ -1,5 +1,15 @@
 import { Me } from "@/entities/user/model/types";
 type Count = { likes: number } | null;
+type Tag = {
+  id: number;
+  postId: number;
+  tagId: number;
+  userId: number;
+  tag: {
+    id: number;
+    name: string;
+  };
+};
 export type Post = {
   id: number;
   title: string;
@@ -12,6 +22,7 @@ export type Post = {
   commentCount?: number;
   _count?: Count;
   visibility: boolean;
+  postTags: Tag[];
 };
 export type PostContent = {};
 

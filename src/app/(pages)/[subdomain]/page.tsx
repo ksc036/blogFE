@@ -8,6 +8,8 @@ import PostLike from "@/entities/post/ui/postLike_tmp/PostLike";
 import { urlParams } from "@/shared/types/types";
 import { Post } from "@/entities/post/model/types";
 import { cookies } from "next/headers";
+import TagList from "@/entities/post/ui/TagList/TagList";
+import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 
 export const dynamic = "force-dynamic";
 export default async function BlogPage({ params }: urlParams) {
@@ -78,7 +80,7 @@ export default async function BlogPage({ params }: urlParams) {
                   alt="post-thumbnail"
                 /> */}
               </div>
-
+              <TagList tagList={tagToArray(post?.postTags)}></TagList>
               <div className={styles.extraInfo}>
                 <div className={styles.date}>
                   {formatToKoreanDate(post.createdAt)}
