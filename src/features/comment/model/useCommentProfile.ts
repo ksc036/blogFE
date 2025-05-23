@@ -21,6 +21,10 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
 
   const handleEdit = async () => {
     //console.log("editCommentId", comment);
+    if (!editContent.trim()) {
+      alert("빈 댓글로 수정할 수 없습니다.");
+      return;
+    }
     const res = await putCommentApi(comment.id, comment.postId, editContent);
     dispatch(editComment({ id: res.id, content: res.content }));
     setEditCommentId(null);
