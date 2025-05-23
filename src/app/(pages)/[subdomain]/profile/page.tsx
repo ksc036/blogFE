@@ -198,8 +198,9 @@ export default function UserProfileForm() {
               )}
             </div>
           ))}
-
-          <button className={styles.deleteButton}>계정삭제</button>
+          <div style={{ display: "flex", alignItems: "flex-end" }}>
+            <button className={styles.deleteButton}>계정삭제</button>
+          </div>
         </div>
       </div>
     </div>

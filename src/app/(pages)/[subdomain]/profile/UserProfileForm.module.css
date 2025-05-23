@@ -167,9 +167,9 @@
   transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
-  width: 20%;
   /* margin: 0 auto; */
   margin-left: auto;
+  min-width: 100px;
 }
 .deleteButton:hover {
   background-color: #c62828; /* 더 어두운 빨강 */
