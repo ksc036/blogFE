@@ -1,18 +1,19 @@
 .cardList {
   display: grid;
   gap: 32px;
-  align-items: stretch;
+  /* align-items: stretch; */
   grid-auto-rows: 1fr; /* 모든 카드 높이를 균등하게 */
 }
 @media (max-width: 768px) {
   .cardList {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); /* 3열 */
+    /* grid-template-columns: repeat(1, 1fr);  */
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
   }
 }
 @media (min-width: 769px) and (max-width: 1056px) {
   .cardList {
-    grid-template-columns: repeat(2, 1fr); /* 3열 */
+    /* grid-template-columns: repeat(2, 1fr);  */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (min-width: 1057px) and (max-width: 1440px) {
@@ -30,13 +31,13 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   } */
   .cardList {
-    grid-template-columns: repeat(4, minmax(300px, 1fr)); /* 항상 3열 */
+    grid-template-columns: repeat(4, minmax(300px, 1fr));
   }
 }
 /* ≥1920: 5개 */
 @media (min-width: 1920px) {
   .cardList {
-    grid-template-columns: repeat(5, minmax(300px, 1fr)); /* 항상 3열 */
+    grid-template-columns: repeat(5, minmax(300px, 1fr));
   }
   /* .cardList {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
