@@ -17,6 +17,7 @@ type ModalProps = {
   postUrl?: string;
   postId?: number;
   info: Post;
+  tags?: string[];
 };
 export default function PostUpload({
   content,
@@ -30,6 +31,7 @@ export default function PostUpload({
   postUrl: initialPostUrl,
   postId: postId,
   info,
+  tags,
 }: ModalProps) {
   const {
     thumbnailInputRef,
@@ -55,6 +57,7 @@ export default function PostUpload({
     initialVisibility,
     initialPostUrl,
     postId,
+    tags,
   });
 
   useEffect(() => {

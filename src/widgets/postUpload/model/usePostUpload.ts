@@ -16,6 +16,7 @@ type ModalProps = {
   initialVisibility?: boolean;
   initialPostUrl?: string;
   postId?: number;
+  tags?: string[];
 };
 
 export function usePostUpload({
@@ -29,6 +30,7 @@ export function usePostUpload({
   initialVisibility,
   initialPostUrl,
   postId,
+  tags,
 }: ModalProps) {
   const router = useRouter();
   const thumbnailInputRef = useRef<HTMLInputElement | null>(null);
@@ -48,7 +50,8 @@ export function usePostUpload({
           desc,
           visibility,
           postUrl,
-          Number(postId)
+          Number(postId),
+          tags
         );
         router.push(
           `https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${res.post.postUrl}`
@@ -60,7 +63,8 @@ export function usePostUpload({
           thumbnailUrl,
           desc,
           visibility,
-          postUrl
+          postUrl,
+          tags
         );
         // // const id = res.postId; // 서버에서 반환해주는 고유 URL
         router.push(

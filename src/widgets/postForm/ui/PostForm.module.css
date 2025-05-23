@@ -23,6 +23,42 @@
   border: none;
   outline: none;
 }
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+}
+.tag {
+  background-color: #e0e0e0;
+  color: black;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+@media (prefers-color-scheme: dark) {
+  .tag {
+    background-color: #f6f6f6;
+  }
+}
+.tag:hover {
+  background-color: #e0e0e0;
+}
+.input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #444;
+  min-width: 120px;
+  padding: 8px 0;
+  background: none;
+  color: var(--foreground);
+}
+
 .urlInput {
   flex: 1;
   border: none;

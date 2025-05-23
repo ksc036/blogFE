@@ -283,7 +283,36 @@ export default function PostForm({ postId }: PostFormProps) {
       //console.error(err);
     }
   };
+  const [tags, setTags] = useState<string[]>([]);
+  const [input, setInput] = useState<string>("");
 
+  const addTag = () => {
+    const trimmed = input.trim();
+    if (tags.includes(trimmed)) {
+      alert(`${trimmed}태그는 이미 존재하는 태그입니다.`);
+      setInput("");
+      return;
+    }
+    if (trimmed) {
+      setTags((prev) => [...prev, trimmed]);
+    }
+    setInput("");
+  };
+  const handleBlur = () => {
+    addTag();
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      addTag();
+    } else if (e.key === "Backspace" && input === "") {
+      setTags((prev) => prev.slice(0, -1));
+    }
+  };
+
+  const handleRemoveTag = (index: number) => {
+    setTags((prev) => prev.filter((_, i) => i !== index));
+  };
   return (
     <div className={styles.mainSize}>
       <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
@@ -297,6 +326,25 @@ export default function PostForm({ postId }: PostFormProps) {
         <button className={styles.submitButton} onClick={handleCompleteWrite}>
           작성완료
         </button>
+      </div>
+      <div className={styles.wrapper}>
+        {tags.map((tag, index) => (
+          <div
+            key={index}
+            className={styles.tag}
+            onClick={() => handleRemoveTag(index)}
+          >
+            {tag}
+          </div>
+        ))}
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onBlur={handleBlur}
+          placeholder="태그를 입력하세요"
+          className={styles.input}
+        />
       </div>
       <div className={styles.toolbar}>
         <button
@@ -440,6 +488,7 @@ export default function PostForm({ postId }: PostFormProps) {
             isUpdate={postId ? true : false}
             postId={info?.id}
             info={info}
+            tags={tags}
           ></PostUpload>
         </div>
       )}

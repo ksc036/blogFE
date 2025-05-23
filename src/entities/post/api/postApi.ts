@@ -6,7 +6,8 @@ export const createPostApi = async (
   thumbnailUrl: string,
   desc: string,
   visibility: boolean,
-  postUrl: string
+  postUrl: string,
+  tags?: string[]
 ) => {
   const res = await axiosInstance.post(`/posts`, {
     title,
@@ -15,6 +16,7 @@ export const createPostApi = async (
     desc,
     visibility,
     postUrl,
+    ...(tags ? { tags } : {}),
   });
   return res.data;
 };
@@ -26,7 +28,8 @@ export const updatePostApi = async (
   desc: string,
   visibility: boolean,
   postUrl: string,
-  postId: number
+  postId: number,
+  tags?: string[]
 ) => {
   const res = await axiosInstance.put(`/posts/${postId}`, {
     title,
@@ -35,6 +38,7 @@ export const updatePostApi = async (
     desc,
     visibility,
     postUrl,
+    ...(tags ? { tags } : {}),
   });
   return res.data;
 };
