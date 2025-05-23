@@ -7,6 +7,7 @@ import { uploadImg } from "@/entities/post/api/uploadImg";
 import PostUpload from "@/widgets/postUpload/ui/PostUpload";
 // import PostUpload from "@/components/client/postUpload/PostUpload";
 import styles from "./PostForm.module.css";
+import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 interface PostFormProps {
   postId?: number;
 }
@@ -24,6 +25,9 @@ export default function PostForm({ postId }: PostFormProps) {
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
   const [showPublishScreen, setShowPublishScreen] = useState(false);
+
+  const [tags, setTags] = useState<string[]>([]);
+  const [input, setInput] = useState<string>("");
   useEffect(() => {
     const fetchPost = async () => {
       //console.log("postId", postId);
@@ -38,6 +42,7 @@ export default function PostForm({ postId }: PostFormProps) {
         setInfo(post);
         setTitle(post.title);
         setContent(post.content);
+        setTags(tagToArray(post.postTags));
       } catch (err) {
         alert("게시글 정보를 불러오지 못했습니다.");
       }
@@ -283,8 +288,6 @@ export default function PostForm({ postId }: PostFormProps) {
       //console.error(err);
     }
   };
-  const [tags, setTags] = useState<string[]>([]);
-  const [input, setInput] = useState<string>("");
 
   const addTag = () => {
     const trimmed = input.trim();

@@ -14,6 +14,8 @@ import { getPostsBySubdomainWithId } from "@/entities/post/api/getPostsByIdWithS
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { createServerAxios } from "@/shared/lib/axiosInstnaceServer";
+import TagList from "@/entities/post/ui/TagList/TagList";
+import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
@@ -85,6 +87,7 @@ export default async function postPage({ params }: urlParams) {
             <div className={styles.content}>
               <PostMarkDownContent content={post.content}></PostMarkDownContent>
             </div>
+            <TagList tagList={tagToArray(post.postTags)}></TagList>
             <PostActionBar
               isLiked={post.isLiked}
               likeCount={post._count.likes}

@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+  margin-top: 80px;
+}
+.tag {
+  background-color: #e0e0e0;
+  color: black;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+@media (prefers-color-scheme: dark) {
+  .tag {
+    background-color: #f6f6f6;
+  }
+}
+.tag:hover {
+  background-color: #e0e0e0;
+}
