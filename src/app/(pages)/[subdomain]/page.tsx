@@ -28,7 +28,7 @@ export default async function BlogPage({ params }: urlParams) {
         {/* <BlogProfile user={data.user}></BlogProfile> */}
         <BlogProfile
           user={data.user}
-          isSubscribed={data.isSubscribed}
+          isSubscribed={data.user.isSubscribed}
         ></BlogProfile>
       </section>
 
