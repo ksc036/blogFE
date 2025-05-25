@@ -1,4 +1,4 @@
-import { Me } from "@/entities/user/model/types";
+import { Me } from "@/entities/user/types";
 type Count = { likes: number } | null;
 type Tag = {
   id: number;

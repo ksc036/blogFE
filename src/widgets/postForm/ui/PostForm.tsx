@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import PostMarkDownContent from "@/entities/post/ui/postContent/PostMarkDownContent";
-import { getPostsById } from "@/entities/post/api/getPostsByIdClient";
-import { getPresign } from "@/entities/post/api/presign";
-import { uploadImg } from "@/entities/post/api/uploadImg";
+import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";
+import { getPostsByIdClient } from "@/entities/post/api";
+import { getPresign } from "@/shared/upload/presign";
+import { uploadImg } from "@/shared/upload/uploadImg";
 import PostUpload from "@/widgets/postUpload/ui/PostUpload";
 // import PostUpload from "@/components/client/postUpload/PostUpload";
 import styles from "./PostForm.module.css";
@@ -37,7 +37,7 @@ export default function PostForm({ postId }: PostFormProps) {
       try {
         // const res = await axiosInstance.get(`/posts/${postId}`);
         // const post = res.data;
-        const post = await getPostsById(postId);
+        const post = await getPostsByIdClient(postId);
         console.log("받아온 post", post);
         setInfo(post);
         setTitle(post.title);

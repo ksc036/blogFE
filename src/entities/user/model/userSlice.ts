@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Me } from "./types";
+import { Me } from "../types";
 interface UserState {
   me: Me | null;
   isLogined: boolean;

@@ -1,20 +1,18 @@
 import styles from "./page.module.css";
 import { urlParams } from "@/shared/types/types";
-import { getPosts } from "@/entities/post/api/getPosts";
-
+import { getPosts } from "@/entities/post/api";
 import CardList from "@/widgets/postList/ui/PostList/CardList";
-import PostMarkDownContent from "@/entities/post/ui/postContent/PostMarkDownContent";
-import PostEditForm from "@/features/post/ui/PostEditForm";
+import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";
+import PostEditForm from "@/features/post/PostEditForm/PostEditForm";
 import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
-import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
+import BlogProfile from "@/features/user/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
-import PostActionBar from "@/entities/post/ui/postActionBar/PostActionBar";
-import { getPostsBySubdomainWithId } from "@/entities/post/api/getPostsByIdWithSubdomainServer";
+import PostActionBar from "@/features/post/postActionBar/PostActionBar";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { createServerAxios } from "@/shared/lib/axiosInstnaceServer";
-import TagList from "@/entities/post/ui/TagList/TagList";
+import TagList from "@/features/post/TagList/TagList";
 import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +25,6 @@ export async function generateMetadata({
   const axiosServerInstance = createServerAxios(cookie);
   const res = await axiosServerInstance.get(`/posts/${subdomain}/${id}`);
   const post = res.data;
-  // const post = await getPostsBySubdomainWithId(subdomain, id);
   return {
     title: post.title,
     description: post.desc,
@@ -54,7 +51,6 @@ export default async function postPage({ params }: urlParams) {
   const axiosServerInstance = createServerAxios(cookie);
   const res = await axiosServerInstance.get(`/posts/${subdomain}/${id}`);
   const post = res.data;
-  // const post = await getPostsBySubdomainWithId(subdomain, id);
   const posts = await getPosts();
 
   return (

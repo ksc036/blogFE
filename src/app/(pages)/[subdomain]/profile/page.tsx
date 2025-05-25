@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./UserProfileForm.module.css";
-import { Me } from "@/entities/user/model/types";
+import { Me } from "@/entities/user/types";
 import { updateMeField } from "@/entities/user/model/userSlice";
 import axiosInstance from "@/shared/lib/axiosInstance";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
-import { getPresign } from "@/entities/post/api/presign";
-import { uploadImg } from "@/entities/post/api/uploadImg";
+import { getPresign } from "@/shared/upload/presign";
+import { uploadImg } from "@/shared/upload/uploadImg";
 
 export default function UserProfileForm() {
   const me = useAppSelector((state) => state.user.me) as Me | null;

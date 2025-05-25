@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, ReactNode } from "react";
-import { getMe } from "@/entities/user/api/getUsers"; // 서버에서 내 정보 가져오는 함수
+import { getMe } from "@/entities/user/api"; // 서버에서 내 정보 가져오는 함수
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { setMe } from "@/entities/user/model/userSlice";
 
@@ -10,8 +10,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isLogined = useAppSelector((state) => state.user.isLogined); // redux에 저장된 유저 정보
   const dispatch = useAppDispatch(); // redux dispatch 함수
   useEffect(() => {
-    console.log("auth provider", me);
-    console.log("isLogined", isLogined);
     const fetchUser = async () => {
       try {
         const data = await getMe();

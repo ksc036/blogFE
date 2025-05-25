@@ -1,6 +1,5 @@
 "use client";
-import { useAppSelector } from "@/shared/store/hooks";
-import { usePostDelete } from "../model/usePostDelete";
+import { usePostDelete } from "../hooks/usePostDelete";
 export default function PostDeleteButton({ postId }: { postId: number }) {
   const { handleDelete } = usePostDelete(postId);
   return (

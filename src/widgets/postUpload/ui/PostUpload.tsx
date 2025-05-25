@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { usePostUpload } from "../model/usePostUpload";
 import styles from "./PostUpload.module.css";
-import { Post } from "@/entities/post/model/types";
+import { Post } from "@/entities/post/types";
 type ModalProps = {
   showPublishScreen: boolean;
   setShowPublishScreen: (value: boolean) => void;

@@ -1,7 +1,7 @@
-import PostUserProfile from "@/entities/user/ui/PostUserProfile";
+import PostUserProfile from "@/features/user/PostUserProfile/PostUserProfile";
 import styles from "./Card.module.css";
-import { CardType, Post } from "@/entities/post/model/types";
-import PostLike from "@/entities/post/ui/postLike_tmp/PostLike";
+import { CardType, Post } from "@/entities/post/types";
+import PostLike from "@/features/post/postLike/PostLike";
 import Link from "next/link";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 export default function Card({ post }: { post: Post }) {

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styles from "./PostActionBar.module.css";
 import axiosInstance from "@/shared/lib/axiosInstance";
-import { Post } from "../../model/types";
+import { Post } from "@/entities/post/types";
 interface PostActionBarProps {
   isLiked: boolean;
   likeCount: number;

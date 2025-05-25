@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import styles from "./PostUserProfile.module.css";
-import { Me } from "../model/types";
+import { Me } from "../../../entities/user/types";
 
 export default function PostUserProfile({ user }: { user: Me }) {
   return (

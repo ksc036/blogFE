@@ -1,4 +1,4 @@
-import { Me } from "@/entities/user/model/types";
+import { Me } from "@/entities/user/types";
 
 export type Comment = {
   postId: number; // 포스트아이디 id

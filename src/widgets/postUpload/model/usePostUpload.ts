@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createPostApi, updatePostApi } from "@/entities/post/api/postApi";
-import { getPresign } from "@/entities/post/api/presign";
-import { uploadImg } from "@/entities/post/api/uploadImg";
+import { createPostApi, updatePostApi } from "@/entities/post/api";
+import { getPresign } from "@/shared/upload/presign";
+import { uploadImg } from "@/shared/upload/uploadImg";
 import { useAppSelector } from "@/shared/store/hooks";
-import { Me } from "@/entities/user/model/types";
+import { Me } from "@/entities/user/types";
 type ModalProps = {
   showPublishScreen: boolean;
   setShowPublishScreen: (value: boolean) => void;

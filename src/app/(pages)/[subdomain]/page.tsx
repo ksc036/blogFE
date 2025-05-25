@@ -2,13 +2,13 @@
 import { createServerAxios } from "@/shared/lib/axiosInstnaceServer";
 import styles from "./BlogPage.module.css";
 import Link from "next/link";
-import BlogProfile from "@/entities/user/ui/blogProfile/BlogProfile";
+import BlogProfile from "@/features/user/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
-import PostLike from "@/entities/post/ui/postLike_tmp/PostLike";
+import PostLike from "@/features/post/postLike/PostLike";
 import { urlParams } from "@/shared/types/types";
-import { Post } from "@/entities/post/model/types";
+import { Post } from "@/entities/post/types";
 import { cookies } from "next/headers";
-import TagList from "@/entities/post/ui/TagList/TagList";
+import TagList from "@/features/post/TagList/TagList";
 import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 
 export const dynamic = "force-dynamic";

@@ -1,8 +1,8 @@
 "use client";
 
 import { useAppSelector } from "@/shared/store/hooks";
-import PostDeleteButton from "./PostDeleteButton";
-import PostEditButton from "@/features/post/ui/PostEditButton";
+import PostDeleteButton from "../PostDeleteButton/PostDeleteButton";
+import PostEditButton from "@/features/post/PostEditButton/PostEditButton";
 export default function PostEditForm({
   postUserId,
   postId,

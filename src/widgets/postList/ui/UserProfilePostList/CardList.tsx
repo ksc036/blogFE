@@ -1,6 +1,6 @@
-import { Post } from "../../../../entities/post/model/types";
+import { Post } from "../../../../entities/post/types";
 import styles from "./CardList.module.css";
-import Card from "@/entities/post/ui/card/Card";
+import Card from "@/features/post/card/Card";
 interface Props {
   posts: Post[];
 }
