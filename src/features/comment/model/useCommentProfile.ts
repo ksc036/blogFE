@@ -1,14 +1,11 @@
 "use client";
 
-import {
-  deleteCommentApi,
-  putCommentApi,
-} from "@/entities/comment/api/changeComment";
+import { deleteCommentApi, putCommentApi } from "@/entities/comment/api";
 import {
   editComment,
   deleteComment,
 } from "@/entities/comment/model/commentSlice";
-import { Comment } from "@/entities/comment/model/types";
+import { Comment } from "@/entities/comment/types";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

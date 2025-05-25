@@ -1,4 +1,4 @@
-import { postSubComment } from "@/entities/comment/api/postComment";
+import { postSubComment } from "@/entities/comment/api";
 import { addReplieComment, set } from "@/entities/comment/model/commentSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useState } from "react";
