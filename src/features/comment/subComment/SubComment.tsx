@@ -5,7 +5,7 @@ import styles from "./SubComment.module.css";
 import axiosInstance from "@/shared/lib/axiosInstance";
 import { useSelector, useDispatch } from "react-redux";
 import { addReplieComment } from "@/entities/comment/model/commentSlice";
-import { useSubCommentInput } from "@/features/comment/model/useSubCommentInput";
+import { useSubCommentInput } from "@/features/comment/subComment/model";
 // import { RootState } from "@/store"; // store의 타입 정의
 export default function SubComment({
   commentId,

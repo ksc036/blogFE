@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { urlParams } from "@/shared/types/types";
+import { urlParams } from "@/shared/types";
 import { getPosts } from "@/entities/post/api";
 import CardList from "@/widgets/postList/ui/PostList/CardList";
 import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";

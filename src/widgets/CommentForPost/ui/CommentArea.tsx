@@ -2,12 +2,11 @@
 
 import styles from "./comments.module.css";
 
-import CommentProfile from "@/features/comment/ui/commentProfile/CommentProfile";
-import SubComment from "@/features/comment/ui/subComment/SubComment";
-import CommentInput from "@/features/comment/ui/CommentInput";
+import CommentProfile from "@/features/comment/commentProfile/CommentProfile";
+import SubComment from "@/features/comment/subComment/SubComment";
+import CommentInput from "@/features/comment/CommentInput/CommentInput";
 import { useCommentArea } from "../model/useCommentArea";
 import { Comment } from "@/entities/comment/types";
-import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 
 export default function CommentArea({
   comments,

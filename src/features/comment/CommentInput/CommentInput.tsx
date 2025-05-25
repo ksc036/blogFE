@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./CommentInput.module.css";
-import { useCommentInput } from "../model/useCommentInput";
+import { useCommentInput } from "./model";
 
 export default function CommentInput({ postId }: { postId: number }) {
   const { comment, setComment, handleSubmit } = useCommentInput(postId);

@@ -1,4 +1,4 @@
-import { urlParams } from "@/shared/types/types";
+import { urlParams } from "@/shared/types";
 import PostForm from "@/widgets/postForm/ui/PostForm";
 
 export default async function EditPage({ params }: urlParams) {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import BlogProfile from "@/features/user/blogProfile/BlogProfile";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import PostLike from "@/features/post/postLike/PostLike";
-import { urlParams } from "@/shared/types/types";
+import { urlParams } from "@/shared/types";
 import { Post } from "@/entities/post/types";
 import { cookies } from "next/headers";
 import TagList from "@/features/post/TagList/TagList";

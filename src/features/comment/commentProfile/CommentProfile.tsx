@@ -1,7 +1,7 @@
 "user client";
 import styles from "./CommentProfile.module.css";
 import { Comment } from "@/entities/comment/types";
-import { useCommentProfile } from "@/features/comment/model/useCommentProfile";
+import { useCommentProfile } from "@/features/comment/commentProfile/model";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import Link from "next/link";
 

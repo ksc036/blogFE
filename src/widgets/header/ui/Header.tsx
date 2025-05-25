@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/shared/store/hooks";
-import LoginModal from "@/features/comment/ui/LoginModal/LoginModal";
+import LoginModal from "@/features/comment/LoginModal/LoginModal";
 
 export default function Header() {
   const dispatch = useAppDispatch();
