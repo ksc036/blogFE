@@ -7,15 +7,59 @@ import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 import TagList from "../TagList/TagList";
 import PostLike from "../postLike/PostLike";
+import { useState } from "react";
+import { getUserBlogData } from "@/widgets/UserBlogPage/model";
 
 export default function UserBlogPagePostList({
   data,
+  subdomain,
+  postLength,
 }: {
-  data: { posts: Post[] };
+  data: Post[];
+  subdomain: string;
+  postLength: number;
 }) {
+  console.log("UserBlogPagePostList data:", data);
+  const POSTS_PER_PAGE = 10;
+  const [posts, setPosts] = useState(data);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const totalPages = Math.ceil(postLength / POSTS_PER_PAGE);
+  const loadPage = async (pageNumber: number) => {
+    if (pageNumber === page) return;
+    setLoading(true);
+    const data = await getUserBlogData(subdomain, pageNumber);
+    setPosts(data.posts);
+    setPage(pageNumber);
+    setLoading(false);
+  };
+  const generatePageNumbers = () => {
+    const pages: (number | string)[] = [];
+    console.log("totalPages:", totalPages);
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      if (page <= 3) {
+        pages.push(1, 2, 3, 4, "...", totalPages);
+      } else if (page >= totalPages - 2) {
+        pages.push(
+          1,
+          "...",
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages
+        );
+      } else {
+        pages.push(1, "...", page - 1, page, page + 1, "...", totalPages);
+      }
+    }
+
+    return pages;
+  };
   return (
     <section className={styles.postList}>
-      {data.posts.map((post: Post) => (
+      {posts.map((post: Post) => (
         <Link
           key={post.id}
           href={`https://${post?.user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${post.postUrl}`}
@@ -65,6 +109,25 @@ export default function UserBlogPagePostList({
           </article>
         </Link>
       ))}
+
+      <div className={styles.pagination}>
+        {generatePageNumbers().map((p, idx) =>
+          typeof p === "string" ? (
+            <span key={idx} className={styles.dots}>
+              {p}
+            </span>
+          ) : (
+            <button
+              key={idx}
+              onClick={() => loadPage(p)}
+              className={p === page ? styles.activePage : styles.pageButton}
+              disabled={p === page}
+            >
+              {p}
+            </button>
+          )
+        )}
+      </div>
     </section>
   );
 }

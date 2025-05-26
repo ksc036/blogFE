@@ -10,6 +10,7 @@ export default async function UserBlogPage({ params }: urlParams) {
   const { subdomain } = await params;
   try {
     const data = await getUserBlogData(subdomain);
+    console.log("data ::", data);
     return (
       <main className={styles.container}>
         <section className={styles.profileSection}>
@@ -18,7 +19,11 @@ export default async function UserBlogPage({ params }: urlParams) {
             isSubscribed={data.user.isSubscribed}
           ></BlogProfile>
         </section>
-        <UserBlogPagePostList data={data}></UserBlogPagePostList>
+        <UserBlogPagePostList
+          data={data.posts}
+          subdomain={subdomain}
+          postLength={data.postLength}
+        ></UserBlogPagePostList>
       </main>
     );
   } catch (err: any) {
