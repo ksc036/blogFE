@@ -35,6 +35,9 @@ export default function UserBlogPagePostList({
     setPage(pageNumber);
     setPostLength(data.postLength);
     // setLoading(false);
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   };
   return (
     <section className={styles.postList}>
