@@ -18,6 +18,23 @@ export default function PostContent({ content }: { content: string }) {
             </div>
           ),
           li: ({ children }) => <li className="list-item">{children}</li>,
+          pre: ({ node, ...props }) => (
+            <pre className={styles.codeBlock} {...props} />
+          ),
+          code: ({ inline, className, children, ...props }: any) => {
+            if (inline) {
+              return (
+                <code className={styles.inlineCode} {...props}>
+                  {children}
+                </code>
+              );
+            }
+            return (
+              <code className={styles.blockCode} {...props}>
+                {children}
+              </code>
+            );
+          },
         }}
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
