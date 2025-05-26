@@ -22,7 +22,7 @@ export default async function UserBlogPage({ params }: urlParams) {
         <UserBlogPagePostList
           data={data.posts}
           subdomain={subdomain}
-          postLength={data.postLength}
+          initPostLength={data.postLength}
         ></UserBlogPagePostList>
       </main>
     );

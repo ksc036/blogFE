@@ -9,53 +9,32 @@ import TagList from "../TagList/TagList";
 import PostLike from "../postLike/PostLike";
 import { useState } from "react";
 import { getUserBlogData } from "@/widgets/UserBlogPage/model";
+import { generatePageNumbers } from "@/shared/lib/generatePageNumber/generatePageNumber";
 
 export default function UserBlogPagePostList({
   data,
   subdomain,
-  postLength,
+  initPostLength,
 }: {
   data: Post[];
   subdomain: string;
-  postLength: number;
+  initPostLength: number;
 }) {
   console.log("UserBlogPagePostList data:", data);
-  const POSTS_PER_PAGE = 10;
+
   const [posts, setPosts] = useState(data);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const totalPages = Math.ceil(postLength / POSTS_PER_PAGE);
+  // const [loading, setLoading] = useState(false);
+  const [postLength, setPostLength] = useState(initPostLength);
+  // const totalPages = Math.ceil(postLength / POSTS_PER_PAGE);
   const loadPage = async (pageNumber: number) => {
     if (pageNumber === page) return;
-    setLoading(true);
+    // setLoading(true);
     const data = await getUserBlogData(subdomain, pageNumber);
     setPosts(data.posts);
     setPage(pageNumber);
-    setLoading(false);
-  };
-  const generatePageNumbers = () => {
-    const pages: (number | string)[] = [];
-    console.log("totalPages:", totalPages);
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) pages.push(i);
-    } else {
-      if (page <= 3) {
-        pages.push(1, 2, 3, 4, "...", totalPages);
-      } else if (page >= totalPages - 2) {
-        pages.push(
-          1,
-          "...",
-          totalPages - 3,
-          totalPages - 2,
-          totalPages - 1,
-          totalPages
-        );
-      } else {
-        pages.push(1, "...", page - 1, page, page + 1, "...", totalPages);
-      }
-    }
-
-    return pages;
+    setPostLength(data.postLength);
+    // setLoading(false);
   };
   return (
     <section className={styles.postList}>
@@ -111,7 +90,7 @@ export default function UserBlogPagePostList({
       ))}
 
       <div className={styles.pagination}>
-        {generatePageNumbers().map((p, idx) =>
+        {generatePageNumbers(postLength, page).map((p, idx) =>
           typeof p === "string" ? (
             <span key={idx} className={styles.dots}>
               {p}
