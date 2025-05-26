@@ -1,10 +1,10 @@
 import { Post } from "@/entities/post/types";
-import styles from "./CardList.module.css";
+import styles from "./HomePostList.module.css";
 import Card from "@/features/post/card/Card";
 interface Props {
   posts: Post[];
 }
-export default function CardList({ posts }: Props) {
+export default function HomePostList({ posts }: Props) {
   return (
     <div className={styles.cardList}>
       {posts.map((post: Post) => (

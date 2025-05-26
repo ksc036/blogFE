@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import { urlParams } from "@/shared/types";
 import { getPosts } from "@/entities/post/api";
-import CardList from "@/widgets/PostList/CardList";
+import HomePostList from "@/widgets/HomePostList/HomePostList";
 import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";
 import PostEditForm from "@/features/post/PostEditForm/PostEditForm";
 import CommentArea from "@/widgets/CommentForPost/ui/CommentArea";
@@ -113,7 +113,7 @@ export default async function postPage({ params }: urlParams) {
               </div>
             </div>
           </div>
-          <CardList posts={posts}></CardList>
+          <HomePostList posts={posts}></HomePostList>
         </div>
       </main>
     </>
