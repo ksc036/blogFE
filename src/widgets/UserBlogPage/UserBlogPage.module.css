@@ -1,0 +1,16 @@
+/* 전체 컨테이너: 가운데 정렬 + 너비 확장 */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0;
+    padding-top: 40px;
+  }
+}
+.profileSection {
+  margin-bottom: 60px;
+}

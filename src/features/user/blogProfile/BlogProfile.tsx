@@ -1,4 +1,3 @@
-import { Me } from "../../../entities/user/types";
 import styles from "./BlogProfile.module.css";
 import Link from "next/link";
 import SubscribeButton from "@/features/user/subscribeButton/SubscribeButton";
@@ -41,7 +40,6 @@ export default function BlogProfile({
         isSubscribed={isSubscribed ?? false}
         userId={user.id}
       ></SubscribeButton>
-      {/* <div className={styles.subscribeButton}>+ 구독</div> */}
     </div>
   );
 }
