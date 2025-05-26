@@ -32,13 +32,6 @@ export default function HomePostList({ initialPost, totalPostLength }: Props) {
     setLoading(true);
     const nextPage = page + 1;
     const res = await getPosts(nextPage); // 페이지를 넘겨줘야 정확
-    // setPosts((prev) => {
-    //   const updatedPosts = [...prev, ...res.posts];
-    //   setHasMore(updatedPosts.length < totalPostLength);
-    //   return updatedPosts;
-    // });
-    // setPage(nextPage);
-    // setLoading(false);
     setTimeout(() => {
       setPosts((prev) => {
         const updatedPosts = [...prev, ...res.posts];

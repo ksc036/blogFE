@@ -51,7 +51,7 @@ export default async function postPage({ params }: urlParams) {
   const axiosServerInstance = createServerAxios(cookie);
   const res = await axiosServerInstance.get(`/posts/${subdomain}/${id}`);
   const post = res.data;
-  const posts = await getPosts();
+  const data = await getPosts(1);
 
   return (
     <>
@@ -113,7 +113,10 @@ export default async function postPage({ params }: urlParams) {
               </div>
             </div>
           </div>
-          <HomePostList posts={posts}></HomePostList>
+          <HomePostList
+            initialPost={data.posts}
+            totalPostLength={data.totalPostLength}
+          ></HomePostList>
         </div>
       </main>
     </>
