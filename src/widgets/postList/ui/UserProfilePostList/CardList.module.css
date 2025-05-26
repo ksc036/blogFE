@@ -1,6 +1,0 @@
-.cardList {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr); /* 3열 */
-  /* flex-direction: column; */
-  gap: 32px;
-}

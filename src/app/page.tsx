@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import CardList from "@/widgets/postList/ui/PostList/CardList";
+import CardList from "@/widgets/PostList/CardList";
 import { getPosts } from "@/entities/post/api";
 export const dynamic = "force-dynamic";
 
