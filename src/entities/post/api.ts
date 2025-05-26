@@ -1,8 +1,12 @@
 import axiosInstance from "@/shared/lib/axiosInstance";
-import { Post } from "@/entities/post/types";
+import { PostWithPageNation } from "@/entities/post/types";
 
-export async function getPosts(): Promise<Post[]> {
-  const res = await axiosInstance.get(`/posts`);
+export async function getPosts(page: number = 1): Promise<PostWithPageNation> {
+  const res = await axiosInstance.get(`/posts`, {
+    params: {
+      page: page,
+    },
+  });
   return res.data;
 }
 

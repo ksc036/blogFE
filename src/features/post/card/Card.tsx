@@ -5,7 +5,7 @@ import PostLike from "@/features/post/postLike/PostLike";
 import Link from "next/link";
 import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 export default function Card({ post }: { post: Post }) {
-  console.log("Card", post);
+  // console.log("Card", post);
   return (
     <div className={styles.card}>
       <Link

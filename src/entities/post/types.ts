@@ -24,6 +24,10 @@ export type Post = {
   visibility: boolean;
   postTags: Tag[];
 };
+export type PostWithPageNation = {
+  posts: Post[];
+  totalPostLength: number; // 전체 게시글 수
+};
 export type PostContent = {};
 
 export type CardType = {
