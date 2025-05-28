@@ -13,7 +13,6 @@
 - **스타일링**: CSS Modules
 - **상태 관리**: React Query, Redux
 - **API 통신**: Axios
-- **아이콘**: Heroicons
 - **기타**: ESLint, Prettier 통한 코드 품질 관리
 
 ---
