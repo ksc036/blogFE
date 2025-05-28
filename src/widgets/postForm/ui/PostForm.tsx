@@ -38,7 +38,6 @@ export default function PostForm({ postId }: PostFormProps) {
         // const res = await axiosInstance.get(`/posts/${postId}`);
         // const post = res.data;
         const post = await getPostsByIdClient(postId);
-        console.log("받아온 post", post);
         setInfo(post);
         setTitle(post.title);
         setContent(post.content);

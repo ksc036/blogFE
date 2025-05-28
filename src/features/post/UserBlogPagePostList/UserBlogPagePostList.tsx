@@ -10,13 +10,11 @@ import PostLike from "../postLike/PostLike";
 
 export default function UserBlogPagePostList({
   posts,
+  userSubdomain,
 }: {
   posts: Post[];
-  postLength: number;
-  page: number;
+  userSubdomain: string;
 }) {
-  console.log("UserBlogPagePostList posts:", posts);
-
   // const [posts, setPosts] = useState(posts);
   // const [page, setPage] = useState(1);
   // // const [loading, setLoading] = useState(false);
@@ -39,7 +37,7 @@ export default function UserBlogPagePostList({
       {posts.map((post: Post) => (
         <Link
           key={post.id}
-          href={`https://${post?.user?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${post.postUrl}`}
+          href={`https://${userSubdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/posts/${post.postUrl}`}
         >
           <article className={styles.postCard}>
             <div className={styles.postContent}>

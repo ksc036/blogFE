@@ -69,8 +69,6 @@ export default async function postPage({ params }: urlParams) {
   } catch (error) {
     notFound(); // 3. 게시글이 없는 경우 404 페이지로 이동
   }
-  console.log("postContent ::", postContent);
-  console.log("data ::", adPosts);
   return (
     <>
       <main>

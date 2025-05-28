@@ -8,7 +8,6 @@ export default function BlogProfile({
   user?: any;
   isSubscribed: boolean;
 }) {
-  console.log("user 출력 ", user);
   if (!user) {
     // 로딩 중이거나 데이터가 없는 경우
     return <div>Loading... {user?.id}</div>; // 또는 Skeleton 컴포넌트 등

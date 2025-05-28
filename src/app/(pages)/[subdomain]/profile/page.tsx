@@ -79,13 +79,11 @@ export default function UserProfileForm() {
     const file = e.target.files?.[0];
     if (!file) return;
     // TODO: S3 업로드 후 서버로 URL 전송하는 로직 작성
-    console.log("Selected file:", file);
     try {
       const { url } = await getPresign(file);
       e.target.value = "";
       await uploadImg(file, url);
       const imageUrl = process.env.NEXT_PUBLIC_S3_URL + url.split("?")[0];
-      console.log("Image URL:", imageUrl);
       // await axiosInstance.put("/users", {
       //   field: "thumbnailUrl",
       //   value: imageUrl,

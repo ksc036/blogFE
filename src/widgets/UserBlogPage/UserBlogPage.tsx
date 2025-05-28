@@ -10,7 +10,6 @@ export default async function UserBlogPage({ params }: urlParams) {
   const { subdomain } = await params;
   try {
     const data = await getUserBlogData(subdomain);
-    console.log("data ::::::", data);
     return (
       <main className={styles.container}>
         <section className={styles.profileSection}>

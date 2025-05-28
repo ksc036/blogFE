@@ -15,7 +15,6 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setMe: (state, action: PayloadAction<{ me: Me }>) => {
-      console.log(action.payload.me);
       state.me = action.payload.me;
       state.isLogined = true;
     },
@@ -27,7 +26,6 @@ export const userSlice = createSlice({
       state,
       action: PayloadAction<{ field: keyof Me; value: Me[keyof Me] }>
     ) => {
-      console.log("updateMeField", action.payload.field, action.payload.value);
       try {
         if (state.me) {
           const key = action.payload.field;

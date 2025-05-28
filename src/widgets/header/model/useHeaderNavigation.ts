@@ -24,7 +24,6 @@ export function useHeaderNavigation() {
   const goToLogOut = async () => {
     try {
       const { data } = await axiosInstance.post("/users/logout");
-      console.log("data", data);
       dispatch(logout());
     } catch (error) {
       console.log(error);

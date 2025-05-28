@@ -17,7 +17,6 @@ export default function CommentProfile({ comment }: { comment: Comment }) {
   } = useCommentProfile({
     comment,
   });
-  console.log("ccccc", comment);
   return (
     <div>
       <div className={styles.commentHeader}>

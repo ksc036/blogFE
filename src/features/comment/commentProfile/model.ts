@@ -17,7 +17,6 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
   const me = useAppSelector((state) => state.user.me);
 
   const handleEdit = async () => {
-    //console.log("editCommentId", comment);
     if (!editContent.trim()) {
       alert("빈 댓글로 수정할 수 없습니다.");
       return;
@@ -29,8 +28,6 @@ export function useCommentProfile({ comment }: { comment: Comment }) {
 
   const handleDelete = async () => {
     const res = await deleteCommentApi(comment.id);
-    console.log("deleteCommentApi success");
-    console.log("res", res);
     dispatch(deleteComment({ id: res }));
   };
 

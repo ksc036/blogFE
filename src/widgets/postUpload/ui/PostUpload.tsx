@@ -61,7 +61,6 @@ export default function PostUpload({
   });
 
   useEffect(() => {
-    console.log("info,", info);
     if (!info) {
       // 게시글 쓰기이면
       if (!postUrl && title) {
@@ -75,7 +74,6 @@ export default function PostUpload({
         setThumbnailUrl(match[1]);
       }
     } else {
-      console.log("수졍한다.");
       //수정
       setPostUrl(info?.postUrl.slice(0, 100));
       setDesc(info?.desc.slice(0, 150));

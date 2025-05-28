@@ -20,6 +20,8 @@ export default function UserBlogPageTagWithPosts({
   const [postLength, setPostLength] = useState(data.postLength);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const userId = data.user.id;
+  // const userSubdomain = data.user.subdomain;
+
   const loadPage = async (pageNumber: number) => {
     if (pageNumber === page) return;
     // setLoading(true);
@@ -37,9 +39,7 @@ export default function UserBlogPageTagWithPosts({
     setPostLength(postLength);
   }
   const handleTagChange = async (ids: any) => {
-    console.log("called!!!!!!!!!!", ids);
     const data = await getUserBlogDataWithTag(userId, 1, ids);
-    console.log("tag 기반선택!!!!!!!!!!!!!!!", data);
     setSelectedIds(ids);
     setPageData(data.posts, 1, data.totalCount);
     // setSelectedIds(ids);
@@ -57,8 +57,7 @@ export default function UserBlogPageTagWithPosts({
       </div>
       <UserBlogPagePostList
         posts={posts}
-        postLength={postLength}
-        page={page}
+        userSubdomain={subdomain}
       ></UserBlogPagePostList>
       <PageButton
         postLength={postLength}
