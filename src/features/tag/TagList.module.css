@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  align-items: center;
+  white-space: nowrap;
+  scrollbar-width: thin; /* Firefox */
+}
+
+/* Chrome/Edge 스크롤바 커스터마이징 */
+.container::-webkit-scrollbar {
+  height: 6px;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* gray-300 */
+  border-radius: 4px;
+}
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tagButton {
+  white-space: nowrap;
+  font-size: 0.875rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db; /* gray-300 */
+  background-color: white;
+  color: #374151; /* gray-700 */
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0; /* 버튼이 줄어들지 않게 */
+}
+
+.tagButton:hover {
+  background-color: #999999; /* gray-100 */
+}
+
+.active {
+  background-color: #000000; /* green-500 */
+  color: white;
+  border-color: transparent;
+}
+@media (prefers-color-scheme: dark) {
+  .active {
+    background-color: #444444; /* green-500 */
+  }
+}

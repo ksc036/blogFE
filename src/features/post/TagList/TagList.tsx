@@ -10,7 +10,7 @@ import styles from "./TagList.module.css";
 //   };
 // };
 export default function TagList({ tagList }: { tagList: string[] }) {
-  console.log("tagList,", tagList);
+  // console.log("tagList,", tagList);
   return (
     <div className={styles.wrapper}>
       {tagList.map((name, index) => (

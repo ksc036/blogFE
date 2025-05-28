@@ -7,38 +7,33 @@ import { formatToKoreanDate } from "@/shared/lib/date/formatData";
 import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 import TagList from "../TagList/TagList";
 import PostLike from "../postLike/PostLike";
-import { useState } from "react";
-import { getUserBlogData } from "@/widgets/UserBlogPage/model";
-import { generatePageNumbers } from "@/shared/lib/generatePageNumber/generatePageNumber";
 
 export default function UserBlogPagePostList({
-  data,
-  subdomain,
-  initPostLength,
+  posts,
 }: {
-  data: Post[];
-  subdomain: string;
-  initPostLength: number;
+  posts: Post[];
+  postLength: number;
+  page: number;
 }) {
-  console.log("UserBlogPagePostList data:", data);
+  console.log("UserBlogPagePostList posts:", posts);
 
-  const [posts, setPosts] = useState(data);
-  const [page, setPage] = useState(1);
-  // const [loading, setLoading] = useState(false);
-  const [postLength, setPostLength] = useState(initPostLength);
+  // const [posts, setPosts] = useState(posts);
+  // const [page, setPage] = useState(1);
+  // // const [loading, setLoading] = useState(false);
+  // const [postLength, setPostLength] = useState(initPostLength);
   // const totalPages = Math.ceil(postLength / POSTS_PER_PAGE);
-  const loadPage = async (pageNumber: number) => {
-    if (pageNumber === page) return;
-    // setLoading(true);
-    const data = await getUserBlogData(subdomain, pageNumber);
-    setPosts(data.posts);
-    setPage(pageNumber);
-    setPostLength(data.postLength);
-    // setLoading(false);
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  };
+  // const loadPage = async (pageNumber: number) => {
+  //   if (pageNumber === page) return;
+  //   // setLoading(true);
+  //   const data = await getUserBlogData(subdomain, pageNumber);
+  //   setPosts(data.posts);
+  //   setPage(pageNumber);
+  //   setPostLength(data.postLength);
+  //   // setLoading(false);
+  //   requestAnimationFrame(() => {
+  //     window.scrollTo({ top: 0, behavior: "smooth" });
+  //   });
+  // };
   return (
     <section className={styles.postList}>
       {posts.map((post: Post) => (
@@ -91,25 +86,6 @@ export default function UserBlogPagePostList({
           </article>
         </Link>
       ))}
-
-      <div className={styles.pagination}>
-        {generatePageNumbers(postLength, page).map((p, idx) =>
-          typeof p === "string" ? (
-            <span key={idx} className={styles.dots}>
-              {p}
-            </span>
-          ) : (
-            <button
-              key={idx}
-              onClick={() => loadPage(p)}
-              className={p === page ? styles.activePage : styles.pageButton}
-              disabled={p === page}
-            >
-              {p}
-            </button>
-          )
-        )}
-      </div>
     </section>
   );
 }
