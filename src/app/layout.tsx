@@ -4,6 +4,8 @@ import "./globals.css";
 import { AppProviders } from "./appProviders";
 import Header from "@/widgets/header/ui/Header";
 import { AuthProvider } from "@/shared/model/authProvier";
+import Script from "next/script";
+import GoogleAnalytics from "@/shared/lib/analytics/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,6 +24,7 @@ export const metadata: Metadata = {
     icon: "/favicon.png", // 또는 { url: "/favicon.png", type: "image/png" }
   },
 };
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({
   children,
@@ -30,6 +33,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* GA4 스크립트: production 환경일 때만 삽입 */}
+        {GA_ID && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}
         style={{ minHeight: "100vh" }}
@@ -42,6 +70,7 @@ export default function RootLayout({
             {children}
           </div>
         </AppProviders>
+        <GoogleAnalytics />
       </body>
     </html>
   );
