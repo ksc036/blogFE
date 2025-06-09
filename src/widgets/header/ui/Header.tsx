@@ -3,16 +3,17 @@
 import styles from "./Header.module.css";
 import { useHeaderNavigation } from "../model/useHeaderNavigation";
 import Link from "next/link";
-import { useState } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/shared/store/hooks";
 import LoginModal from "@/features/comment/LoginModal/LoginModal";
+// import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const { goToLoginGoogle, goToProfile, isLogined, goToLogOut, me } =
     useHeaderNavigation();
-
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
 
@@ -23,6 +24,26 @@ export default function Header() {
     // dispatch(testUserInput(1));\
     setIsDropdownOpen(true);
   };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
   return (
     <header className={styles.header}>
       <div className={styles.mainHeader}>
@@ -60,16 +81,22 @@ export default function Header() {
                 />
                 <span className={styles.arrow}>▼</span> {/* ▼ 아이콘 추가 */}
                 {isDropdownOpen && (
-                  <div className={styles.dropdownMenu}>
+                  <div className={styles.dropdownMenu} ref={dropdownRef}>
+                    <Link
+                      href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/write`}
+                    >
+                      <div>글쓰기</div>
+                    </Link>
                     <Link
                       href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}`}
                     >
                       <div>내 블로그</div>
                     </Link>
                     <Link
-                      href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/write`}
+                      // href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/review`}
+                      href={`http://localhost:3000/review`}
                     >
-                      <div>글쓰기</div>
+                      <div>오늘의 복습</div>
                     </Link>
                     <Link
                       href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/profile`}
