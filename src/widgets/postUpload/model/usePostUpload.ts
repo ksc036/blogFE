@@ -5,6 +5,7 @@ import { getPresign } from "@/shared/upload/presign";
 import { uploadImg } from "@/shared/upload/uploadImg";
 import { useAppSelector } from "@/shared/store/hooks";
 import { Me } from "@/entities/user/types";
+import { set } from "@/entities/comment/model/commentSlice";
 type ModalProps = {
   showPublishScreen: boolean;
   setShowPublishScreen: (value: boolean) => void;
@@ -38,6 +39,7 @@ export function usePostUpload({
   const [desc, setDesc] = useState<string>("");
   const [visibility, setVisibility] = useState<boolean>(true);
   const [postUrl, setPostUrl] = useState<string>("");
+  const [reviewLater, setReviewLater] = useState<boolean>(false);
   // const me = useAppSelector((stat) => stat.user.me);
   const me: Me = useAppSelector((state) => state.user.me); // 본인 ID
   const onPublish = async () => {
@@ -96,7 +98,9 @@ export function usePostUpload({
       alert("썸네일 업로드에 실패했습니다.");
     }
   };
-
+  function reviewSetting() {
+    setReviewLater(!reviewLater);
+  }
   return {
     postUrl,
     thumbnailInputRef,
@@ -110,5 +114,7 @@ export function usePostUpload({
     setVisibility,
     setPostUrl,
     setThumbnailUrl,
+    reviewLater,
+    reviewSetting,
   };
 }

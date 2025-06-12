@@ -22,3 +22,31 @@
 .desc {
   color: var(--foreground);
 }
+
+.reviewButton {
+  display: inline-block; /* 또는 block */
+  padding: 10px 20px;
+  background-color: #3498db;
+  background-color: #ffe0ec;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  /* border-radius: 8px; */
+  cursor: pointer;
+  text-align: center;
+  user-select: none; /* 텍스트 드래그 방지 */
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  visibility: hidden; /*이거 때고 작업하기*/
+}
+
+.reviewButton:hover {
+  background-color: #2980b9;
+  background-color: #ffc1d6;
+}
+
+.reviewButton:active {
+  background-color: #2471a3;
+  background-color: #ffacc5;
+  transform: scale(0.98); /* 눌리는 효과 */
+}

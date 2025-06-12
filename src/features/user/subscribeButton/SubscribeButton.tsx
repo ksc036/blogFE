@@ -20,6 +20,7 @@ export default function subscribeButton({
   const handleSubscribe = async () => {
     if (!isLogined) {
       alert("로그인이 필요합니다.");
+      return;
     }
     try {
       if (!isSubscribed) {

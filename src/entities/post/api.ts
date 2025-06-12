@@ -57,3 +57,13 @@ export const updatePostApi = async (
   });
   return res.data;
 };
+
+export const fetchReviews = async () => {
+  const res = await axiosInstance.get(`/posts/review`);
+  return res.data;
+};
+
+export const fetchReviewsStatus = async () => {
+  const res = await axiosInstance.get(`/posts/reviewStatus`);
+  return res.data;
+};

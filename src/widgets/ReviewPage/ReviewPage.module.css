@@ -1,0 +1,25 @@
+.toggle {
+  display: flex;
+  gap: 24px; /* 원하는 간격 */
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+.tab {
+  font-size: 18px;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+  position: relative;
+}
+.tab.active {
+  color: black; /* 초록색 글씨 */
+}
+.tab.active::after {
+  content: "";
+  display: block;
+  margin: 4px auto 0;
+  width: 100%;
+  height: 2px;
+  background-color: black; /* 밑줄 색상 */
+}

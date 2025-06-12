@@ -1,5 +1,6 @@
 import { urlParams } from "@/shared/types";
+import ReviewPage from "@/widgets/ReviewPage/ReviewPage";
 
 export default async function BlogPage({ params }: urlParams) {
-  return <div>리뷰페이지</div>;
+  return <ReviewPage />;
 }

@@ -29,7 +29,6 @@ export async function generateMetadata({
   try {
     const res = await axiosServerInstance.get(`/posts/${subdomain}/${id}`);
     const post = res.data;
-
     return {
       title: post.title,
       description: post.desc,
@@ -106,6 +105,7 @@ export default async function postPage({ params }: urlParams) {
               likeCount={postContent._count.likes}
               postId={postContent.id}
               post={postContent}
+              userId={postContent.user.id}
             ></PostActionBar>
             <div className={styles.profile}>
               <BlogProfile

@@ -23,6 +23,7 @@ export type Post = {
   _count?: Count;
   visibility: boolean;
   postTags: Tag[];
+  reviewInstances?: [];
 };
 export type PostWithPageNation = {
   posts: Post[];

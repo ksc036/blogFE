@@ -46,6 +46,8 @@ export default function PostUpload({
     setPostUrl,
     postUrl,
     setThumbnailUrl,
+    reviewLater,
+    reviewSetting,
   } = usePostUpload({
     content,
     title,
@@ -215,41 +217,53 @@ export default function PostUpload({
             />
           </div>
         </div>
-
         <div
           style={{
             display: "flex",
             gap: "1rem",
             marginTop: "3rem",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
           }}
         >
-          <button
-            onClick={() => setShowPublishScreen(false)}
+          <div>
+            <div className={styles.reviewButton} onClick={reviewSetting}>
+              {reviewLater ? "복습 +" : "복습 V"}
+            </div>
+          </div>
+
+          <div
             style={{
-              background: "none",
-              border: "none",
-              color: "#888",
-              fontWeight: "bold",
-              padding: "0.5rem 1.5rem",
-              cursor: "pointer",
+              display: "flex",
+              gap: "1rem",
             }}
           >
-            취소
-          </button>
-          <button
-            onClick={onPublish}
-            style={{
-              background: "#000000",
-              border: "none",
-              color: "white",
-              fontWeight: "bold",
-              padding: "0.5rem 1.5rem",
-              cursor: "pointer",
-            }}
-          >
-            출간하기
-          </button>
+            <button
+              onClick={() => setShowPublishScreen(false)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#888",
+                fontWeight: "bold",
+                padding: "0.5rem 1.5rem",
+                cursor: "pointer",
+              }}
+            >
+              취소
+            </button>
+            <button
+              onClick={onPublish}
+              style={{
+                background: "#000000",
+                border: "none",
+                color: "white",
+                fontWeight: "bold",
+                padding: "0.5rem 1.5rem",
+                cursor: "pointer",
+              }}
+            >
+              출간하기
+            </button>
+          </div>
         </div>
       </div>
     </div>
