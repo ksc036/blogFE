@@ -93,8 +93,8 @@ export default function Header() {
                       <div>내 블로그</div>
                     </Link>
                     <Link
-                      // href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/review`}
-                      href={`http://localhost:3000/review`}
+                      href={`https://${me?.subdomain}.${process.env.NEXT_PUBLIC_DOMAIN}/review`}
+                      // href={`http://localhost:3000/review`}
                     >
                       <div>오늘의 복습</div>
                     </Link>
