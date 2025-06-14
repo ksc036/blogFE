@@ -1,0 +1,31 @@
+.button {
+  padding: 4px 4px;
+  /* font-size: 14px; */
+  font-weight: 500;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  margin-left: 8px;
+}
+
+.button:hover {
+  background-color: #333; /* 조금 더 밝은 검정 */
+  border-color: #333;
+}
+
+/* ✅ 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .button {
+    background-color: #111;
+    border-color: #444;
+    color: #eee;
+  }
+
+  .button:hover {
+    background-color: #222;
+    border-color: #666;
+  }
+}

@@ -2,6 +2,7 @@ import { Post } from "@/entities/post/types";
 import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";
 import axiosInstance from "@/shared/lib/axiosInstance";
 import { todayReviewData } from "../../ReviewPage";
+import styles from "./ReviewContentModal.module.css";
 
 type reviewPost = {
   id: number;
@@ -69,8 +70,12 @@ export default function ReviewContentModal({
         <PostMarkDownContent
           content={selectedItem ? selectedItem?.post.content : " "}
         ></PostMarkDownContent>
-        <button onClick={closeModal}>닫기</button>
-        <button onClick={completeReview}>복습완료</button>
+        <div
+          style={{ display: "flex", justifyContent: "flex-end", gap: "4px" }}
+        >
+          <button onClick={closeModal}>닫기</button>
+          <button onClick={completeReview}>복습완료</button>
+        </div>
       </div>
     </div>
   );

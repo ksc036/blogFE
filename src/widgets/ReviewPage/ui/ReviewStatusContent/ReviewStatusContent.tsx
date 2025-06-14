@@ -81,7 +81,8 @@ export default function ReviewStatusContent({ data }: { data: reviewData[] }) {
               padding: "20px",
               borderRadius: "8px",
               // maxWidth: "500px",
-              width: "100%",
+
+              width: "fit-content",
               minWidth: "300px",
               maxHeight: "80vh",
               overflowY: "auto",
@@ -93,7 +94,9 @@ export default function ReviewStatusContent({ data }: { data: reviewData[] }) {
               content={selectedPost.post.content}
             ></PostMarkDownContent>
             {/* <p>{selectedPost.post.content}</p> */}
-            <button onClick={closeModal}>Close</button>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button onClick={closeModal}>닫기</button>
+            </div>
           </div>
         </div>
       )}
