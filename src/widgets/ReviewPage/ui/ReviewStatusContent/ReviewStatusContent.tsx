@@ -1,6 +1,7 @@
 import { Post } from "@/entities/post/types";
 import { useState } from "react";
 import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";
+import { statusToEmoji } from "@/shared/lib/statusToEmoji";
 type ReviewInstance = {
   id: number;
   status: "PENDING" | "DONE" | "MISSED";
@@ -16,19 +17,6 @@ type reviewData = {
 
 // ReviewStatusContent.tsx
 export default function ReviewStatusContent({ data }: { data: reviewData[] }) {
-  const statusToEmoji = (status: "PENDING" | "DONE" | "MISSED") => {
-    switch (status) {
-      case "PENDING":
-        return "⏳"; // 시계 이모티콘
-      case "DONE":
-        return "✅"; // V 체크 이모티콘
-      case "MISSED":
-        return "❌"; // X 표시 이모티콘
-      default:
-        return "";
-    }
-  };
-
   const [selectedPost, setSelectedPost] = useState<reviewData | null>(null);
 
   const handlePostClick = (post: reviewData) => {

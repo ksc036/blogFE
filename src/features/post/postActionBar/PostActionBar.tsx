@@ -6,6 +6,7 @@ import { Post } from "@/entities/post/types";
 import { useAppSelector } from "@/shared/store/hooks";
 import { Me } from "@/entities/user/types";
 import ReviewSettingModal from "../ReviewSettingModal/ReviewSettingModal";
+import ReviewInstance from "../reviewInstance/ReviewInstance";
 interface PostActionBarProps {
   isLiked: boolean;
   likeCount: number;
@@ -20,6 +21,7 @@ export default function PostActionBar({
   post,
   userId,
 }: PostActionBarProps) {
+  console.log(post);
   const [likeCnt, setLikeCnt] = useState(likeCount);
   const [isLike, setIsLike] = useState(isLiked);
   const [isOpen, setIsOpen] = useState(false);
@@ -39,40 +41,47 @@ export default function PostActionBar({
     }
   };
   const handleReview = async () => {
+    if (post.reviewInstances && post.reviewInstances.length > 0) {
+      return;
+    }
     setIsOpen(true);
   };
   return (
     <div className={styles.actionBar}>
-      <button className={styles.likeButton} onClick={handleLikeToggle}>
-        {isLike ? "♥" : "♡"} {likeCnt}
-      </button>
+      <div className={styles.postAction}>
+        <button className={styles.likeButton} onClick={handleLikeToggle}>
+          {isLike ? "♥" : "♡"} {likeCnt}
+        </button>
+
+        <button
+          className={styles.shareButton}
+          onClick={() => {
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: post.title,
+                  text: post.desc,
+                  url: window.location.href,
+                })
+                .then(() => console.log("공유 성공"))
+                .catch(console.error);
+            } else {
+              alert("공유 기능을 지원하지 않는 브라우저입니다.");
+            }
+          }}
+        >
+          🔗 공유
+        </button>
+      </div>
       {me?.id === userId && (
         <button className={styles.likeButton} onClick={handleReview}>
-          {post.reviewInstances && post.reviewInstances.length > 0
-            ? "복습 V"
-            : "복습 +"}
+          {post.reviewInstances && post.reviewInstances.length > 0 ? (
+            <ReviewInstance data={post.reviewInstances}></ReviewInstance>
+          ) : (
+            "복습 +"
+          )}
         </button>
       )}
-
-      <button
-        className={styles.shareButton}
-        onClick={() => {
-          if (navigator.share) {
-            navigator
-              .share({
-                title: post.title,
-                text: post.desc,
-                url: window.location.href,
-              })
-              .then(() => console.log("공유 성공"))
-              .catch(console.error);
-          } else {
-            alert("공유 기능을 지원하지 않는 브라우저입니다.");
-          }
-        }}
-      >
-        🔗 공유
-      </button>
       {isOpen && (
         <ReviewSettingModal onClose={() => setIsOpen(false)} postId={post.id} />
       )}

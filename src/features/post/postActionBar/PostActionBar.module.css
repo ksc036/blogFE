@@ -10,8 +10,12 @@
 }
 .actionBar {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 12px;
   margin-top: 30px;
   /* margin-bottom: 24px; */
+}
+.postAction {
+  display: flex;
+  gap: 12px;
 }
