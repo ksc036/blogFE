@@ -117,6 +117,9 @@ jobs:
           chmod +x argocd
           sudo mv argocd /usr/local/bin/
 
+      - name: Check Argo CD reachability
+        run: curl -v --connect-timeout 5 https://argocd.ksc036.store || echo "Connection failed"
+
       - name: Login to Argo CD
         run: |
           argocd version --client
