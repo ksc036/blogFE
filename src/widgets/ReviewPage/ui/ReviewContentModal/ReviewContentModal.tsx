@@ -55,14 +55,7 @@ export default function ReviewContentModal({
     >
       <div
         onClick={(e) => e.stopPropagation()} // 내부 클릭 시 이벤트 전파 막기 (모달 안 닫힘)
-        style={{
-          background: "white",
-          padding: "20px",
-          borderRadius: "8px",
-          minWidth: "300px",
-          maxHeight: "80vh",
-          overflowY: "auto",
-        }}
+        className={styles.modalInside}
       >
         <h3>{selectedItem?.post.title}</h3>
 

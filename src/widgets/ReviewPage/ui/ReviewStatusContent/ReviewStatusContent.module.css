@@ -1,0 +1,14 @@
+.modalInside {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: fit-content;
+  min-width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+@media (prefers-color-scheme: dark) {
+  .modalInside {
+    background-color: var(--background);
+  }
+}

@@ -2,6 +2,7 @@ import { Post } from "@/entities/post/types";
 import { useState } from "react";
 import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";
 import { statusToEmoji } from "@/shared/lib/statusToEmoji";
+import styles from "./ReviewStatusContent.module.css";
 type ReviewInstance = {
   id: number;
   status: "PENDING" | "DONE" | "MISSED";
@@ -28,7 +29,7 @@ export default function ReviewStatusContent({ data }: { data: reviewData[] }) {
   };
   return (
     <div>
-      <h2>Review Posts</h2>
+      <h2>Review Posts Status</h2>
       <div>
         {data.map((postData) => (
           <div
@@ -76,17 +77,7 @@ export default function ReviewStatusContent({ data }: { data: reviewData[] }) {
           onClick={closeModal}
         >
           <div
-            style={{
-              backgroundColor: "#fff",
-              padding: "20px",
-              borderRadius: "8px",
-              // maxWidth: "500px",
-
-              width: "fit-content",
-              minWidth: "300px",
-              maxHeight: "80vh",
-              overflowY: "auto",
-            }}
+            className={styles.modalInside}
             onClick={(e) => e.stopPropagation()} // 모달 내부 클릭 시 닫히지 않도록
           >
             <h2>{selectedPost.post.title}</h2>
