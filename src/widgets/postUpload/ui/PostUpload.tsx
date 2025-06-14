@@ -69,7 +69,7 @@ export default function PostUpload({
         setPostUrl(title.slice(0, 100));
       }
       if (!desc && content) {
-        setDesc(content.slice(0, 150));
+        setDesc(content.slice(0, 60));
       }
       const match = content.match(/!\[.*?\]\((.*?)\)/);
       if (match && !thumbnailUrl) {
@@ -78,7 +78,7 @@ export default function PostUpload({
     } else {
       //수정
       setPostUrl(info?.postUrl.slice(0, 100));
-      setDesc(info?.desc.slice(0, 150));
+      setDesc(info?.desc.slice(0, 60));
       setThumbnailUrl(info?.thumbnailUrl);
       setVisibility(info?.visibility);
     }
@@ -137,7 +137,7 @@ export default function PostUpload({
         <input
           type="text"
           value={desc}
-          maxLength={150}
+          maxLength={60}
           onChange={(e) => setDesc(e.target.value)}
           placeholder="당신의 포스트를 짧게 소개해보세요."
           className={styles.desc}
@@ -158,7 +158,7 @@ export default function PostUpload({
             marginTop: "4px",
           }}
         >
-          {desc.length} / 150자
+          {desc.length} / 60자
         </div>
       </div>
 
