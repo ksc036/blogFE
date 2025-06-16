@@ -6,6 +6,7 @@ import TodayReviewContent from "./ui/TodayReviewContent/TodayReviewContent";
 import ReviewStatusContent from "./ui/ReviewStatusContent/ReviewStatusContent";
 import { Post } from "@/entities/post/types";
 import axiosInstance from "@/shared/lib/axiosInstance";
+import { PostTag } from "@/entities/tag/types";
 export type ReviewInstance = {
   id: number;
   status: "PENDING" | "DONE" | "MISSED";

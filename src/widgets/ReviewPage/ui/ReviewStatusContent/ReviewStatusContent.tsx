@@ -4,6 +4,8 @@ import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent
 import { statusToEmoji } from "@/shared/lib/statusToEmoji";
 import styles from "./ReviewStatusContent.module.css";
 import axiosInstance from "@/shared/lib/axiosInstance";
+import TagList from "@/features/post/TagList/TagList";
+import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 type ReviewInstance = {
   id: number;
   status: "PENDING" | "DONE" | "MISSED";
@@ -45,7 +47,7 @@ export default function ReviewStatusContent({
             key={postData.postId}
             style={{
               border: "1px solid #ccc",
-              padding: "10px",
+              padding: "10px 20px",
               marginBottom: "10px",
               cursor: "pointer",
             }}
@@ -53,7 +55,13 @@ export default function ReviewStatusContent({
           >
             <div className={styles.postContainer}>
               <div className={styles.postInfo}>
-                <h3>{postData.post.title}</h3>
+                <div className={styles.postStatusRight}>
+                  <h3>{postData.post.title}</h3>
+                  <TagList
+                    tagList={tagToArray(postData.post.postTags)}
+                  ></TagList>
+                </div>
+
                 <div>
                   {postData?.reviewInstances
                     ?.sort(
@@ -68,28 +76,30 @@ export default function ReviewStatusContent({
                     ))}
                 </div>
               </div>
-              <div
-                onClick={async (e) => {
-                  e.stopPropagation();
-                  try {
-                    const res = await axiosInstance.delete(
-                      "/posts/reviewInstance",
-                      {
-                        params: {
-                          postId: postData.postId,
-                        },
-                      }
-                    );
-                    setData((prev) =>
-                      prev.filter((item) => item.postId !== postData.postId)
-                    );
-                    console.log(res);
-                  } catch (e) {
-                    console.log(e);
-                  }
-                }}
-              >
-                ❌
+              <div>
+                <div
+                  onClick={async (e) => {
+                    e.stopPropagation();
+                    try {
+                      const res = await axiosInstance.delete(
+                        "/posts/reviewInstance",
+                        {
+                          params: {
+                            postId: postData.postId,
+                          },
+                        }
+                      );
+                      setData((prev) =>
+                        prev.filter((item) => item.postId !== postData.postId)
+                      );
+                      console.log(res);
+                    } catch (e) {
+                      console.log(e);
+                    }
+                  }}
+                >
+                  ❌
+                </div>
               </div>
             </div>
           </div>

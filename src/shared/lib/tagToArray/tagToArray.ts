@@ -1,13 +1,5 @@
-type PostTagWithTag = {
-  id: number;
-  postId: number;
-  tagId: number;
-  userId: number;
-  tag: {
-    id: number;
-    name: string;
-  };
-};
-export function tagToArray(data: PostTagWithTag[]): string[] {
+import { PostTag } from "@/entities/tag/types";
+
+export function tagToArray(data: PostTag[]): string[] {
   return data.map((t) => t.tag.name);
 }
