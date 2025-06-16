@@ -21,6 +21,18 @@ export function formatToKoreanDate(isoString: string): string {
     .toString()
     .padStart(2, "0")}:${minute}`;
 }
+export function fomatToKoreanOnlyDate(isoString: string): string {
+  const utcDate = new Date(isoString);
+
+  // 2. KST 기준으로 9시간 더함
+  const kstDate = new Date(utcDate.getTime() + 9 * 60 * 60 * 1000);
+
+  const year = kstDate.getFullYear();
+  const month = (kstDate.getMonth() + 1).toString().padStart(2, "0");
+  const day = kstDate.getDate().toString().padStart(2, "0");
+
+  return `${year}.${month}.${day}`;
+}
 // export function formatToKoreanDate(isoString: string): string {
 //   return new Date(isoString).toLocaleString("ko-KR", {
 //     timeZone: "Asia/Seoul",
