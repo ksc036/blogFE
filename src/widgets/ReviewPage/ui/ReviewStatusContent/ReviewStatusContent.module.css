@@ -6,7 +6,7 @@
 .postInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  /* gap: 4px; */
 }
 .modalInside {
   background-color: #fff;
