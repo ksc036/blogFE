@@ -53,6 +53,7 @@ export default function UserBlogPageTagWithPosts({
           onChange={handleTagChange}
           selectedIds={selectedIds}
           setSelectedIds={setSelectedIds}
+          postLength={data.postLength}
         ></TagList>
       </div>
       <UserBlogPagePostList

@@ -26,6 +26,10 @@ export default async function UserBlogPage({ params }: urlParams) {
     );
   } catch (err: any) {
     console.error("Error fetching user blog page:", err);
-    return <div>알 수 없는 오류가 발생했습니다.</div>;
+    return (
+      <div>
+        해당 아이디에 해당하는 유저가 없거나 더이상 공개되지 않은 블로그입니다.
+      </div>
+    );
   }
 }

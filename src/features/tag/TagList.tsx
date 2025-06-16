@@ -14,6 +14,7 @@ type Props = {
   onChange?: (selectedIds: number[]) => void; // 선택된 태그를 상위에 전달하고 싶을 경우
   selectedIds: any;
   setSelectedIds: any;
+  postLength: number;
 };
 
 export default function TagList({
@@ -21,6 +22,7 @@ export default function TagList({
   onChange,
   selectedIds,
   setSelectedIds,
+  postLength,
 }: Props) {
   const handleClick = (id?: number) => {
     if (!id) {
@@ -46,7 +48,7 @@ export default function TagList({
         }`}
         onClick={() => handleClick(undefined)}
       >
-        전체 ({tagList.reduce((sum, tag) => sum + tag.count, 0)})
+        전체 ({postLength})
       </button>
 
       {tagList
