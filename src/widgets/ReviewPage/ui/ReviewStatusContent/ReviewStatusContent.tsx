@@ -166,7 +166,7 @@ export default function ReviewStatusContent({
                             width: "100%", // 필요 시
                           }}
                         >
-                          {fomatToKoreanOnlyDate(instance.scheduledDate)}
+                          {formatToKoreanDate(instance.scheduledDate)}
                         </span>
                         <div
                           style={{
