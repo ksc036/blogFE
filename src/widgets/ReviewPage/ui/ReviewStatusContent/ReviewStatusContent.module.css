@@ -1,3 +1,13 @@
+.postContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.postInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 .modalInside {
   background-color: #fff;
   padding: 20px;

@@ -83,7 +83,10 @@ export default function ReviewPage() {
           />
         )}
         {activeTab === "복습 현황" && (
-          <ReviewStatusContent data={reviewStatusData} />
+          <ReviewStatusContent
+            data={reviewStatusData}
+            setData={setReviewStatusData}
+          />
         )}
       </div>
     </main>

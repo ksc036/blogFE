@@ -3,6 +3,7 @@ import { useState } from "react";
 import PostMarkDownContent from "@/features/post/postContent/PostMarkDownContent";
 import { statusToEmoji } from "@/shared/lib/statusToEmoji";
 import styles from "./ReviewStatusContent.module.css";
+import axiosInstance from "@/shared/lib/axiosInstance";
 type ReviewInstance = {
   id: number;
   status: "PENDING" | "DONE" | "MISSED";
@@ -17,7 +18,15 @@ type reviewData = {
 };
 
 // ReviewStatusContent.tsx
-export default function ReviewStatusContent({ data }: { data: reviewData[] }) {
+export default function ReviewStatusContent({
+  data,
+  setData,
+}: {
+  data: reviewData[];
+  setData: (
+    newState: reviewData[] | ((prevState: reviewData[]) => reviewData[])
+  ) => void;
+}) {
   const [selectedPost, setSelectedPost] = useState<reviewData | null>(null);
 
   const handlePostClick = (post: reviewData) => {
@@ -42,19 +51,46 @@ export default function ReviewStatusContent({ data }: { data: reviewData[] }) {
             }}
             onClick={() => handlePostClick(postData)}
           >
-            <h3>{postData.post.title}</h3>
-            <div>
-              {postData?.reviewInstances
-                ?.sort(
-                  (a, b) =>
-                    new Date(a.scheduledDate).getTime() -
-                    new Date(b.scheduledDate).getTime()
-                )
-                ?.map((instance) => (
-                  <span key={instance.id} style={{ marginRight: "5px" }}>
-                    {statusToEmoji(instance.status)}
-                  </span>
-                ))}
+            <div className={styles.postContainer}>
+              <div className={styles.postInfo}>
+                <h3>{postData.post.title}</h3>
+                <div>
+                  {postData?.reviewInstances
+                    ?.sort(
+                      (a, b) =>
+                        new Date(a.scheduledDate).getTime() -
+                        new Date(b.scheduledDate).getTime()
+                    )
+                    ?.map((instance) => (
+                      <span key={instance.id} style={{ marginRight: "5px" }}>
+                        {statusToEmoji(instance.status)}
+                      </span>
+                    ))}
+                </div>
+              </div>
+              <div
+                onClick={async (e) => {
+                  e.stopPropagation();
+                  try {
+                    const res = await axiosInstance.delete(
+                      "/posts/reviewInstance",
+                      {
+                        params: {
+                          postId: postData.postId,
+                        },
+                      }
+                    );
+                    setData((prev) =>
+                      prev.filter((item) => item.postId !== postData.postId)
+                    );
+                    console.log(res);
+                  } catch (e) {
+                    console.log(e);
+                  }
+                }}
+              >
+                ❌
+              </div>
             </div>
           </div>
         ))}
