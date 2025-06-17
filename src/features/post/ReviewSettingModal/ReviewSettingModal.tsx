@@ -68,18 +68,22 @@ export default function ReviewSettingModal({
   const handleRemoveDay = (day: number) => {
     setRepeatDays(repeatDays.filter((d) => d !== day));
   };
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!selectedPlanId) {
       onClose();
       return;
     }
     // 여기서 planName과 repeatDays를 서버에 보내거나 상위 컴포넌트로 넘기면 됨
-    axiosInstance.post("/posts/reviewInstance", {
-      planId: selectedPlanId,
-      postId,
-    });
-    onClose();
-    window.location.reload();
+    try {
+      await axiosInstance.post("/posts/reviewInstance", {
+        planId: selectedPlanId,
+        postId,
+      });
+      onClose();
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+    }
   };
   const handleDeletePlan = async (id: number) => {
     console.log("delete Item", id);
