@@ -46,6 +46,7 @@ export default function TodayReviewContent({
       {(data ?? []).map((item) => {
         return (
           <div
+            key={item.id}
             onClick={() => handleItemClick(item)}
             style={{
               padding: "8px 16px",
