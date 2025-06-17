@@ -60,65 +60,11 @@ export default function ReviewStatusContent({
           >
             <div className={styles.postContainer}>
               <div className={styles.postInfo}>
-                <div className={styles.postStatusRight}>
-                  <h3>{postData.post.title}</h3>
-                  {/* <TagList
+                <h3>{postData.post.title}</h3>
+                {/* <TagList
                     tagList={tagToArray(postData.post.postTags)}
                   ></TagList> */}
-                </div>
-
-                {/* <div>
-                  <table
-                    style={{
-                      borderCollapse: "collapse",
-                      marginTop: "10px",
-                      border: "1px solid #ccc",
-                    }}
-                  >
-                    <tbody>
-                      <tr>
-                        {postData?.reviewInstances.map((instance) => (
-                          <td
-                            key={instance.id}
-                            style={{
-                              padding: "6px 12px",
-                              textAlign: "center",
-                              border: "1px solid #ccc",
-                            }}
-                          >
-                            <div style={{ fontSize: "0.85em", color: "#666" }}>
-                              {fomatToKoreanOnlyDate(instance.scheduledDate)}
-                            </div>
-                          </td>
-                        ))}
-                      </tr>
-                      <tr>
-                        {postData?.reviewInstances.map((instance) => (
-                          <td
-                            key={instance.id}
-                            style={{
-                              padding: "6px 12px",
-                              textAlign: "center",
-                              fontSize: "1.4em",
-                              border: "1px solid #ccc", // 셀 테두리
-                            }}
-                          >
-                            {statusToEmoji(instance.status)}
-                          </td>
-                        ))}
-                      </tr>
-                    </tbody>
-                  </table>
-                </div> */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row", // ← 가로 방향
-                    gap: "12px",
-                    overflowX: "auto", // ← 많을 경우 스크롤
-                    padding: "8px 0",
-                  }}
-                >
+                <div className={styles.reviewInstanceStatus}>
                   {postData?.reviewInstances
                     ?.sort(
                       (a, b) =>
@@ -126,25 +72,6 @@ export default function ReviewStatusContent({
                         new Date(b.scheduledDate).getTime()
                     )
                     ?.map((instance) => (
-                      // <span key={instance.id} style={{ marginRight: "5px" }}>
-                      //   {statusToEmoji(instance.status)}
-                      // </span>
-
-                      // <div
-                      //   key={instance.id}
-                      //   style={{
-                      //     display: "flex",
-                      //     alignItems: "center",
-                      //     marginBottom: "6px",
-                      //   }}
-                      // >
-                      //   <span style={{ marginRight: "6px", fontSize: "1.2em" }}>
-                      //     {statusToEmoji(instance.status)}
-                      //   </span>
-                      //   <span style={{ color: "#888", fontSize: "0.9em" }}>
-                      //     {fomatToKoreanOnlyDate(instance.scheduledDate)}
-                      //   </span>
-                      // </div>
                       <div
                         key={instance.id}
                         style={{
@@ -157,20 +84,22 @@ export default function ReviewStatusContent({
                           backgroundColor: "#fafafa",
                           minWidth: "80px",
                           gap: "3px",
+                          flexShrink: 0,
+                          // alignSelf: "flex-start",
                         }}
                       >
                         <span
                           style={{
                             fontSize: "0.95em",
                             color: "#666",
-                            width: "100%", // 필요 시
+                            // width: "100%", // 필요 시
                           }}
                         >
                           {formatToKoreanOnlyDate(instance.scheduledDate)}
                         </span>
                         <div
                           style={{
-                            width: "100%",
+                            // width: "100%",
                             borderTop: "1px solid #ccc",
                             margin: "4px 0",
                           }}
@@ -203,6 +132,7 @@ export default function ReviewStatusContent({
                       console.log(e);
                     }
                   }}
+                  style={{ minWidth: "30px" }}
                 >
                   삭제
                 </div>

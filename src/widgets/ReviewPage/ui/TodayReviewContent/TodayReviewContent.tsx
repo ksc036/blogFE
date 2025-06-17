@@ -5,7 +5,7 @@ import { getDateDiffInDays } from "@/shared/lib/date/diff";
 import { todayReviewData } from "../../ReviewPage";
 import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 import TagList from "@/features/post/TagList/TagList";
-
+import styles from "./TodayReviewContent.module.css";
 // type todayReviewData = {
 //   id: number;
 //   post: Post;
@@ -58,19 +58,9 @@ export default function TodayReviewContent({
               alignItems: "center",
             }}
           >
-            <div>
-              {item.post.title}
-              <span
-                style={{
-                  marginLeft: "15px",
-                  backgroundColor: "#e6f0ff", // 연한 파란색 배경
-                  padding: "2px 6px", // 안쪽 여백
-                  borderRadius: "4px", // 둥근 모서리
-                  fontSize: "0.9em", // 글자 약간 작게
-                  color: "#333", // 글자 색
-                  fontWeight: "bold", // 강조
-                }}
-              >
+            <div className={styles.titleAndDayContainer}>
+              <span>{item.post.title}</span>
+              <span className={styles.dayTag}>
                 - {getDateDiffInDays(item.createdAt, item.scheduledDate)} 일차
               </span>
             </div>

@@ -2,12 +2,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
+/* @media (max-width: 500px) {
+  .postContainer {
+    flex-direction: column;
+  }
+} */
 .postInfo {
   display: flex;
   flex-direction: column;
   /* gap: 4px; */
+  min-width: 0; /* ✅ 이거 없으면 flex item이 넘칠 수 있음 */
 }
+
+.reviewInstanceStatus {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 8px 0;
+  width: 100%;
+  /* max-width: 100%; ✅ 부모의 최대 너비를 화면 너비로 제한 */
+  box-sizing: border-box; /* ✅ 패딩 포함한 전체 폭 계산 */
+  min-width: 0;
+}
+
 .modalInside {
   background-color: #fff;
   padding: 20px;
@@ -22,12 +41,12 @@
     background-color: var(--background);
   }
 }
-.postStatusRight {
+/* .postStatusRight {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
-}
+} */
 
 /* .removeButton {
   display: flex;

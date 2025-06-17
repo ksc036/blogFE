@@ -1,0 +1,27 @@
+.titleAndDayContainer {
+  display: flex;
+}
+@media (max-width: 500px) {
+  .titleAndDayContainer {
+    flex-direction: column;
+  }
+}
+
+.dayTag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-left: 15px;
+  background-color: #e6f0ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #333;
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .dayTag {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
