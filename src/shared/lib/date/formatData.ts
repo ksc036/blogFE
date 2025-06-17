@@ -41,7 +41,7 @@ export function formatToKoreanDate(isoString: string): string {
   //   .toString()
   //   .padStart(2, "0")}:${minute}`;
 }
-export function fomatToKoreanOnlyDate(isoString: string): string {
+export function formatToKoreanOnlyDate(isoString: string): string {
   const date = new Date(isoString);
   const formatter = new Intl.DateTimeFormat("ko-KR", {
     timeZone: "Asia/Seoul",

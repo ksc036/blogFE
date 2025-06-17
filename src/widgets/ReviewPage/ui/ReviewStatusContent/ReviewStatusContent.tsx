@@ -7,7 +7,7 @@ import axiosInstance from "@/shared/lib/axiosInstance";
 import TagList from "@/features/post/TagList/TagList";
 import { tagToArray } from "@/shared/lib/tagToArray/tagToArray";
 import {
-  fomatToKoreanOnlyDate,
+  formatToKoreanOnlyDate,
   formatToKoreanDate,
 } from "@/shared/lib/date/formatData";
 type ReviewInstance = {
@@ -166,7 +166,7 @@ export default function ReviewStatusContent({
                             width: "100%", // 필요 시
                           }}
                         >
-                          {formatToKoreanDate(instance.scheduledDate)}
+                          {formatToKoreanOnlyDate(instance.scheduledDate)}
                         </span>
                         <div
                           style={{
